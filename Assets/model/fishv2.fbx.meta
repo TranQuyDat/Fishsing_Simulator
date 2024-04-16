@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a8fd0d08c30426d4c978a4998752cf7d
+guid: 4c1d9eac0dd5a2e458806c2d17f7df31
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -13,7 +13,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
@@ -23,7 +23,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
+    importConstraints: 1
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -44,7 +44,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
+    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -81,7 +81,52 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: fishv2(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: FishV2
+      parentName: fishv2(Clone)
+      position: {x: 0.000000048276846, y: -0.0000000016681029, z: 2.458833e-10}
+      rotation: {x: -0.000000037748947, y: -1.3877788e-15, z: 2.461139e-15, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: fishv2(Clone)
+      position: {x: -0.39025134, y: 0.023651352, z: 0.0011655372}
+      rotation: {x: -0.43521714, y: 0.55730253, z: -0.5573024, w: 0.43521714}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Bone
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.5440925, y: -0.45162308, z: 0.45162308, w: 0.5440925}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Bone.001
+      parentName: Bone
+      position: {x: -9.313238e-12, y: 0.0025712636, z: -1.2212453e-17}
+      rotation: {x: 0.000000029802322, y: -0, z: -0.4174901, w: 0.9086815}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Bone.002
+      parentName: Bone.001
+      position: {x: -1.86264e-11, y: 0.0020024981, z: 3.1086245e-17}
+      rotation: {x: 0.000000024131893, y: -0.00000012351974, z: -0.104208365, w: 0.99455553}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.003
+      parentName: Bone.002
+      position: {x: 1.4901178e-10, y: 0.0018000001, z: -4.4408918e-17}
+      rotation: {x: -0.000000025475769, y: -0.00000001510122, z: 0.0015695167, w: 0.9999988}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.004
+      parentName: Bone.003
+      position: {x: -7.4505596e-11, y: 0.0015297054, z: -3.5527136e-17}
+      rotation: {x: 0.00000004553122, y: 0.000000058356626, z: 0.0785922, w: 0.9969069}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.004_end
+      parentName: Bone.004
+      position: {x: -0, y: 0.0005830952, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -92,16 +137,16 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
