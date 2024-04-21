@@ -451,7 +451,7 @@ Transform:
   - {fileID: 1878316846215467391}
   - {fileID: 8555519727791643010}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8692079348738570116
 Animator:
@@ -935,7 +935,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1878316846215467391}
   - component: {fileID: 5727798815974991336}
-  - component: {fileID: 2996742500792348992}
   m_Layer: 0
   m_Name: Peasant Nolant
   m_TagString: Untagged
@@ -1044,27 +1043,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -2.3283064e-10, y: 0.0011994755, z: -0.00040803547}
     m_Extent: {x: 0.003455709, y: 0.008865731, z: 0.0038897444}
   m_DirtyAABB: 0
---- !u!65 &2996742500792348992
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4521171953116350109}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0032315184, y: 0.0023718434, z: 0.0034296755}
-  m_Center: {x: 0.00018022624, y: -0.00032934855, z: 0.0015369301}
 --- !u!1 &4793203350153736207
 GameObject:
   m_ObjectHideFlags: 0
