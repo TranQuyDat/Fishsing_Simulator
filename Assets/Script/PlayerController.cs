@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     public Animator ani;
     public float axis;
     public bool canMove;
+    public Rigidbody rb;
     private void Awake()
     {
+        rb = this.GetComponent<Rigidbody>();
     }
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
         else ani.SetBool("isrun", false);
 
         axis = Input.GetAxis("Horizontal");
-        transform.position = new Vector2(transform.position.x + axis/2 * speedMove , transform.position.y);
+        rb.position = new Vector2(transform.position.x + axis/2 * speedMove , transform.position.y);
     }
 
     public void flip()

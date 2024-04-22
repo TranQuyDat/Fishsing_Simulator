@@ -5,6 +5,8 @@ using UnityEngine;
 public class TriggerChangeScene : MonoBehaviour
 {
     public GameObject imgIcon;
+    public GameObject target;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +30,10 @@ public class TriggerChangeScene : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         imgIcon.SetActive(false);
+    }
+
+    public void movePlayerToTarget()
+    {
+        player.transform.position = target.transform.position;
     }
 }

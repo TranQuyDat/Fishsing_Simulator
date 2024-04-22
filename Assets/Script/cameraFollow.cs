@@ -24,4 +24,9 @@ public class cameraFollow : MonoBehaviour
             ,Player.transform.position.y,-12);
     }
 
+    public void btn_clickIcon()
+    {
+
+    }
+
 }
