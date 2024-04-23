@@ -32,8 +32,16 @@ public class TriggerChangeScene : MonoBehaviour
         imgIcon.SetActive(false);
     }
 
+   
     public void movePlayerToTarget()
     {
+        Debug.Log("this ok");
         player.transform.position = target.transform.position;
+    }
+    public void movePlayerToTarget(float eulerY)
+    {
+        Debug.Log("this ok");
+        player.transform.position = target.transform.position;
+        player.transform.eulerAngles = new Vector2(0,eulerY);
     }
 }

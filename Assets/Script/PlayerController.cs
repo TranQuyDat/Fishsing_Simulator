@@ -38,18 +38,21 @@ public class PlayerController : MonoBehaviour
         else ani.SetBool("isrun", false);
 
         axis = Input.GetAxis("Horizontal");
-        rb.position = new Vector2(transform.position.x + axis/2 * speedMove , transform.position.y);
+        rb.position = new Vector3(transform.position.x + axis/2 * speedMove , transform.position.y,transform.position.z);
     }
 
     public void flip()
     {
+        
         if (axis > 0)
         {
-            transform.eulerAngles = new Vector3(0,-90,0) ;
+            float y = -Mathf.Abs(transform.rotation.ToEuler().y * Mathf.Rad2Deg);
+            transform.eulerAngles = new Vector3(0,y,0) ;
         }
         else if(axis < 0)
         {
-            transform.eulerAngles = new Vector3(0, 90, 0);
+            float y = Mathf.Abs(transform.rotation.ToEuler().y * Mathf.Rad2Deg);
+            transform.eulerAngles = new Vector3(0, y, 0);
         }
     }
 
