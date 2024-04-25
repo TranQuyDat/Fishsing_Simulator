@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region public values
     public float speedMove;
     public float radius;
     public Animator ani;
     public float axis;
     public bool canMove;
     public Rigidbody rb;
+    public GameObject dirobj;
+    public float eulerY;
+    #endregion
+
+
+    #region Default Method
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -18,15 +25,21 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ani.SetBool("isrun", false);
+        eulerY = transform.rotation.ToEuler().y * Mathf.Rad2Deg;
     }
 
     // Update is called once per frame
     void Update()
     {
+       // Debug.Log((dirobj.transform.position - rb.position).normalized);
+
         movement();
         flip();
     }
+    #endregion
 
+
+    #region public method
     public void movement()
     {
         if (!canMove)
@@ -38,24 +51,37 @@ public class PlayerController : MonoBehaviour
         else ani.SetBool("isrun", false);
 
         axis = Input.GetAxis("Horizontal");
-        rb.position = new Vector3(transform.position.x + axis/2 * speedMove , transform.position.y,transform.position.z);
+        if (axis != 0)
+        {
+            Vector3 dir = transform.InverseTransformDirection((dirobj.transform.position - rb.position).normalized);
+            
+            rb.transform.Translate(dir * speedMove * Time.deltaTime);// movement
+        }
     }
 
     public void flip()
     {
-        
-        if (axis > 0)
+        if (axis == 0) return;
+        float right = eulerY ;
+        float left =right+180 ;
+        Vector3 dir = transform.TransformDirection(rb.transform.right).normalized;
+
+        // Get the camera's right direction in world space
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        // Calculate the dot product between the player's direction and the camera's right direction
+        float dotProduct = Vector3.Dot(dir, cameraRight);
+        Debug.Log(dir+" "+cameraRight);
+        if (axis > 0 && dotProduct > 0)
         {
-            float y = -Mathf.Abs(transform.rotation.ToEuler().y * Mathf.Rad2Deg);
-            transform.eulerAngles = new Vector3(0,y,0) ;
+            transform.eulerAngles = new Vector3(0,right,0) ;
         }
-        else if(axis < 0)
+        else if(axis < 0 && dotProduct < 0)
         {
-            float y = Mathf.Abs(transform.rotation.ToEuler().y * Mathf.Rad2Deg);
-            transform.eulerAngles = new Vector3(0, y, 0);
+            transform.eulerAngles = new Vector3(0, left, 0);
         }
     }
-
+    #endregion
 
     private void OnDrawGizmosSelected()
     {

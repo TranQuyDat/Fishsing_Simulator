@@ -2670,7 +2670,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3210
+  m_VersionIndex: 3222
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2769,7 +2769,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
@@ -3340,7 +3340,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1864
+  m_VersionIndex: 1873
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4014,7 +4014,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1615
+  m_VersionIndex: 1624
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4688,7 +4688,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1624
+  m_VersionIndex: 1633
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5362,7 +5362,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1858
+  m_VersionIndex: 1870
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5813,7 +5813,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2682
+  m_VersionIndex: 2691
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6165,7 +6165,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3157
+  m_VersionIndex: 3169
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6870,7 +6870,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1624
+  m_VersionIndex: 1633
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7544,7 +7544,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 867
+  m_VersionIndex: 879
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7649,7 +7649,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &4150536502962784405
@@ -8218,7 +8218,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1609
+  m_VersionIndex: 1621
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19680,7 +19680,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3214
+  m_VersionIndex: 3226
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20350,7 +20350,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1612
+  m_VersionIndex: 1621
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21024,7 +21024,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1615
+  m_VersionIndex: 1624
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -21343,7 +21343,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2691
+  m_VersionIndex: 2700
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22013,7 +22013,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 870
+  m_VersionIndex: 882
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22118,7 +22118,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &5824187489406056064
@@ -33475,7 +33475,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3223
+  m_VersionIndex: 3232
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -34145,7 +34145,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1606
+  m_VersionIndex: 1615
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -34501,7 +34501,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1500
+  m_VersionIndex: 1512
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -34816,7 +34816,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2694
+  m_VersionIndex: 2703
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -35486,7 +35486,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 861
+  m_VersionIndex: 876
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -35591,7 +35591,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &6241894084541315134
@@ -36160,7 +36160,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1858
+  m_VersionIndex: 1867
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -36834,7 +36834,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1612
+  m_VersionIndex: 1624
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -37578,7 +37578,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1861
+  m_VersionIndex: 1870
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -37932,7 +37932,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2691
+  m_VersionIndex: 2700
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -38602,7 +38602,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 855
+  m_VersionIndex: 870
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -38707,7 +38707,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &8711838845571485274
@@ -38958,7 +38958,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1179
+  m_VersionIndex: 1188
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -39129,6 +39129,18 @@ PrefabInstance:
     - target: {fileID: 4832593164529506978, guid: cedc0faccc0ae734eb25127e36619e5f, type: 3}
       propertyPath: m_Name
       value: posInhome
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403891585560524509, guid: cedc0faccc0ae734eb25127e36619e5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1519043
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403891585560524509, guid: cedc0faccc0ae734eb25127e36619e5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403891585560524509, guid: cedc0faccc0ae734eb25127e36619e5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.6615515
       objectReference: {fileID: 0}
     - target: {fileID: 8510953038810215820, guid: cedc0faccc0ae734eb25127e36619e5f, type: 3}
       propertyPath: m_Size.x

@@ -6,6 +6,9 @@ public class cameraFollow : MonoBehaviour
 {
     public GameObject Player;
     public float speed;
+    public bool followZ;
+    public float dis;
+    public float height;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +23,11 @@ public class cameraFollow : MonoBehaviour
 
     public void followPlayer()
     {
-        this.transform.position = new Vector3(Player.transform.position.x 
-            ,Player.transform.position.y,-12);
+        this.transform.position =(!followZ) 
+            ? new Vector3(Player.transform.position.x+dis, Player.transform.position.y+ height, this.transform.position.z)
+            : this.transform.position = new Vector3(Player.transform.position.x+dis, Player.transform.position.y+ height, Player.transform.position.z+dis) ;
+
+
     }
 
     public void btn_clickIcon()
