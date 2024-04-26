@@ -65,18 +65,12 @@ public class PlayerController : MonoBehaviour
         float right = eulerY ;
         float left =right+180 ;
         Vector3 dir = transform.TransformDirection(rb.transform.right).normalized;
-
-        // Get the camera's right direction in world space
-        Vector3 cameraRight = Camera.main.transform.right;
-
-        // Calculate the dot product between the player's direction and the camera's right direction
-        float dotProduct = Vector3.Dot(dir, cameraRight);
-        Debug.Log(dir+" "+cameraRight);
-        if (axis > 0 && dotProduct > 0)
+        Debug.Log(Vector3.SignedAngle(transform.right, dir,Vector3.up));
+        if (axis > 0 )
         {
             transform.eulerAngles = new Vector3(0,right,0) ;
         }
-        else if(axis < 0 && dotProduct < 0)
+        else if(axis < 0 )
         {
             transform.eulerAngles = new Vector3(0, left, 0);
         }

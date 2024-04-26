@@ -9,6 +9,7 @@ public class TriggerChangeScene : MonoBehaviour
     public GameObject player;
     public GameObject cameraAct;
     public GameObject cameraNotActive;
+    public bool isFaceRight;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +46,9 @@ public class TriggerChangeScene : MonoBehaviour
         Debug.Log("this ok");
         cameraAct.SetActive( true);
         cameraNotActive.SetActive( false);
+        float euler = (isFaceRight) ? eulerY : eulerY+180;
         player.GetComponent<PlayerController>().eulerY = eulerY;
         player.transform.position = target.transform.position;
-        player.transform.eulerAngles = new Vector2(0,eulerY);
+        player.transform.eulerAngles = new Vector2(0, euler);
     }
 }
