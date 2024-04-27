@@ -9,11 +9,12 @@ TagManager:
   - player
   - posSit
   - posFishing
+  - ship
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
   - waterTrigger

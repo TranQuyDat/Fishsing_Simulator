@@ -6,13 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     #region public values
     public float speedMove;
-    public float radius;
     public Animator ani;
     public float axis;
     public bool canMove;
     public Rigidbody rb;
     public GameObject dirobj;
-    public float eulerY;
+    public Transform mainCamera;
+    public area inArea;
+    public Action cur_action;
+
+    public float faceRight;
+    public float faceLeft;
     #endregion
 
 
@@ -25,7 +29,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ani.SetBool("isrun", false);
-        eulerY = transform.rotation.ToEuler().y * Mathf.Rad2Deg;
+        cur_action = Action.idle;
+        faceRight = (mainCamera.rotation.ToEuler() * Mathf.Rad2Deg).y - 90;
+        faceLeft = faceRight + 180;
     }
 
     // Update is called once per frame
@@ -47,8 +53,16 @@ public class PlayerController : MonoBehaviour
             ani.SetBool("isrun", false);
             return;
         }
-        if (axis != 0) ani.SetBool("isrun", true);
-        else ani.SetBool("isrun", false);
+        if (axis != 0)
+        {
+            ani.SetBool("isrun", true);
+            cur_action = Action.run;
+        }
+        else
+        {
+            ani.SetBool("isrun", false);
+            cur_action = Action.idle;
+        }
 
         axis = Input.GetAxis("Horizontal");
         if (axis != 0)
@@ -62,24 +76,34 @@ public class PlayerController : MonoBehaviour
     public void flip()
     {
         if (axis == 0) return;
-        float right = eulerY ;
-        float left =right+180 ;
-        Vector3 dir = transform.TransformDirection(rb.transform.right).normalized;
-        Debug.Log(Vector3.SignedAngle(transform.right, dir,Vector3.up));
         if (axis > 0 )
         {
-            transform.eulerAngles = new Vector3(0,right,0) ;
+            transform.eulerAngles = new Vector3(0,faceRight,0) ;
         }
         else if(axis < 0 )
         {
-            transform.eulerAngles = new Vector3(0, left, 0);
+            transform.eulerAngles = new Vector3(0, faceLeft, 0);
         }
+    }
+
+    public void setCanMove(bool canmove)
+    {
+        canMove = canmove;
+    }
+    public void changeAction(Action ac)
+    {
+        this.cur_action = ac;
+    }
+    public void updateMainCamera( Transform newCamera )
+    {
+        mainCamera = newCamera;
+        faceRight = (newCamera.rotation.ToEuler() *Mathf.Rad2Deg).y - 90;
+        faceLeft = faceRight + 180;
     }
     #endregion
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

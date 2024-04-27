@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5403891585560524509}
-  - component: {fileID: 2855609562561842570}
   - component: {fileID: 7056043638702187767}
   - component: {fileID: 8240074489893488979}
   - component: {fileID: 2753428771330058311}
@@ -35,14 +34,6 @@ Transform:
   m_Father: {fileID: 863792497115977580}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!222 &2855609562561842570
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077362053926922047}
-  m_CullTransparentMesh: 1
 --- !u!212 &7056043638702187767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -201,7 +192,7 @@ Transform:
   m_Children:
   - {fileID: 5403891585560524509}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8510953038810215820
 BoxCollider:
@@ -239,3 +230,9 @@ MonoBehaviour:
   imgIcon: {fileID: 2077362053926922047}
   target: {fileID: 0}
   player: {fileID: 0}
+  cameraAct: {fileID: 0}
+  cameraNotActive: {fileID: 0}
+  isFaceRight: 0
+  triggerTag: 0
+  nextArea: 0
+  setAct: 0

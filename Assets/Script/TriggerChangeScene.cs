@@ -9,8 +9,23 @@ public class TriggerChangeScene : MonoBehaviour
     public GameObject player;
     public GameObject cameraAct;
     public GameObject cameraNotActive;
+
     public bool isFaceRight;
+    public bool activeCheckTrigger = true;
+
+    public tag triggerTag;
+    public area nextArea;
+    public Action setAct = Action.idle;
+    PlayerController playerctrl;
     // Start is called before the first frame update
+
+
+    #region default Method
+
+    private void Awake()
+    {
+        playerctrl = player.GetComponent<PlayerController>();
+    }
     void Start()
     {
         
@@ -22,9 +37,17 @@ public class TriggerChangeScene : MonoBehaviour
         
     }
 
+    #endregion
+
     private void OnTriggerStay(Collider other)
     {
-        if(other != null && other.CompareTag("player"))
+
+        if (activeCheckTrigger && playerctrl.inArea == nextArea)
+        {
+            imgIcon.SetActive(false);
+            return;
+        }
+        if (activeCheckTrigger && other != null && other.CompareTag(triggerTag.ToString()))
         {
             imgIcon.SetActive(true);
         }
@@ -32,7 +55,7 @@ public class TriggerChangeScene : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        imgIcon.SetActive(false);
+       if(activeCheckTrigger) imgIcon.SetActive(false);
     }
 
    
@@ -40,15 +63,27 @@ public class TriggerChangeScene : MonoBehaviour
     {
         Debug.Log("this ok");
         player.transform.position = target.transform.position;
+        playerctrl.inArea = nextArea;
+        float euler = playerctrl.faceRight;
+        player.transform.eulerAngles = new Vector2(0, (isFaceRight) ? euler : euler + 180);
+        playerctrl.cur_action = setAct;
     }
-    public void movePlayerToTarget(float eulerY)
+    public void movePlayerToTargetWithCamera()
     {
         Debug.Log("this ok");
-        cameraAct.SetActive( true);
-        cameraNotActive.SetActive( false);
-        float euler = (isFaceRight) ? eulerY : eulerY+180;
-        player.GetComponent<PlayerController>().eulerY = eulerY;
+        changeCamera();
+        float euler = (isFaceRight) ? playerctrl.faceRight : playerctrl.faceRight + 180;
+
         player.transform.position = target.transform.position;
         player.transform.eulerAngles = new Vector2(0, euler);
+        playerctrl.inArea = nextArea;
+        playerctrl.cur_action = setAct;
+    }
+
+    void changeCamera()
+    {
+        cameraAct.SetActive(true);
+        cameraNotActive.SetActive(false);
+        playerctrl.updateMainCamera(cameraAct.transform);
     }
 }

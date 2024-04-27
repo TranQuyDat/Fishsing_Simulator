@@ -2,10 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum area
+public enum area
 {
     home,
     ship,
-    port
+    port,
+    city
 
+}
+public enum tag
+{
+    player,
+    ship
+}
+public enum Action
+{
+    idle,run,sitting,fishing_idle,fishing_cast,sleeping
 }
