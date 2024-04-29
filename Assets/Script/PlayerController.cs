@@ -48,19 +48,13 @@ public class PlayerController : MonoBehaviour
     #region public method
     public void movement()
     {
-        if (!canMove)
-        {
-            ani.SetBool("isrun", false);
-            return;
-        }
+        if (!canMove) return;
         if (axis != 0)
         {
-            ani.SetBool("isrun", true);
             cur_action = Action.run;
         }
         else
         {
-            ani.SetBool("isrun", false);
             cur_action = Action.idle;
         }
 
@@ -99,6 +93,16 @@ public class PlayerController : MonoBehaviour
         mainCamera = newCamera;
         faceRight = (newCamera.rotation.ToEuler() *Mathf.Rad2Deg).y - 90;
         faceLeft = faceRight + 180;
+    }
+
+    public void updateTranform(Transform p,area a)
+    {
+        if (inArea == a)
+        {
+            rb.transform.SetParent(p);
+            return;
+        }
+        rb.transform.SetParent(null);
     }
     #endregion
 

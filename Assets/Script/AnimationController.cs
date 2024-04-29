@@ -31,6 +31,16 @@ public class AnimationController : MonoBehaviour
         if (ac == actIsRunning) return;
         
         actIsRunning = ac;
-        ani.Play(ac.ToString());
+
+        ani.SetBool("isrun", ac == Action.run);
+        ani.SetBool("isSleeping", ac == Action.sleeping);
+        ani.SetBool("isSitting", ac == Action.sitting);
+        ani.SetBool("isFishing_cast", ac == Action.fishing_cast);
+        ani.SetBool("isFishing_idle", ac == Action.fishing_idle);
+    }
+
+    public void nextAction(Action ac)
+    {
+        playerCtrl.cur_action = ac;
     }
 }

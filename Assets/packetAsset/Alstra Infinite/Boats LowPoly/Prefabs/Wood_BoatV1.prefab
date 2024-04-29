@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7131784902483920647}
   m_Layer: 0
   m_Name: option
-  m_TagString: Untagged
+  m_TagString: posSit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077576469048887450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.765, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.765, z: -0.73}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7414570892975399470}
@@ -144,7 +144,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -211,7 +211,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
@@ -231,10 +231,12 @@ MonoBehaviour:
   target: {fileID: 4727251928600325006}
   player: {fileID: 0}
   cameraAct: {fileID: 0}
+  cameraNotActive: {fileID: 0}
+  isFaceRight: 1
+  activeCheckTrigger: 0
   triggerTag: 0
   nextArea: 1
-  cameraNotActive: {fileID: 0}
-  isFaceRight: 0
+  setAct: 3
 --- !u!1 &6031768859134974309
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +251,7 @@ GameObject:
   - component: {fileID: 1906513997427917744}
   m_Layer: 0
   m_Name: option
-  m_TagString: Untagged
+  m_TagString: posFishing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,8 +264,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6031768859134974309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34, y: 0.85, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.34, y: 0.85, z: -0.73}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 606527102217809054}
@@ -379,7 +381,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -407,8 +409,8 @@ GameObject:
   - component: {fileID: 7186362235289923678}
   - component: {fileID: 4926904084376323220}
   - component: {fileID: 7267473770934246997}
-  - component: {fileID: 6145647731863675197}
   - component: {fileID: 274592557719645906}
+  - component: {fileID: 7140168948977267069}
   m_Layer: 0
   m_Name: Wood_BoatV1
   m_TagString: ship
@@ -493,7 +495,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -505,12 +507,35 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!64 &6145647731863675197
+  m_Constraints: 124
+  m_CollisionDetection: 1
+--- !u!114 &274592557719645906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872243824899630401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6f9e02b9166b740892d23481abf3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7267473770934246997}
+  radius: 0.7
+  speed: 5
+  listOption:
+  - {fileID: 1077576469048887450}
+  - {fileID: 6031768859134974309}
+  layercheck:
+    serializedVersion: 2
+    m_Bits: 8
+  isdriveShip: 0
+  isFishing: 0
+--- !u!64 &7140168948977267069
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -526,31 +551,12 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6717044640063268569, guid: 8b9c2549002de7a4fbba40dfaf37b661, type: 3}
---- !u!114 &274592557719645906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6872243824899630401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6f9e02b9166b740892d23481abf3f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.7
-  listOption:
-  - {fileID: 1077576469048887450}
-  - {fileID: 6031768859134974309}
-  layercheck:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &8767018054204766850
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +608,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
@@ -622,7 +628,9 @@ MonoBehaviour:
   target: {fileID: 8767018054204766850}
   player: {fileID: 0}
   cameraAct: {fileID: 0}
+  cameraNotActive: {fileID: 0}
+  isFaceRight: 1
+  activeCheckTrigger: 0
   triggerTag: 0
   nextArea: 1
-  cameraNotActive: {fileID: 0}
-  isFaceRight: 0
+  setAct: 2

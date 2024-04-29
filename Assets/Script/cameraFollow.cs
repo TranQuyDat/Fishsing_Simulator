@@ -30,9 +30,10 @@ public class cameraFollow : MonoBehaviour
 
     }
 
-    public void btn_clickIcon()
+    public void setHeight(float h)
     {
-
+        height = h;
     }
+
 
 }
