@@ -1,59 +1,98 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class lineScript : MonoBehaviour
 {
-
+    public GameObject prefapLine;
     public Transform rodTip;
     public Transform hook;
-    public int countPos=20;
-    public float ropeLenght=5f;
-    public float sagFactor = 0.1f;
-
-
+    public Transform ropeTranform;
+    [Range(3,10)] public int legthRope;
+    public float gap;
+    public bool snapRopTip = true;
+    public bool snapHook = true;
+    int numpos;
+    int cur_numpos;
     LineRenderer line;
-    float k; //khoang cach giua 2 diem
-    float x; // do dai day /2
-    float y; // toa do cua mox cau
-    float a;// do cong cua day
+
+   public List<GameObject> listNode;
     private void Awake()
     {
-        line = this.GetComponent<LineRenderer>();
+        line = ropeTranform.GetComponent<LineRenderer>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        line.startColor = Color.white;
-        line.endColor = Color.white;
-        line.positionCount = countPos;
-        ropeLenght =  Vector3.Distance(rodTip.position, hook.position);
+        legthRope = Mathf.RoundToInt((hook.position - rodTip.position).magnitude);
+        numpos = (int)(legthRope / gap);
+        cur_numpos = numpos;
+        line.positionCount = numpos;
+        physicLine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (line.positionCount != countPos)
+        legthRope = Mathf.RoundToInt((hook.position - rodTip.position).magnitude);
+        numpos = (int)(legthRope / gap);
+        if (cur_numpos != numpos)
         {
-            line.positionCount = countPos;
+            cur_numpos = numpos;
+            destroyAllNode();
+            line.positionCount = numpos;
+            //Debug.Log(listNode.Count);
+            if(listNode.Count <= 0 ) physicLine();
         }
-
-        physicLine();
-
+        if(listNode.Count > 0) line.SetPositions(getallPosChild());
+        if (snapHook && listNode.Count>1)
+        {
+            listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            listNode[listNode.Count - 1].transform.position = hook.position;
+        }
     }
 
     public void physicLine()
     {
-        a = ropeLenght * sagFactor;
-        k = ropeLenght / (countPos - 1);
-        for (int i =0; i< countPos; i++)
+        Vector3 dir = (rodTip.position - hook.position).normalized;
+        for(int i =0;i < numpos; i++)
         {
+            GameObject node =  Instantiate(prefapLine,rodTip.position - (dir * (gap * i)), Quaternion.identity, ropeTranform);
+            listNode.Add(node);
+            if (i == 0)
+            {
+                Destroy(node.GetComponent<CharacterJoint>());
+                if (snapRopTip)
+                {
+                    node.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                }
+                continue;
+            }
             
-            x = -ropeLenght / 2f + k * i;
-            y = a * (Mathf.Exp(x / a) + Mathf.Exp(-x / a)) / 2f;
-            Vector3 pointOnRope = Vector3.Lerp(rodTip.position, hook.position, (float)i / (countPos - 1)) + Vector3.up * y;
-
-            line.SetPosition(i,pointOnRope);
+            //Debug.Log(ropeTranform.GetChild(i - 1).name);
+            node.GetComponent<CharacterJoint>().connectedBody = listNode[i - 1].GetComponent<Rigidbody>();
         }
+        
+    }
+
+    public Vector3[] getallPosChild()
+    {
+        Vector3[] listChild = new Vector3[listNode.Count];
+        int i = 0;
+        foreach (GameObject c in listNode)
+        {
+            listChild.SetValue(c.transform.position, i);
+            i++;
+        }
+        return listChild;
+    }
+    public void destroyAllNode()
+    {
+        for (int i = listNode.Count-1 ; i >=0 ;i--)
+        {
+            Destroy(listNode[i].gameObject);
+        }
+        listNode.Clear();
     }
 }
