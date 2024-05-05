@@ -18,6 +18,7 @@ public class lineScript : MonoBehaviour
     LineRenderer line;
 
    public List<GameObject> listNode;
+    #region default method
     private void Awake()
     {
         line = ropeTranform.GetComponent<LineRenderer>();
@@ -25,57 +26,84 @@ public class lineScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        legthRope = Mathf.RoundToInt((hook.position - rodTip.position).magnitude);
         numpos = (int)(legthRope / gap);
-        cur_numpos = numpos;
         line.positionCount = numpos;
-        physicLine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        legthRope = Mathf.RoundToInt((hook.position - rodTip.position).magnitude);
         numpos = (int)(legthRope / gap);
-        if (cur_numpos != numpos)
+        if (listNode.Count != numpos)
         {
-            cur_numpos = numpos;
-            destroyAllNode();
+            //destroyAllNode();
             line.positionCount = numpos;
             //Debug.Log(listNode.Count);
-            if(listNode.Count <= 0 ) physicLine();
+            if (listNode.Count < numpos)
+            {
+                destroyAllNode();
+                spawnNode();
+            }
+            else if (listNode.Count > numpos) destroyNode();
         }
-        if(listNode.Count > 0) line.SetPositions(getallPosChild());
-        if (snapHook && listNode.Count>1)
+        if (listNode.Count > 0)
         {
-            listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            listNode[listNode.Count - 1].transform.position = hook.position;
+            line.SetPositions(getallPosChild());
+            ruleNode();
         }
     }
+    #endregion
 
-    public void physicLine()
+
+
+
+
+    #region public method
+    public void ruleNode()
     {
-        Vector3 dir = (rodTip.position - hook.position).normalized;
-        for(int i =0;i < numpos; i++)
+        for (int i = 0; i < numpos ; i++)
         {
-            GameObject node =  Instantiate(prefapLine,rodTip.position - (dir * (gap * i)), Quaternion.identity, ropeTranform);
-            listNode.Add(node);
-            if (i == 0)
+            if (snapHook && i == numpos-1 || snapRopTip && i == 0)
             {
-                Destroy(node.GetComponent<CharacterJoint>());
-                if (snapRopTip)
-                {
-                    node.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                }
                 continue;
             }
-            
-            //Debug.Log(ropeTranform.GetChild(i - 1).name);
-            node.GetComponent<CharacterJoint>().connectedBody = listNode[i - 1].GetComponent<Rigidbody>();
+            listNode[i].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            listNode[i].GetComponent<CharacterJoint>().connectedBody = listNode[i - 1].GetComponent<Rigidbody>();
+        }
+        if (snapHook)
+        {
+
+            listNode[listNode.Count - 1].GetComponent<CharacterJoint>().connectedBody = listNode[listNode.Count - 2].GetComponent<Rigidbody>();
+            listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            listNode[listNode.Count - 1].transform.position = hook.position;
+            legthRope = (int)(rodTip.position - hook.position).magnitude;
+
+        }
+        else
+        {
+            listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            hook.transform.position = listNode[listNode.Count - 1].transform.position;
+        }
+
+        if (snapRopTip)
+        {
+            Destroy(listNode[0].GetComponent<CharacterJoint>());
+            listNode[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            listNode[0].transform.position = rodTip.position;
         }
         
     }
 
+    public void spawnNode()
+    {
+        Vector3 dir = (rodTip.position - hook.position).normalized;
+        for (int i = 0 ; i < numpos ; i++)
+        {
+            GameObject node =  Instantiate(prefapLine,rodTip.position  - (dir * gap*i), Quaternion.identity, ropeTranform);
+            listNode.Add(node);
+        }
+    }
+  
     public Vector3[] getallPosChild()
     {
         Vector3[] listChild = new Vector3[listNode.Count];
@@ -89,10 +117,22 @@ public class lineScript : MonoBehaviour
     }
     public void destroyAllNode()
     {
+        if (listNode.Count <= 0) return;
         for (int i = listNode.Count-1 ; i >=0 ;i--)
         {
             Destroy(listNode[i].gameObject);
         }
         listNode.Clear();
     }
+    public void destroyNode()
+    {
+        if (listNode.Count <= 0) return;
+        
+        listNode[1].GetComponent<CharacterJoint>().connectedBody = null;
+        listNode[1].transform.position = rodTip.position;
+        Destroy(listNode[0]);
+        listNode.RemoveAt(0);
+        
+    }
+    #endregion
 }
