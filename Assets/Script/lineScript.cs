@@ -6,13 +6,14 @@ using System.Linq;
 public class lineScript : MonoBehaviour
 {
     public GameObject prefapLine;
-    public Transform rodTip;
-    public Transform hook;
+    public Transform startPos;
+    public Transform endPost;
     public Transform ropeTranform;
     [Range(3,10)] public int legthRope;
     public float gap;
     public bool snapRopTip = true;
     public bool snapHook = true;
+    public bool isUpdateEndPos = true;
     int numpos;
     int cur_numpos;
     LineRenderer line;
@@ -33,7 +34,12 @@ public class lineScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        numpos = (int)(legthRope / gap);
+        if (isUpdateEndPos)
+        {
+            endPost.position = endPost.position;
+            isUpdateEndPos = false;
+        }
+            numpos = (int)(legthRope / gap);
         if (listNode.Count != numpos)
         {
             //destroyAllNode();
@@ -75,31 +81,31 @@ public class lineScript : MonoBehaviour
 
             listNode[listNode.Count - 1].GetComponent<CharacterJoint>().connectedBody = listNode[listNode.Count - 2].GetComponent<Rigidbody>();
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            listNode[listNode.Count - 1].transform.position = hook.position;
-            legthRope = (int)(rodTip.position - hook.position).magnitude;
+            listNode[listNode.Count - 1].transform.position = endPost.position;
+            legthRope = (int)(startPos.position - endPost.position).magnitude;
 
         }
         else
         {
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            hook.transform.position = listNode[listNode.Count - 1].transform.position;
+            endPost.transform.position = listNode[listNode.Count - 1].transform.position;
         }
 
         if (snapRopTip)
         {
             Destroy(listNode[0].GetComponent<CharacterJoint>());
             listNode[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            listNode[0].transform.position = rodTip.position;
+            listNode[0].transform.position = startPos.position;
         }
         
     }
 
     public void spawnNode()
     {
-        Vector3 dir = (rodTip.position - hook.position).normalized;
+        Vector3 dir = (startPos.position - endPost.position).normalized;
         for (int i = 0 ; i < numpos ; i++)
         {
-            GameObject node =  Instantiate(prefapLine,rodTip.position  - (dir * gap*i), Quaternion.identity, ropeTranform);
+            GameObject node =  Instantiate(prefapLine, startPos.position  - (dir * gap*i), Quaternion.identity, ropeTranform);
             listNode.Add(node);
         }
     }
@@ -129,7 +135,7 @@ public class lineScript : MonoBehaviour
         if (listNode.Count <= 0) return;
         
         listNode[1].GetComponent<CharacterJoint>().connectedBody = null;
-        listNode[1].transform.position = rodTip.position;
+        listNode[1].transform.position = startPos.position;
         Destroy(listNode[0]);
         listNode.RemoveAt(0);
         
