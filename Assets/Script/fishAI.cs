@@ -23,6 +23,7 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         bool islimit = (target.transform.position.x <= limitXYmin.position.x || target.transform.position.y <= limitXYmin.position.y ||
                         target.transform.position.x >= limitXYmax.position.x || target.transform.position.y >= limitXYmax.position.y);
         if (islimit)
@@ -42,7 +43,7 @@ public class fishAI : MonoBehaviour
         head.transform.Rotate(-90, 0, 0, Space.Self);
         head.transform.Rotate(0, 90, 0, Space.Self);
 
-        target.transform.localPosition = dir;
+        
         if (target.transform.position.z >= x/2 && x>0) x = -x;
         if(target.transform.position.z <= x/2 && x<0) x = -x;
         target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y,
@@ -52,24 +53,26 @@ public class fishAI : MonoBehaviour
     public void changeDir()
     {
         float randX = Random.Range(limitXYmin.position.x, limitXYmax.position.x);
-        float randY = Random.Range(limitXYmin.position.y, limitXYmax.position.y);
-        while(randY/randX > 0.5f)
-        {
-            randX = Random.Range(limitXYmin.position.x, limitXYmax.position.x);
-            randY = Random.Range(limitXYmin.position.y, limitXYmax.position.y);
-        }
+        float randY = Random.Range(transform.position.y-2f, transform.position.y + 2f);
+
         Vector3 newPos = new Vector3(randX,randY, 0);
         dir = (newPos - target.transform.transform.position).normalized;
-        
-
+        target.transform.localPosition = target.transform.InverseTransformDirection(dir);
+        timeChangeDir = Random.RandomRange(2f, 10f);
+        CancelInvoke("changeDir");
+        InvokeRepeating("changeDir", timeChangeDir, timeChangeDir);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        Ray r = new Ray(head.transform.position, (target.transform.position-head.transform.position));
+        if (target == null || head == null) return;
+        
+        Ray r = new Ray(head.transform.position, (target.transform.position - head.transform.position));
         Gizmos.DrawRay(r);
+
         Gizmos.DrawSphere(target.transform.position, 0.3f);
+        
         Gizmos.color = Color.green;
         Gizmos.DrawRay(head.transform.position, head.transform.up * 3f);
         Gizmos.color = Color.red;
