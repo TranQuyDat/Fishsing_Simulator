@@ -696,10 +696,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   timeChangeDir: 8
+  olfaction: 0
   limitXYmin: {fileID: 0}
   limitXYmax: {fileID: 0}
   head: {fileID: 3780998805147929658}
   target: {fileID: 4248286221413956974}
+  food: {fileID: 0}
+  maskFood:
+    serializedVersion: 2
+    m_Bits: 256
+  likefood: 000000000100000002000000
+  isMeetFood: 0
+  canMove: 1
 --- !u!4 &7793426975797438068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c1d9eac0dd5a2e458806c2d17f7df31, type: 3}

@@ -17,5 +17,17 @@ public enum tag
 }
 public enum Action
 {
-    idle,run,sitting,fishing_idle,fishing_cast,sleeping
+    //action of player
+    idle,run,sitting,fishing_idle,fishing_cast,sleeping,
+    
+    //action of fish
+    checkBait,eatBait,ateBait,
+}
+public enum bait
+{
+    fakeBait,
+    woom,
+    rice,
+    meet,
+    fish,
 }
