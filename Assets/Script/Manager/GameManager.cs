@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public UiManager uiMngr;
     public BoatController boatCtrl;
+    public PlayerController player;
 
     private void Update()
     {
-        uiMngr.ShipUi.setActive_UiFishing(boatCtrl.isFishing);
     }
 }

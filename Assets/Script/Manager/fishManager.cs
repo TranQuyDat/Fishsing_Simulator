@@ -5,15 +5,18 @@ using UnityEngine;
 public class fishManager : MonoBehaviour
 {
     public List<GameObject> listFishAroundHook;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject theLuckyFish;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        randomFish();
+    }
+    public void randomFish()
+    {
+        if(theLuckyFish == null)
+        {
+            theLuckyFish = listFishAroundHook[Random.Range(0, listFishAroundHook.Count)];
+            theLuckyFish.GetComponent<fishAI>().playAction(Action.eatBait, 8f);
+        }
     }
 }

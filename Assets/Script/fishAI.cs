@@ -23,6 +23,7 @@ public class fishAI : MonoBehaviour
     Vector3 dir;
     float x = 3f;
     bool isAroundHook;
+    #region default method
     private void Awake()
     {
         fishMngr = transform.parent.GetComponent<fishManager>();
@@ -30,22 +31,23 @@ public class fishAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("changeDir", 0, timeChangeDir);
+        InvokeRepeating("randomDir", 0, timeChangeDir);
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkLikeFood();
-        changeDir();
         eatEvent();
+        switchBwtAC();
+        changeDirWhenLimit();
         //movement
-        if (canMove && (target.transform.position - head.transform.position).magnitude >=0.5f )
+        if (canMove && (target.transform.position - head.transform.position).magnitude >0.5f )
             transform.transform.position += (target.transform.position - head.transform.position).normalized * speed * Time.deltaTime;
 
         followTarget();
        
     }
+    #endregion
     public void followTarget()
     {
         head.transform.LookAt(target.transform.position);
@@ -61,49 +63,108 @@ public class fishAI : MonoBehaviour
         if (target.transform.position.z >= x / 2 && x > 0) x = -x;
         if (target.transform.position.z <= x / 2 && x < 0) x = -x;
         target.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
-            obj.transform.position.z + x * Time.deltaTime);
+            obj.transform.position.z +x * Time.deltaTime) ;
+
     } 
-    public void changeDir()
+    public void changeDirWhenLimit()
     {
         bool islimit = (target.transform.position.x <= limitXYmin.position.x || target.transform.position.y <= limitXYmin.position.y ||
                         target.transform.position.x >= limitXYmax.position.x || target.transform.position.y >= limitXYmax.position.y);
 
         if (!islimit || isMeetFood ) return;
-        float randX = Random.Range(limitXYmin.position.x, limitXYmax.position.x);
-        float randY = Random.Range(transform.position.y-2f, transform.position.y + 2f);
+        randomDir();
+    }
+    public void randomDir()
+    {
+        float randX = Random.RandomRange(limitXYmin.position.x, limitXYmax.position.x);
+        float randY = Random.RandomRange(transform.position.y - 2f, transform.position.y + 2f);
 
-        Vector3 newPos = new Vector3(randX,randY, 0);
+        Vector3 newPos = new Vector3(randX, randY, 0);
         dir = (newPos - target.transform.transform.position).normalized;
         target.transform.localPosition = target.transform.InverseTransformDirection(dir);
         timeChangeDir = Random.RandomRange(2f, 10f);
-        CancelInvoke("changeDir");
-        InvokeRepeating("changeDir", timeChangeDir, timeChangeDir);
+        CancelInvoke("randomDir");
+        InvokeRepeating("randomDir", timeChangeDir, timeChangeDir);
     }
 
-    public void checkLikeFood()
+    public void playAction(Action ac,float time ,bool b = true)
+    {
+        if(b) StartCoroutine(waittoPlayAc(time,ac));
+    }
+    IEnumerator waittoPlayAc(float time,Action ac)
+    {
+        yield return new WaitForSeconds(time);
+        acFish = ac;
+    }
+    public void switchBwtAC()
+    {
+        switch (acFish)
+        {
+            case Action.checkBait:
+                // hanh dong di chuyen quanh bait
+                moveAroundfood(2f, 1.5f);
+                break;
+
+            case Action.eatBait:
+                // hanh dong di den bait
+                fishEatBait();
+                break;
+
+            case Action.ateBait:
+                // hanh dong da can moi
+                fishAteBait();
+                break;
+            case Action.idle:
+                // hanh dong mac dinh
+                setDefault();
+                break;
+        }
+    }
+
+    public void setDefault()
+    {
+        isMeetFood = false;
+        if (!IsInvoking("randomDir")) randomDir();
+    }
+
+    public void eatEvent()
+    {
+        
+        fishingRodController  fishingRodCtrl = (food != null)? food.GetComponentInParent<fishingRodController>():null;
+        if (isMeetFood && fishingRodCtrl.isfishbite &&( acFish == Action.checkBait|| acFish == Action.idle))
+        {
+            playAction(Action.idle, 0);
+            return;
+        }
+        isMeetFood = checkLikeFood() && 
+            (fishMngr.listFishAroundHook.Count<2 || fishMngr.listFishAroundHook.Contains(this.gameObject))
+            ;
+        playAction(Action.checkBait,0,isMeetFood && acFish == Action.idle  && !fishingRodCtrl.isfishbite);
+
+    }
+    public bool checkLikeFood()
     {
         checkBait = Physics.OverlapSphere(head.transform.position, olfaction, maskFood);
-        if (checkBait == null || checkBait.Length <= 0)
-        {
-            isMeetFood = false;
-            return;
-        }
-        if (acFish == Action.checkBait || acFish == Action.eatBait || acFish == Action.ateBait) return;
-        foreach(bait b in likefood)
-        {
-            if (checkBait[0].tag != b.ToString()) continue; // check like food(bait)
 
-            isMeetFood = true;
-            acFish = Action.checkBait;
+        if (checkBait == null || checkBait.Length <= 0) return false;
+
+        //check xem 'bait' co nam trong list like food ko
+        foreach (bait b in likefood)
+        {
+            if (checkBait[0].tag != b.ToString()) continue;
             food = checkBait[0].gameObject;
-            return;
+            return true;
         }
-        
-        
+        return false;
+
+
     }
 
+
+   
+    #region ACTION
     float timeEventEat;
-    public void moveAroundfood(float orbitRadius, float orbitSpeed )
+    public void moveAroundfood(float orbitRadius, float orbitSpeed ) //di chuyen xuong quanh obj
     {
         timeEventEat += 1 * Time.deltaTime;
         float numDir = 1;
@@ -117,6 +178,7 @@ public class fishAI : MonoBehaviour
         {
             isAroundHook = true;
             fishMngr.listFishAroundHook.Add(this.gameObject);// them vao list around hook
+            CancelInvoke("randomDir");
         }
         float eulerStart = 360f / (fishMngr.listFishAroundHook.IndexOf(this.gameObject) + 1);// goc bat dau quay cho moi con ca
         // Tính toán vị trí quay xung quanh vật thể mục tiêu
@@ -125,34 +187,23 @@ public class fishAI : MonoBehaviour
         float z = Mathf.Sin(orbitAngle) * orbitRadius;
         target.transform.position = new Vector3(x, 0, z) + food.transform.position;
     }
-    public void fishEatBait()
+    public void fishEatBait() 
     {
-        acFish = Action.eatBait;
-        if (acFish != Action.eatBait) return;
-        target.transform.position = food.transform.position;
-        acFish = Action.ateBait;
-
-
+        updateTarget(food);
+        if((target.transform.position - head.transform.position).magnitude <= 0.5f)
+        {
+            fishingRodController fishingRodCtrl = food.GetComponentInParent<fishingRodController>();
+            fishingRodCtrl.isfishbite = true;
+        }
     }
-    public void eatEvent()
+    public void fishAteBait()
     {
-        if (!isMeetFood || 
-           (!fishMngr.listFishAroundHook.Contains(this.gameObject) && fishMngr.listFishAroundHook.Count>=2))
-        {
-            food = null;
-            return;
-        }
-        //fish around bait
-        if (acFish == Action.checkBait)
-        {
-            moveAroundfood(2f, 1.5f);
-            Invoke("fishEatBait", 8f);
-            return;
-        }
-        //fish eat bait
-        
+        fishingRodController fishingRodCtrl = food.GetComponentInParent<fishingRodController>();
+        fishingRodCtrl.isfishbite = true;
     }
-
+    #endregion
+   
+    
     #region gizmos
     private void OnDrawGizmos()
     {
