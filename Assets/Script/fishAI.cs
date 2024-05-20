@@ -37,6 +37,7 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fishAteBait();
         eatEvent();
         switchBwtAC();
         changeDirWhenLimit();
@@ -198,8 +199,11 @@ public class fishAI : MonoBehaviour
     }
     public void fishAteBait()
     {
-        fishingRodController fishingRodCtrl = food.GetComponentInParent<fishingRodController>();
-        fishingRodCtrl.isfishbite = true;
+        //isMeetFood = false;
+        if (food == null) return;
+        Vector3 newdir = (target.transform.position - food.transform.position).normalized * -1;
+        target.transform.localPosition = target.transform.InverseTransformPoint(dir);
+        food.transform.position = head.transform.position;
     }
     #endregion
    

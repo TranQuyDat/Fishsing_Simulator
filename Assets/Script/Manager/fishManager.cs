@@ -13,7 +13,7 @@ public class fishManager : MonoBehaviour
     }
     public void randomFish()
     {
-        if(theLuckyFish == null)
+        if(theLuckyFish == null && listFishAroundHook.Count>0)
         {
             theLuckyFish = listFishAroundHook[Random.Range(0, listFishAroundHook.Count)];
             theLuckyFish.GetComponent<fishAI>().playAction(Action.eatBait, 8f);

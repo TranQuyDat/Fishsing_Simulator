@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public UiManager uiMngr;
+    public fishManager fishMngr;
     public BoatController boatCtrl;
-    public PlayerController player;
-
+    public PlayerController playerCtrl;
+    public fishingRodController fishingRodCtrl;
     private void Update()
     {
     }

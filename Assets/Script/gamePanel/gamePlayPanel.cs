@@ -15,7 +15,8 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Update()
     {
-        if(!Input.GetMouseButtonDown(0)) btn.editImg.AddFillAmount(-(1f/15));
+        if(btn.editImg.imgValue.fillAmount > 0 && btn.editImg.imgValue.fillAmount <0.99f) 
+            btn.editImg.AddFillAmount(-(1f/15));
     }
 
     #region button
@@ -26,7 +27,7 @@ public class gamePlayPanel : MonoBehaviour
     }
     public void btnFishingcast()
     {
-        gameMngr.player.cur_action = Action.fishing_cast;
+        gameMngr.playerCtrl.cur_action = Action.fishing_cast;
     }
 
     #endregion
