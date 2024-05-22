@@ -17,6 +17,7 @@ public class fishAI : MonoBehaviour
     public bait[] likefood;
     public bool isMeetFood;
     public bool canMove = true;
+    public bool canChangeDirRandom = true;
     public Collider[] checkBait;
     public fishManager fishMngr;
     public Action acFish;
@@ -37,7 +38,6 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fishAteBait();
         eatEvent();
         switchBwtAC();
         changeDirWhenLimit();
@@ -64,7 +64,7 @@ public class fishAI : MonoBehaviour
         if (target.transform.position.z >= x / 2 && x > 0) x = -x;
         if (target.transform.position.z <= x / 2 && x < 0) x = -x;
         target.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
-            obj.transform.position.z +x * Time.deltaTime) ;
+            obj.transform.position.z ) ;
 
     } 
     public void changeDirWhenLimit()
@@ -72,11 +72,12 @@ public class fishAI : MonoBehaviour
         bool islimit = (target.transform.position.x <= limitXYmin.position.x || target.transform.position.y <= limitXYmin.position.y ||
                         target.transform.position.x >= limitXYmax.position.x || target.transform.position.y >= limitXYmax.position.y);
 
-        if (!islimit || isMeetFood ) return;
+        if (!islimit) return;
         randomDir();
     }
     public void randomDir()
     {
+        if (!canChangeDirRandom) return;
         float randX = Random.RandomRange(limitXYmin.position.x, limitXYmax.position.x);
         float randY = Random.RandomRange(transform.position.y - 2f, transform.position.y + 2f);
 
@@ -125,23 +126,27 @@ public class fishAI : MonoBehaviour
     public void setDefault()
     {
         isMeetFood = false;
+        speed = 5;
         if (!IsInvoking("randomDir")) randomDir();
     }
 
     public void eatEvent()
     {
-        
+        isMeetFood = checkLikeFood()  ;
+        bool isMaxfishTag2bait = (fishMngr.listFishAroundHook.Count < 2 || fishMngr.listFishAroundHook.Contains(this.gameObject));
+
         fishingRodController  fishingRodCtrl = (food != null)? food.GetComponentInParent<fishingRodController>():null;
-        if (isMeetFood && fishingRodCtrl.isfishbite &&( acFish == Action.checkBait|| acFish == Action.idle))
+        bool hadFishBite = isMeetFood && fishingRodCtrl.isfishbite && (acFish == Action.checkBait || acFish == Action.idle);
+        
+        if (!isMeetFood && isMaxfishTag2bait || hadFishBite)
         {
             playAction(Action.idle, 0);
             return;
         }
-        isMeetFood = checkLikeFood() && 
-            (fishMngr.listFishAroundHook.Count<2 || fishMngr.listFishAroundHook.Contains(this.gameObject))
-            ;
-        playAction(Action.checkBait,0,isMeetFood && acFish == Action.idle  && !fishingRodCtrl.isfishbite);
 
+
+        playAction(Action.checkBait,0, acFish == Action.idle  && !fishingRodCtrl.isfishbite);
+        playAction(Action.ateBait, 0, acFish == Action.eatBait && fishingRodCtrl.isfishbite);
     }
     public bool checkLikeFood()
     {
@@ -197,12 +202,17 @@ public class fishAI : MonoBehaviour
             fishingRodCtrl.isfishbite = true;
         }
     }
+    public bool isPull;
     public void fishAteBait()
     {
-        //isMeetFood = false;
         if (food == null) return;
-        Vector3 newdir = (target.transform.position - food.transform.position).normalized * -1;
-        target.transform.localPosition = target.transform.InverseTransformPoint(dir);
+        speed = 2;
+        canChangeDirRandom = false;
+        Vector2 dir_RodPullFish = (food.transform.parent.position - head.transform.position).normalized;
+        Vector2 dir_FishPullRod = dir_RodPullFish*-1 ;
+        target.transform.localPosition = target.transform.InverseTransformDirection(
+            (isPull)? dir_RodPullFish: dir_FishPullRod
+            );
         food.transform.position = head.transform.position;
     }
     #endregion

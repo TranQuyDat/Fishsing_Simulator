@@ -13,7 +13,7 @@ public class editImgUI
     }
     public void setFillAmount(float v)
     {
-        imgValue.fillAmount = v ;
+        imgValue.fillAmount = Mathf.Round(v*100f)*0.01f ;
     }
 
 }
