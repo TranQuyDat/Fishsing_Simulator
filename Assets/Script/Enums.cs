@@ -19,7 +19,7 @@ public enum tag
 public enum Action
 {
     //action of player
-    idle,run,sitting,fishing_idle,fishing_cast,sleeping,
+    idle,running,sitting,fishing_idle,fishing_cast,sleeping,
     
     //action of fish
     checkBait,eatBait,ateBait,
@@ -31,4 +31,8 @@ public enum bait
     rice,
     meet,
     fish,
+}
+public enum GizmosTyle
+{
+    drawDir,drawRec,
 }

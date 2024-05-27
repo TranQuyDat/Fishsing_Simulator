@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         if (!canMove) return;
         if (axis != 0)
         {
-            cur_action = Action.run;
+            cur_action = Action.running;
         }
         else
         {

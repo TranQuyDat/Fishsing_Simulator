@@ -61,7 +61,7 @@ public class TriggerChangeScene : MonoBehaviour
    
     public void movePlayerToTarget()
     {
-        Debug.Log("this ok");
+        //Debug.Log("this ok");
         player.transform.position = target.transform.position;
         playerctrl.inArea = nextArea;
         float euler = playerctrl.faceRight;
@@ -70,7 +70,7 @@ public class TriggerChangeScene : MonoBehaviour
     }
     public void movePlayerToTargetWithCamera()
     {
-        Debug.Log("this ok");
+        //Debug.Log("this ok");
         changeCamera();
         float euler = (isFaceRight) ? playerctrl.faceRight : playerctrl.faceRight + 180;
 

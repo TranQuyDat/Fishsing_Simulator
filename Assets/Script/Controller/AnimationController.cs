@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ public class AnimationController : MonoBehaviour
         
         actIsRunning = ac;
 
-        ani.SetBool("isrun", ac == Action.run);
+        ani.SetBool("isrun", ac == Action.running);
         ani.SetBool("isSleeping", ac == Action.sleeping);
         ani.SetBool("isSitting", ac == Action.sitting);
         ani.SetBool("isFishing_cast", ac == Action.fishing_cast);
@@ -41,6 +41,7 @@ public class AnimationController : MonoBehaviour
 
     public void nextAction(Action ac)
     {
+
         playerCtrl.cur_action = ac;
     }
 }

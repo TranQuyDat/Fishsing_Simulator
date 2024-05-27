@@ -45,6 +45,8 @@ public class gamePlayPanel : MonoBehaviour
     }
     public void btnFishingcast()
     {
+
+        gameMngr.fishingRodCtrl.isCasting = true;
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
     }
 

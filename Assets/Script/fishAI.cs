@@ -133,12 +133,12 @@ public class fishAI : MonoBehaviour
     public void eatEvent()
     {
         isMeetFood = checkLikeFood()  ;
-        bool isMaxfishTag2bait = (fishMngr.listFishAroundHook.Count < 2 || fishMngr.listFishAroundHook.Contains(this.gameObject));
+        bool isMaxfishTag2bait = (fishMngr.listFishAroundHook.Count >= 2 && !fishMngr.listFishAroundHook.Contains(this.gameObject));
 
         fishingRodController  fishingRodCtrl = (food != null)? food.GetComponentInParent<fishingRodController>():null;
         bool hadFishBite = isMeetFood && fishingRodCtrl.isfishbite && (acFish == Action.checkBait || acFish == Action.idle);
         
-        if (!isMeetFood && isMaxfishTag2bait || hadFishBite)
+        if (!isMeetFood || (isMeetFood && isMaxfishTag2bait) || hadFishBite)
         {
             playAction(Action.idle, 0);
             return;
@@ -208,6 +208,9 @@ public class fishAI : MonoBehaviour
         if (food == null) return;
         speed = 2;
         canChangeDirRandom = false;
+
+        fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
+        fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = false;
         Vector2 dir_RodPullFish = (food.transform.parent.position - head.transform.position).normalized;
         Vector2 dir_FishPullRod = dir_RodPullFish*-1 ;
         target.transform.localPosition = target.transform.InverseTransformDirection(
