@@ -36,6 +36,7 @@ public class AnimationController : MonoBehaviour
         ani.SetBool("isSleeping", ac == Action.sleeping);
         ani.SetBool("isSitting", ac == Action.sitting);
         ani.SetBool("isFishing_cast", ac == Action.fishing_cast);
+        ani.SetBool("fishing_reel", ac == Action.fishing_reel);
         ani.SetBool("isFishing_idle", ac == Action.fishing_idle);
     }
 

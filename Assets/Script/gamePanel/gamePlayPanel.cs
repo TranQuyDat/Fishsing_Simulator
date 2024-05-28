@@ -45,8 +45,8 @@ public class gamePlayPanel : MonoBehaviour
     }
     public void btnFishingcast()
     {
-
-        gameMngr.fishingRodCtrl.isCasting = true;
+        if (gameMngr.playerCtrl.cur_action == Action.fishing_cast
+         || gameMngr.playerCtrl.cur_action == Action.fishing_reel) return;
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
     }
 

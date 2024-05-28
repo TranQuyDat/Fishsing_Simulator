@@ -19,7 +19,7 @@ public enum tag
 public enum Action
 {
     //action of player
-    idle,running,sitting,fishing_idle,fishing_cast,sleeping,
+    idle,running,sitting,fishing_idle,fishing_cast,fishing_reel,sleeping,
     
     //action of fish
     checkBait,eatBait,ateBait,

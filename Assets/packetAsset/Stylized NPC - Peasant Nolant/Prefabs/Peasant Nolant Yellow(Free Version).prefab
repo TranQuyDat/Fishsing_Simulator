@@ -80,7 +80,6 @@ GameObject:
   - component: {fileID: 1724913258350202950}
   - component: {fileID: 5175735532663102717}
   - component: {fileID: 4217353715132362536}
-  - component: {fileID: 7983300617434597080}
   m_Layer: 0
   m_Name: buoys
   m_TagString: Untagged
@@ -96,7 +95,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368055428529371208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.15, y: 0.02, z: 0.84}
+  m_LocalPosition: {x: 3.15, y: 0, z: 0.84}
   m_LocalScale: {x: 0.3, y: 0.3, z: -0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,57 +174,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!144 &7983300617434597080
-CharacterJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368055428529371208}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.50000036, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -40.017937, y: 3.484446, z: 0.49995565}
-  serializedVersion: 2
-  m_SwingAxis: {x: 0, y: 1, z: 0}
-  m_TwistLimitSpring:
-    spring: 0
-    damper: 0
-  m_LowTwistLimit:
-    limit: -20
-    bounciness: 0
-    contactDistance: 0
-  m_HighTwistLimit:
-    limit: 70
-    bounciness: 0
-    contactDistance: 0
-  m_SwingLimitSpring:
-    spring: 0
-    damper: 0
-  m_Swing1Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_Swing2Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_EnableProjection: 0
-  m_ProjectionDistance: 0.1
-  m_ProjectionAngle: 180
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &465379559262222726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2587,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8613954126185663617, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1900197341501621031}
+    - targetCorrespondingSourceObject: {fileID: 8613954126185663617, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3985875198191300661}
   m_SourcePrefab: {fileID: 100100000, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
 --- !u!4 &8555519727791643010 stripped
 Transform:
@@ -2667,4 +2623,25 @@ MonoBehaviour:
   castforce: 10
   isReeling: 0
   isCasting: 0
+  startACTionCasting: 0
   fishingPoint: {fileID: 85233127316137187}
+--- !u!114 &3985875198191300661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9074928559405810488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f2977528c1bcd42a61e501431ef406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tyle: 0
+  drawRec: []
+  drawDir:
+  - obj: {fileID: 5105737033758196805}
+    showForward: 1
+    showUp: 0
+    showRight: 0
+  canDraw: 1

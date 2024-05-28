@@ -211,11 +211,8 @@ public class fishAI : MonoBehaviour
 
         fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
         fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = false;
-        Vector2 dir_RodPullFish = (food.transform.parent.position - head.transform.position).normalized;
-        Vector2 dir_FishPullRod = dir_RodPullFish*-1 ;
-        target.transform.localPosition = target.transform.InverseTransformDirection(
-            (isPull)? dir_RodPullFish: dir_FishPullRod
-            );
+        Vector2 dir_FishPullRod = (food.transform.parent.position - head.transform.position).normalized * -1 ;
+        target.transform.localPosition =  dir_FishPullRod;
         food.transform.position = head.transform.position;
     }
     #endregion

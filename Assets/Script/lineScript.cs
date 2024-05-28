@@ -54,7 +54,11 @@ public class lineScript : MonoBehaviour
     #endregion
 
 
-
+    public void resetLine()
+    {
+        destroyAllNode();
+        spawnNode();
+    }
 
 
     #region public method
@@ -77,7 +81,7 @@ public class lineScript : MonoBehaviour
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             listNode[listNode.Count - 1].transform.position = endPost.position;
             legthRope = Mathf.Clamp((int)(startPos.position - endPost.position).magnitude,
-                                    3,10);
+                                    3,20);
 
 
         }
