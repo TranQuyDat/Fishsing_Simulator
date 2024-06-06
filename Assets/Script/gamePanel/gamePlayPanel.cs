@@ -27,21 +27,13 @@ public class gamePlayPanel : MonoBehaviour
     }
 
     #region button
-
     public void btnFishing()
     {
-        gameMngr.fishMngr.theLuckyFishAI.isPull = true;
-        if (btn.editImg.imgValue.fillAmount > 0.90f)
+        gameMngr.fishingRodCtrl.isPull = true;
+        if (btn.editImg.imgValue.fillAmount >= 0.99f)
         {
             btn.editImg.setFillAmount(1);
-            return;
         }
-            StartCoroutine(resetIspullofFish());
-    }
-    IEnumerator resetIspullofFish()
-    {
-        yield return new WaitForSeconds(0.5f);
-        gameMngr.fishMngr.theLuckyFishAI.isPull = false;
     }
     public void btnFishingcast()
     {

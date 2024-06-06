@@ -447,6 +447,9 @@ PrefabInstance:
       addedObject: {fileID: 6345305086408573135}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -4558419591134668789}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5454996199376837304}
   m_SourcePrefab: {fileID: 100100000, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}
 --- !u!1 &496865290017823560 stripped
@@ -491,6 +494,33 @@ MonoBehaviour:
   - m_Rig: {fileID: 1529654132650624760}
     m_Active: 1
   m_Effectors: []
+--- !u!54 &-4558419591134668789
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496865290017823560}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &5454996199376837304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ebb14dd5aaae841a5861d11e81e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: -4558419591134668789}
   speed: 4
   timeChangeDir: 8
   olfaction: 0
@@ -517,6 +548,12 @@ MonoBehaviour:
   likefood: 000000000100000002000000
   isMeetFood: 0
   canMove: 1
+  canChangeDirRandom: 1
+  checkBait: []
+  fishMngr: {fileID: 0}
+  acFish: 0
+  timePullRod: 0
+  maxDisPull: 10
 --- !u!4 &985981510929318386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}

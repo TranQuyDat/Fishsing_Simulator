@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class fishAI : MonoBehaviour
 {
-
+    public Rigidbody rb;
     public float speed;
     public float timeChangeDir;
     public float olfaction;
@@ -43,7 +43,7 @@ public class fishAI : MonoBehaviour
         changeDirWhenLimit();
         //movement
         if (canMove && (target.transform.position - head.transform.position).magnitude >0.5f )
-            transform.transform.position += (target.transform.position - head.transform.position).normalized * speed * Time.deltaTime;
+            transform.position += (target.transform.position - head.transform.position).normalized * speed * Time.deltaTime;
 
         followTarget();
        
@@ -64,7 +64,7 @@ public class fishAI : MonoBehaviour
         if (target.transform.position.z >= x / 2 && x > 0) x = -x;
         if (target.transform.position.z <= x / 2 && x < 0) x = -x;
         target.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
-            obj.transform.position.z ) ;
+            obj.transform.position.z +x*Time.deltaTime) ;
 
     } 
     public void changeDirWhenLimit()
@@ -116,7 +116,7 @@ public class fishAI : MonoBehaviour
                 // hanh dong da can moi
                 fishAteBait();
                 break;
-            case Action.idle:
+            default:
                 // hanh dong mac dinh
                 setDefault();
                 break;
@@ -125,6 +125,7 @@ public class fishAI : MonoBehaviour
 
     public void setDefault()
     {
+        //canMove = true;
         isMeetFood = false;
         speed = 5;
         if (!IsInvoking("randomDir")) randomDir();
@@ -202,18 +203,48 @@ public class fishAI : MonoBehaviour
             fishingRodCtrl.isfishbite = true;
         }
     }
-    public bool isPull;
+
+    public float timePullRod =0;
+    public float maxDisPull = 10f;
     public void fishAteBait()
     {
-        if (food == null) return;
-        speed = 2;
+        canMove = false;
         canChangeDirRandom = false;
+        if (food == null || fishMngr.gameMngr.fishingRodCtrl.wasCaughtFish 
+            || fishMngr.gameMngr.fishingRodCtrl.isPull) return;
 
+        fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = true;
         fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
-        fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = false;
-        Vector2 dir_FishPullRod = (food.transform.parent.position - head.transform.position).normalized * -1 ;
-        target.transform.localPosition =  dir_FishPullRod;
+        fishMngr.gameMngr.fishingRodCtrl.rope2.snapRopTip = false;
+
         food.transform.position = head.transform.position;
+
+        speed = 10;
+        
+        Vector3 dir_FishPullRod = (head.transform.position - food.transform.parent.position).normalized;
+        Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
+        Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
+
+        target.transform.localPosition =target.transform.InverseTransformDirection(dir_FishPullRod);
+
+        if(fishMngr.dis<= (maxDisPull - 2) ) timePullRod = 0f ;
+        if(fishMngr.dis>5 && rb.isKinematic)
+        {
+            speed = 2;
+            transform.position -= dir_FishPullRod* speed * Time.deltaTime;
+        }
+        if (timePullRod<=0) 
+        {
+            timePullRod = 2f;
+            rb.isKinematic = false;
+            Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
+            rb.AddForce(ranDir* speed, ForceMode.Impulse);
+        }
+        if(fishMngr.dis >= maxDisPull)
+        {
+            rb.isKinematic = true;
+        }
+
     }
     #endregion
    

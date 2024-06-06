@@ -34,5 +34,5 @@ public enum bait
 }
 public enum GizmosTyle
 {
-    drawDir,drawRec,
+    drawDir,drawRec, drawLine,
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class DrawParent 
 {
+    public Color color;
     public abstract void Draw();
 }
 [System.Serializable]
@@ -15,7 +16,8 @@ public class DrawRec : DrawParent
 
     public override void Draw()
     {
-        Gizmos.color = Color.red;
+        if (obj1 == null || obj2 == null) return;
+        Gizmos.color = color;
         Gizmos.DrawLine(obj1.position, new Vector3(obj1.position.x, obj2.position.y));
         Gizmos.DrawLine(obj1.position, new Vector3(obj2.position.x, obj1.position.y));
 
@@ -25,47 +27,86 @@ public class DrawRec : DrawParent
 
 }
 [System.Serializable]
+public class DrawLine : DrawParent
+{
+    public Transform point1;
+    public Transform point2;
+    public override void Draw()
+    {
+        if (point1 == null || point2 == null) return;
+        Gizmos.color = color;
+        Gizmos.DrawLine(point1.position, point2.position);
+    }
+}
+[System.Serializable]
 public class DrawDir : DrawParent
 {
     public Transform obj;
+    public Transform target;
+    [Tooltip("need fill target")] public bool showDirToTarget;
     public bool showForward;
     public bool showUp;
     public bool showRight;
     public override void Draw()
     {
-        Gizmos.color = Color.blue;
-        if(showForward) Gizmos.DrawRay(new Ray(obj.position, obj.forward));
-        if(showUp) Gizmos.DrawRay(new Ray(obj.position, obj.up));
-        if(showRight) Gizmos.DrawRay(new Ray(obj.position, obj.right));
+        if (obj == null) return;
+        
+        Gizmos.color = color;
+        if (showForward) Gizmos.DrawRay(new Ray(obj.position, obj.forward));
+        if (showUp) Gizmos.DrawRay(new Ray(obj.position, obj.up));
+        if (showRight) Gizmos.DrawRay(new Ray(obj.position, obj.right));
+        
+        if (target == null) return;
+        if (showDirToTarget)
+        {
+            Vector3 dir = (target.position - obj.position).normalized;
+            Gizmos.DrawRay(new Ray(obj.position,dir));
+        }
     }
 }
-public class drawGizmos : MonoBehaviour
+[System.Serializable]
+public class Draw
 {
     public GizmosTyle tyle;
     public DrawRec[] drawRec;
     public DrawDir[] drawDir;
+    public DrawLine[] drawLine;
     public bool canDraw;
     public DrawParent[] curDraw;
-    public void switchdraw()
+    public DrawParent[] getCurDraw()
     {
         curDraw = tyle switch
         {
             GizmosTyle.drawDir => drawDir,
             GizmosTyle.drawRec => drawRec,
-            _=>null,
+            GizmosTyle.drawLine => drawLine,
+            _ => null,
         };
+        return curDraw;
     }
+}
+public class drawGizmos : MonoBehaviour
+{
+    public Draw[] draws;
+    
+   
     private void OnDrawGizmos()
     {
-        switchdraw();
-        if (!canDraw || curDraw == null) return;
-        foreach(DrawParent d in curDraw)
+        if (draws.Length <= 0 || draws == null) return;
+        foreach(Draw d in draws)
         {
-            d.Draw();
+            if (!d.canDraw) continue;
+            foreach (DrawParent dr in d.getCurDraw())
+            {
+                dr.Draw();
+            }
         }
+        
+
         
 
     }
 
 
 }
+

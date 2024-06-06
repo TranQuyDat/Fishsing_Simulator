@@ -18,12 +18,20 @@ public class fishingRodController : MonoBehaviour
     public bool startACTionCasting;
     public Transform fishingPoint;
     public Transform dirCast;
+    public fishAI fish;
+    public bool isPull;
+    public float pullforce =0.5f;
     void Start()
     {
         
     }
     private void OnEnable()
     {
+        rope1.snapHook = false;
+        rope2.snapHook = false;
+        rope2.snapRopTip = true;
+        rope1.legthRope = 3;
+        rope2.legthRope = 3;
         rope1.resetLine();
         rope2.resetLine();
     }
@@ -31,9 +39,15 @@ public class fishingRodController : MonoBehaviour
     void Update()
     {
         wasCaughtFish = imgvalue.fillAmount >= 1;
-  
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            isPull = true;
+            
+        }
+        pullrod();
         castLine();
         reelLine();
+        Rigidbody rb = rope2.startPos.GetComponent<Rigidbody>();
     }
 
     public void castLine()
@@ -47,6 +61,7 @@ public class fishingRodController : MonoBehaviour
         if (startACTionCasting && !isCasting)
         {
             rope1.snapHook = true;
+            rope1.endPost.GetComponent<Rigidbody>().useGravity = true;
             rope1.endPost.GetComponent<Rigidbody>().isKinematic = false;
             Vector3 dir = dirCast.forward + dirCast.up;
             rope1.endPost.GetComponent<Rigidbody>().AddForce(dir*castforce, ForceMode.Impulse);
@@ -83,4 +98,24 @@ public class fishingRodController : MonoBehaviour
         }
     }
 
+    public void pullrod()
+    {
+        if (fish == null || !isPull || wasCaughtFish ) return;
+
+        fish.maxDisPull -= 1;
+        Vector3 dir = (rope1.startPos.position - fish.head.transform.position).normalized;
+        rope2.endPost.position = fish.head.transform.position;
+        fish.target.transform.localPosition = fish.target.transform.InverseTransformDirection(dir);
+        fish.rb.isKinematic = false;
+        fish.rb.AddForce(dir * 10f, ForceMode.Impulse);
+
+        
+        isPull = false;
+        StartCoroutine(resetPull());
+    }
+    IEnumerator resetPull()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (fish.maxDisPull >= 10)  fish.maxDisPull += 1;
+    }
 }

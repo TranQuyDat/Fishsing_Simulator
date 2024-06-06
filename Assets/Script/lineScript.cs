@@ -9,11 +9,13 @@ public class lineScript : MonoBehaviour
     public Transform startPos;
     public Transform endPost;
     public Transform ropeTranform;
-    [Range(3,10)] public int legthRope;
+    [Range(3,10)] public float legthRope;
+    public bool lockLengthRope;
     public float gap;
     public bool snapRopTip = true;
     public bool snapHook = true;
     public int numpos;
+    public Transform ropeConnection;
     LineRenderer line;
 
    public List<GameObject> listNode;
@@ -50,9 +52,19 @@ public class lineScript : MonoBehaviour
             line.SetPositions(getallPosChild());
             ruleNode();
         }
+        connectWithRope();
     }
     #endregion
-
+    public void connectWithRope()
+    {
+        if (ropeConnection == null ) return;
+        lineScript line = ropeConnection.GetComponent<lineScript>();
+        if(snapRopTip == false && line.listNode.Count>0)
+        {
+            listNode[0].GetComponent<CharacterJoint>().connectedBody = line.listNode[line.listNode.Count - 1].GetComponent<Rigidbody>();
+            line.endPost.position = listNode[0].transform.position;
+        }
+    }
 
     public void resetLine()
     {
@@ -80,7 +92,7 @@ public class lineScript : MonoBehaviour
             listNode[listNode.Count - 1].GetComponent<CharacterJoint>().connectedBody = listNode[listNode.Count - 2].GetComponent<Rigidbody>();
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             listNode[listNode.Count - 1].transform.position = endPost.position;
-            legthRope = Mathf.Clamp((int)(startPos.position - endPost.position).magnitude,
+            if(!lockLengthRope)legthRope = Mathf.Clamp((startPos.position - endPost.position).magnitude,
                                     3,20);
 
 
@@ -90,12 +102,17 @@ public class lineScript : MonoBehaviour
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
            endPost.transform.position = listNode[listNode.Count - 1].transform.position;
         }
-
+        Component com = listNode[0].GetComponent<CharacterJoint>();
         if (snapRopTip)
         {
             Destroy(listNode[0].GetComponent<CharacterJoint>());
             listNode[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             listNode[0].transform.position = startPos.position;
+        }
+        else if (listNode[0].GetComponent<CharacterJoint>()== null)
+        {
+            listNode[0].AddComponent(com.GetType());
+            listNode[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
         
     }
