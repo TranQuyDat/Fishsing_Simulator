@@ -22,7 +22,6 @@ public class fishAI : MonoBehaviour
     public fishManager fishMngr;
     public Action acFish;
     Vector3 dir;
-    float x = 3f;
     bool isAroundHook;
     #region default method
     private void Awake()
@@ -56,16 +55,17 @@ public class fishAI : MonoBehaviour
         head.transform.Rotate(0, 90, 0, Space.Self);
 
 
-        if(!isMeetFood) updateTarget(target);
+        if(!isMeetFood) updateTarget(-head.transform.up);
     }
 
-    public void updateTarget(GameObject obj)
+    public void updateTarget(Vector3 dir,float dis = 3f, float x=3f)
     {
-        if (target.transform.position.z >= x / 2 && x > 0) x = -x;
-        if (target.transform.position.z <= x / 2 && x < 0) x = -x;
-        target.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y,
-            obj.transform.position.z +x*Time.deltaTime) ;
+        Vector3 newdir = new Vector3(dir.x, dir.y,dir.z + x * Time.deltaTime) ;
+        if( (head.transform.position.z >= x / 2) || (head.transform.position.z <= -Mathf.Abs(x) / 2) )
+            newdir = new Vector3(dir.x, dir.y, dir.z + -x * Time.deltaTime);
 
+        target.transform.position = head.transform.position + newdir * dis; ;
+        
     } 
     public void changeDirWhenLimit()
     {
@@ -196,15 +196,15 @@ public class fishAI : MonoBehaviour
     }
     public void fishEatBait() 
     {
-        updateTarget(food);
-        if((target.transform.position - head.transform.position).magnitude <= 0.5f)
+        Vector3 dir = (food.transform.position - head.transform.position).normalized;
+        updateTarget(dir);
+        if((head.transform.position - head.transform.position).magnitude <= 0.5f)
         {
             fishingRodController fishingRodCtrl = food.GetComponentInParent<fishingRodController>();
             fishingRodCtrl.isfishbite = true;
         }
     }
 
-    public float timePullRod =0;
     public float maxDisPull = 10f;
     public void fishAteBait()
     {
@@ -221,28 +221,25 @@ public class fishAI : MonoBehaviour
 
         speed = 10;
         
-        Vector3 dir_FishPullRod = (head.transform.position - food.transform.parent.position).normalized;
+        Vector3 dir_FishPullRod = (head.transform.position - fishMngr.fishRodCtrl.rodtip.position).normalized;
         Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
         Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
 
-        target.transform.localPosition =target.transform.InverseTransformDirection(dir_FishPullRod);
-
-        if(fishMngr.dis<= (maxDisPull - 2) ) timePullRod = 0f ;
-        if(fishMngr.dis>5 && rb.isKinematic)
+        updateTarget( Vector3.Slerp( dir_min,dir_max,Random.Range(0,1) ) , 0.5f);
+        if (fishMngr.dis >= maxDisPull)// stop pull
+        {
+            rb.isKinematic = true;
+        }
+        if(fishMngr.dis >= maxDisPull - 2 && rb.isKinematic) // stop pull and move to dir
         {
             speed = 2;
             transform.position -= dir_FishPullRod* speed * Time.deltaTime;
         }
-        if (timePullRod<=0) 
+        if (fishMngr.dis < (maxDisPull - 2)) // pull
         {
-            timePullRod = 2f;
             rb.isKinematic = false;
             Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
             rb.AddForce(ranDir* speed, ForceMode.Impulse);
-        }
-        if(fishMngr.dis >= maxDisPull)
-        {
-            rb.isKinematic = true;
         }
 
     }

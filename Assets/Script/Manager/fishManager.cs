@@ -5,6 +5,7 @@ using UnityEngine;
 public class fishManager : MonoBehaviour
 {
     public GameManager gameMngr;
+    public fishingRodController fishRodCtrl;
     public List<GameObject> listFishAroundHook;
     public GameObject theLuckyFish;
     public Transform surfaceWater;

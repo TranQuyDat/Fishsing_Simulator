@@ -7,7 +7,7 @@ public class lineScript : MonoBehaviour
 {
     public GameObject prefapLine;
     public Transform startPos;
-    public Transform endPost;
+    public Transform endPos;
     public Transform ropeTranform;
     [Range(3,10)] public float legthRope;
     public bool lockLengthRope;
@@ -62,7 +62,7 @@ public class lineScript : MonoBehaviour
         if(snapRopTip == false && line.listNode.Count>0)
         {
             listNode[0].GetComponent<CharacterJoint>().connectedBody = line.listNode[line.listNode.Count - 1].GetComponent<Rigidbody>();
-            line.endPost.position = listNode[0].transform.position;
+            line.endPos.position = listNode[0].transform.position;
         }
     }
 
@@ -91,8 +91,8 @@ public class lineScript : MonoBehaviour
 
             listNode[listNode.Count - 1].GetComponent<CharacterJoint>().connectedBody = listNode[listNode.Count - 2].GetComponent<Rigidbody>();
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            listNode[listNode.Count - 1].transform.position = endPost.position;
-            if(!lockLengthRope)legthRope = Mathf.Clamp((startPos.position - endPost.position).magnitude,
+            listNode[listNode.Count - 1].transform.position = endPos.position;
+            if(!lockLengthRope)legthRope = Mathf.Clamp((startPos.position - endPos.position).magnitude,
                                     3,20);
 
 
@@ -100,7 +100,7 @@ public class lineScript : MonoBehaviour
         else
         {
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-           endPost.transform.position = listNode[listNode.Count - 1].transform.position;
+           endPos.transform.position = listNode[listNode.Count - 1].transform.position;
         }
         Component com = listNode[0].GetComponent<CharacterJoint>();
         if (snapRopTip)
@@ -119,7 +119,7 @@ public class lineScript : MonoBehaviour
 
     public void spawnNode()
     {
-        Vector3 dir = (startPos.position - endPost.position).normalized;
+        Vector3 dir = (startPos.position - endPos.position).normalized;
         for (int i = 0; i < numpos ; i++)
         {
             addNode(i);
@@ -128,7 +128,7 @@ public class lineScript : MonoBehaviour
 
     public void addNode(int index)
     {
-        Vector3 dir = (endPost.position - startPos.position).normalized;
+        Vector3 dir = (endPos.position - startPos.position).normalized;
         GameObject node = Instantiate(prefapLine, startPos.position + (dir * gap * index), Quaternion.identity, ropeTranform);
 
         listNode.Insert(index, node);

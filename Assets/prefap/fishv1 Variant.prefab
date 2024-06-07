@@ -552,7 +552,6 @@ MonoBehaviour:
   checkBait: []
   fishMngr: {fileID: 0}
   acFish: 0
-  timePullRod: 0
   maxDisPull: 10
 --- !u!4 &985981510929318386 stripped
 Transform:
