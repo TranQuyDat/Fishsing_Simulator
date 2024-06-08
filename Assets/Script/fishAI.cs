@@ -212,36 +212,39 @@ public class fishAI : MonoBehaviour
         canChangeDirRandom = false;
         if (food == null || fishMngr.gameMngr.fishingRodCtrl.wasCaughtFish 
             || fishMngr.gameMngr.fishingRodCtrl.isPull) return;
-
-        fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = true;
-        fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
-        fishMngr.gameMngr.fishingRodCtrl.rope2.snapRopTip = false;
-
-        food.transform.position = head.transform.position;
-
-        speed = 10;
-        
-        Vector3 dir_FishPullRod = (head.transform.position - fishMngr.fishRodCtrl.rodtip.position).normalized;
-        Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
-        Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
-
-        updateTarget( Vector3.Slerp( dir_min,dir_max,Random.Range(0,1) ) , 0.5f);
-        if (fishMngr.dis >= maxDisPull)// stop pull
+        if (!fishMngr.gameMngr.fishingRodCtrl.isPull)
         {
-            rb.isKinematic = true;
-        }
-        if(fishMngr.dis >= maxDisPull - 2 && rb.isKinematic) // stop pull and move to dir
-        {
-            speed = 2;
-            transform.position -= dir_FishPullRod* speed * Time.deltaTime;
-        }
-        if (fishMngr.dis < (maxDisPull - 2)) // pull
-        {
-            rb.isKinematic = false;
-            Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
-            rb.AddForce(ranDir* speed, ForceMode.Impulse);
-        }
+            fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = true;
+            fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
+            fishMngr.gameMngr.fishingRodCtrl.rope2.snapRopTip = false;
 
+            food.transform.position = head.transform.position;
+
+
+
+            Vector3 dir_FishPullRod = (head.transform.position - fishMngr.fishRodCtrl.rodtip.position).normalized;
+            Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
+            Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
+            Vector3 randir = Vector3.Slerp(dir_min, dir_max, Random.Range(0, 1));
+            updateTarget(randir);
+            if (fishMngr.dis >= maxDisPull && !rb.isKinematic)// stop pull
+            {
+                maxDisPull += (fishMngr.dis<10f)?1:0;
+                rb.isKinematic = true;
+            }
+            if (fishMngr.dis >= maxDisPull - 2 && rb.isKinematic) // stop pull and move to dir
+            {
+                speed = 2;
+                transform.position -= dir_FishPullRod * speed * Time.deltaTime;
+            }
+            if (fishMngr.dis < (maxDisPull - 2)) // pull
+            {
+                speed = 10;
+                rb.isKinematic = false;
+                Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
+                rb.AddForce(ranDir * speed, ForceMode.Impulse);
+            }
+        }
     }
     #endregion
    

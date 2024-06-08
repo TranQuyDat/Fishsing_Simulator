@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class fishingRodController : MonoBehaviour
@@ -106,22 +105,25 @@ public class fishingRodController : MonoBehaviour
 
     public void pullrod()
     {
-        if (fish == null || !isPull || wasCaughtFish ) return;
-        fish.maxDisPull -= 1;
-        Vector3 dir = (rope1.startPos.position - fish.head.transform.position).normalized;
+        if (fish == null || !isPull || wasCaughtFish)
+        {
+            return;
+        }
+
+            Vector3 dir = (rope1.startPos.position - fish.head.transform.position).normalized;
         rope2.endPos.position = fish.head.transform.position;
         fish.target.transform.localPosition = fish.target.transform.InverseTransformDirection(dir);
         fish.rb.isKinematic = false;
         fish.rb.AddForce(dir * 10f, ForceMode.Impulse);
 
         
-        isPull = false;
-        StartCoroutine(resetPull());
-    }
-    IEnumerator resetPull()
-    {
-        if (isPull) yield return null;
-        yield return new WaitForSeconds(1f);
-        if (fish.maxDisPull < 10)  fish.maxDisPull += 1;
+        if (fish.fishMngr.dis < fish.maxDisPull - 2)
+        {
+            fish.maxDisPull -= 1;
+            fish.rb.isKinematic = true;
+            isPull = false;
+        }
+        
+        
     }
 }
