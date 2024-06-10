@@ -536,7 +536,7 @@ MonoBehaviour:
   rb: {fileID: -4558419591134668789}
   speed: 4
   timeChangeDir: 8
-  olfaction: 0
+  olfaction: 3
   limitXYmin: {fileID: 0}
   limitXYmax: {fileID: 0}
   head: {fileID: 6193001578506824636}
@@ -552,7 +552,8 @@ MonoBehaviour:
   checkBait: []
   fishMngr: {fileID: 0}
   acFish: 0
-  maxDisPull: 10
+  maxDisPull: 7
+  minDisPull: 2
 --- !u!4 &985981510929318386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}

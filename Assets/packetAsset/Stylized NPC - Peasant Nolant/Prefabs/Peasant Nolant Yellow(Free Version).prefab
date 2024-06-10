@@ -594,7 +594,7 @@ Transform:
   - {fileID: 1878316846215467391}
   - {fileID: 8555519727791643010}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8692079348738570116
 Animator:
@@ -968,13 +968,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefapLine: {fileID: 996038159730542995, guid: 63d1e21e87abfb9408382ec4d1b4ad50, type: 3}
   startPos: {fileID: 5470397241217863896}
-  endPost: {fileID: 5105737033758196805}
+  endPos: {fileID: 0}
   ropeTranform: {fileID: 4326797368904384285}
   legthRope: 5
+  lockLengthRope: 0
   gap: 0.2
   snapRopTip: 1
   snapHook: 1
   numpos: 0
+  ropeConnection: {fileID: 0}
   listNode: []
 --- !u!120 &59118193313814844
 LineRenderer:
@@ -1191,13 +1193,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefapLine: {fileID: 996038159730542995, guid: 63d1e21e87abfb9408382ec4d1b4ad50, type: 3}
   startPos: {fileID: 5105737033758196805}
-  endPost: {fileID: 4972824669043886680}
+  endPos: {fileID: 0}
   ropeTranform: {fileID: 6713781865337804293}
   legthRope: 3
+  lockLengthRope: 0
   gap: 0.3
   snapRopTip: 1
   snapHook: 0
   numpos: 0
+  ropeConnection: {fileID: 0}
   listNode: []
 --- !u!120 &305480346989919549
 LineRenderer:
@@ -2587,9 +2591,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8613954126185663617, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1900197341501621031}
-    - targetCorrespondingSourceObject: {fileID: 8613954126185663617, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3985875198191300661}
   m_SourcePrefab: {fileID: 100100000, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
 --- !u!4 &8555519727791643010 stripped
 Transform:
@@ -2613,10 +2614,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a591f81f22389a24d8396422335da833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   isfishbite: 0
   wasCaughtFish: 0
-  gameMngr: {fileID: 0}
   imgvalue: {fileID: 0}
+  rodtip: {fileID: 0}
+  hook: {fileID: 0}
   rope1: {fileID: 6606055552067450071}
   rope2: {fileID: 836795649667446437}
   surFaceWaterObj: {fileID: 0}
@@ -2625,23 +2628,7 @@ MonoBehaviour:
   isCasting: 0
   startACTionCasting: 0
   fishingPoint: {fileID: 85233127316137187}
---- !u!114 &3985875198191300661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9074928559405810488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9f2977528c1bcd42a61e501431ef406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tyle: 0
-  drawRec: []
-  drawDir:
-  - obj: {fileID: 5105737033758196805}
-    showForward: 1
-    showUp: 0
-    showRight: 0
-  canDraw: 1
+  dirCast: {fileID: 0}
+  fish: {fileID: 0}
+  isPull: 0
+  pullforce: 0.5

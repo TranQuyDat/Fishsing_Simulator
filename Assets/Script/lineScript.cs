@@ -9,7 +9,7 @@ public class lineScript : MonoBehaviour
     public Transform startPos;
     public Transform endPos;
     public Transform ropeTranform;
-    [Range(3,10)] public float legthRope;
+    [Range(2,10)] public float legthRope;
     public bool lockLengthRope;
     public float gap;
     public bool snapRopTip = true;
@@ -93,7 +93,7 @@ public class lineScript : MonoBehaviour
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             listNode[listNode.Count - 1].transform.position = endPos.position;
             if(!lockLengthRope)legthRope = Mathf.Clamp((startPos.position - endPos.position).magnitude,
-                                    3,20);
+                                    2,20);
 
 
         }

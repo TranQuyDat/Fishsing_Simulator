@@ -26,42 +26,67 @@ public class fishingRodController : MonoBehaviour
     public fishAI fish;
     public bool isPull;
     public float pullforce =0.5f;
+
     void Start()
     {
         
     }
     private void OnEnable()
     {
+        wasCaughtFish = false;
+        isfishbite = false;
         rope1.snapHook = false;
         rope2.snapHook = false;
         rope2.snapRopTip = true;
-        rope1.legthRope = 3;
-        rope2.legthRope = 3;
+        rope1.legthRope = 2;
+        rope2.legthRope = 2;
         rope1.resetLine();
         rope2.resetLine();
     }
     // Update is called once per frame
     void Update()
     {
-        wasCaughtFish = imgvalue.fillAmount >= 1;
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            isPull = true;
+        //if (Input.GetKeyDown(KeyCode.LeftControl))
+        //{
+        //    isPull = true;
             
-        }
-        pullrod();
+        //}
+
         castLine();
         reelLine();
-        Rigidbody rb = rope2.startPos.GetComponent<Rigidbody>();
+        pullrod();
+        fishWasCaught();
     }
 
+    public void Reset()
+    {
+        wasCaughtFish = false;
+        isfishbite = false;
+        rope1.snapHook = false;
+        rope2.snapHook = false;
+        rope2.snapRopTip = true;
+        rope1.legthRope = 2;
+        rope2.legthRope = 2;
+        rope1.resetLine();
+        rope2.resetLine();
+    }
+    private void FixedUpdate()
+    {
+        fishWasBite();
+    }
+    public void fishWasBite()
+    {
+        if (!isfishbite) return;
+        hook.position = fish.head.transform.position;
+        
+    }
     public void castLine()
     {
         if (gameMngr.playerCtrl.cur_action != Action.fishing_cast) return;
         if (!startACTionCasting)
         {
             rope1.snapHook = false;
-            rope1.legthRope = 3;
+            rope1.legthRope = 2;
         }
         if (startACTionCasting && !isCasting)
         {
@@ -91,6 +116,7 @@ public class fishingRodController : MonoBehaviour
 
         if (isReeling)
         {
+            rope2.legthRope = 5f;
             if (Vector3.Distance(fishingPoint.position, rope1.endPos.position) > 0.5f)
             {
                 Vector3 dir = (fishingPoint.position - rope1.endPos.position).normalized;
@@ -111,19 +137,48 @@ public class fishingRodController : MonoBehaviour
         }
 
             Vector3 dir = (rope1.startPos.position - fish.head.transform.position).normalized;
-        rope2.endPos.position = fish.head.transform.position;
-        fish.target.transform.localPosition = fish.target.transform.InverseTransformDirection(dir);
         fish.rb.isKinematic = false;
         fish.rb.AddForce(dir * 10f, ForceMode.Impulse);
 
         
-        if (fish.fishMngr.dis < fish.maxDisPull - 2)
+        if (fish.fishMngr.dis < fish.maxDisPull - 2 || 
+            fish.transform.position.y>surFaceWaterObj.transform.position.y)
         {
-            fish.maxDisPull -= 1;
+            if(fish.maxDisPull > fish.minDisPull) 
+                fish.maxDisPull -= 1;
+
             fish.rb.isKinematic = true;
+            isPull = false;
+        }
+
+        if(fish.maxDisPull <= fish.minDisPull)
+        {
             isPull = false;
         }
         
         
+    }
+
+    public void fishWasCaught()
+    {
+        wasCaughtFish = imgvalue.fillAmount >= 0.99f;
+        if (!wasCaughtFish) return;
+        #region set Default Rod
+        if (isfishbite) 
+        {
+            isfishbite = false;
+            rope1.snapHook = false;
+            rope2.snapHook = false;
+            rope2.snapRopTip = true;
+            rope1.legthRope = 2;
+            rope2.legthRope = 2;
+            rope1.resetLine();
+            rope2.resetLine();
+        }
+        #endregion
+        fish.rb.isKinematic = true;
+        fish.head.transform.position = hook.position;
+        fish.target.transform.position = rodtip.position;
+
     }
 }

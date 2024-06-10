@@ -5,6 +5,7 @@ using UnityEngine;
 public class gamePlayPanel : MonoBehaviour
 {
     public GameObject fishingUI;
+    public GameObject fishInfoUI;
     public GameManager gameMngr;
     public buttons btn;
 
@@ -18,19 +19,27 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Update()
     {
-        if (gameMngr.fishMngr.theLuckyFish !=null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
-            btn.editImg.imgValue.fillAmount >= 0 && btn.editImg.imgValue.fillAmount <= 0.90f)
-        {
-            btn.editImg.setFillAmount(1 - Mathf.Round( (gameMngr.fishMngr.dis / gameMngr.fishMngr.cur_dis) *100f )*0.01f);
-        }
-        
+        setActive(fishingUI, gameMngr.boatCtrl.isFishing);
+        setActive(fishInfoUI, gameMngr.fishingRodCtrl.wasCaughtFish);
+        updateAmount();
     }
+
+
+    public void updateAmount()
+    {
+        if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
+            btn.editImg.imgValue.fillAmount >= 0 && btn.editImg.imgValue.fillAmount < 1f)
+        {
+            btn.editImg.setFillAmount(1 - Mathf.Round((gameMngr.fishMngr.dis / gameMngr.fishMngr.maxdis) * 100f) * 0.01f);
+        }
+    }
+
 
     #region button
     public void btnFishing()
     {
         gameMngr.fishingRodCtrl.isPull = true;
-        if (btn.editImg.imgValue.fillAmount >= 0.99f)
+        if (btn.editImg.imgValue.fillAmount >= 0.95f)
         {
             btn.editImg.setFillAmount(1);
         }
@@ -42,5 +51,19 @@ public class gamePlayPanel : MonoBehaviour
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
     }
 
+    public void btnCloseUIFishInfo()
+    {
+        gameMngr.fishingRodCtrl.Reset();
+    }
     #endregion
+
+
+    public void setActive(GameObject ui, bool b)
+    {
+        if (ui == null ||
+            (ui.active && b) ||
+            (!ui.active && !b)
+            ) return;
+        ui.SetActive(b);
+    }
 }

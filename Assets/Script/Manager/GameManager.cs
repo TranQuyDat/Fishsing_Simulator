@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public UiManager uiMngr;
+    public GameStateManager gameState;
     public fishManager fishMngr;
     public BoatController boatCtrl;
     public PlayerController playerCtrl;

@@ -36,3 +36,8 @@ public enum GizmosTyle
 {
     drawDir,drawRec, drawLine,
 }
+public enum State
+{
+    gamePlay,
+    gamePause,
+}
