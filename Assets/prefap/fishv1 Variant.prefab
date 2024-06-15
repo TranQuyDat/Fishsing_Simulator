@@ -417,6 +417,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fishv1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2992839973022501101, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6757576169017915880, guid: 31c3b4d19a8865241a6ea7994e1b87c0, type: 3}
       propertyPath: m_Name
       value: 2

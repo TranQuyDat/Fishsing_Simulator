@@ -51,10 +51,7 @@ public class gamePlayPanel : MonoBehaviour
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
     }
 
-    public void btnCloseUIFishInfo()
-    {
-        gameMngr.fishingRodCtrl.Reset();
-    }
+
     #endregion
 
 

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStateManager : MonoBehaviour
+public class GameUiManager : MonoBehaviour
 {
-    public State curState;
     public gamePlayPanel gamePlay;
     public gamePausePanel gamePause;
     public GameManager gameMngr;
@@ -16,15 +15,16 @@ public class GameStateManager : MonoBehaviour
     }
     private void Update()
     {
-        swGameState();
     }
 
-    public void swGameState()
+    public void btnCloseUI(GameObject ui)
     {
-        if (!ischangeState) return;
-        gamePlay.gameObject.SetActive(curState==State.gamePlay);
-        gamePause.gameObject.SetActive(curState == State.gamePause);
-        ischangeState = false;
+        ui.SetActive(false);
     }
+    public void btnOpentUI(GameObject ui)
+    {
+        ui.SetActive(true);
+    }
+
     
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class fishAI : MonoBehaviour
 {
+    public itemData fishData;
     public Rigidbody rb;
     public float speed;
     public float timeChangeDir;

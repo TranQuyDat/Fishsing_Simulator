@@ -36,8 +36,7 @@ public enum GizmosTyle
 {
     drawDir,drawRec, drawLine,
 }
-public enum State
+public enum TyleItem
 {
-    gamePlay,
-    gamePause,
+    fish,bait,ship,
 }

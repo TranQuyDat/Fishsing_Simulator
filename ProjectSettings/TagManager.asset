@@ -11,6 +11,7 @@ TagManager:
   - posFishing
   - ship
   - rice
+  - slotitem
   layers:
   - Default
   - TransparentFX
