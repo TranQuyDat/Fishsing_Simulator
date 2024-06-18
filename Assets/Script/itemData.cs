@@ -9,7 +9,8 @@ public class itemData :ScriptableObject
     public TyleItem tyleItem;
     public string nameItem;
     public Sprite imgItem;
-    public float price;
+    public int price;
     [TextArea] public string detail;
     public int maxNuminSlot=10;
+    public Status status;
 }

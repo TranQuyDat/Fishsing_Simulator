@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class demo : MonoBehaviour
 {
-    public inventory iv;
+    public GroupSlot iv;
     public Button btn;
     public itemData it;
     public void button()

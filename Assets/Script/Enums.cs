@@ -40,3 +40,7 @@ public enum TyleItem
 {
     fish,bait,ship,
 }
+public enum Status
+{
+    equiped,Lock,unlock,normal,
+}

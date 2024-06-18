@@ -13,6 +13,7 @@ public class slotItem : MonoBehaviour
     public int maxNumItem;
     public Image imgItem;
     public TextMeshProUGUI txt_numItem;
+    public TextMeshProUGUI txt_name;
     private void Start()
     {
         updateSlot(item, numItem);
@@ -26,6 +27,7 @@ public class slotItem : MonoBehaviour
         numItem = num;
         txt_numItem.text = "x" + numItem;
         maxNumItem = it.maxNuminSlot;
+        if (txt_name != null ) txt_name.text = it.name;
     }
     public void addNumItem( int value)
     {
