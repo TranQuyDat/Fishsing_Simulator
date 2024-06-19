@@ -9,7 +9,6 @@ public class inventory : GroupSlot
 {
     public TextMeshProUGUI txt_coin;
     public int coin;
-    public TextMeshProUGUI detail;
     public store st;
     private void Awake()
     {

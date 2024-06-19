@@ -15,7 +15,7 @@ MonoBehaviour:
   tyleItem: 2
   nameItem: 
   imgItem: {fileID: 948531988, guid: 92f6a40beadb2514ea3bdb239fdb2c9c, type: 3}
-  price: 0
+  price: 100
   detail: ship1
   maxNuminSlot: 1
   status: 1

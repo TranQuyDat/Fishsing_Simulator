@@ -28,7 +28,7 @@ public class store : GroupSlot
     }
 
   
-    
+    override
     public void btn_buy()
     {
         if (curSlot == null || curSlot.item == null) return;
