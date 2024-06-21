@@ -5,14 +5,13 @@ using UnityEngine;
 public class storeShip : GroupSlot
 {
     public inventory iv;
-
     public itemData it_Equiped;
     public slotItem_ship sl;
     // Start is called before the first frame update
     private void Awake()
     {
 
-        
+        importShopData();
     }
 
     // Update is called once per frame
@@ -24,6 +23,15 @@ public class storeShip : GroupSlot
             ui_btnBuy.interactable = false;
         }
         else ui_btnBuy.interactable = true;
+    }
+
+    public void importShopData()
+    {
+        if (shopData == null) return;
+        foreach (Item it in shopData.items)
+        {
+            addItem(it.itdt, it.NumIt);
+        }
     }
 
     public override void btn_buy()

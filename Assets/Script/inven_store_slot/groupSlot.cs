@@ -27,7 +27,8 @@ public abstract class GroupSlot : MonoBehaviour
     #endregion
     public string name;
     public List<slotItem> slots;
-    
+
+    public ShopData shopData;
     public int maxCoutSlot;
     public slotItem curSlot;
 
@@ -53,6 +54,7 @@ public abstract class GroupSlot : MonoBehaviour
     #endregion
 
     #region normal method
+    
     public void SortAndMergeSlots()
     {
         for (int i = 0; i < slots.Count - 1; i++)
@@ -95,7 +97,8 @@ public abstract class GroupSlot : MonoBehaviour
 
     public void addItem(itemData it, int numItem = 1)
     {
-
+        if (it == null) return;
+        print(slots[0].name);
         for (int i = 0; i < slots.Count; i++)
         {
             //  slot !=null && numItem == maxNumItem || item != it => continue

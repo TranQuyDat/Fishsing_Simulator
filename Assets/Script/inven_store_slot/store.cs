@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class store : GroupSlot
 {
     public inventory iv;
-    public ShopData shopData;
     private void Awake()
     {
         importShopData();
@@ -18,16 +17,16 @@ public class store : GroupSlot
         updateUIok();
         updateGroupSlot();
     }
+
     public void importShopData()
     {
         if (shopData == null) return;
-        foreach(Item it in shopData.items)
+        foreach (Item it in shopData.items)
         {
             addItem(it.itdt, it.NumIt);
         }
     }
 
-  
     override
     public void btn_buy()
     {
