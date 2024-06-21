@@ -31,7 +31,7 @@ public abstract class GroupSlot : MonoBehaviour
     public ShopData shopData;
     public int maxCoutSlot;
     public slotItem curSlot;
-
+    public bool canOpenIven ;
     #region Virtual
     public virtual void btn_buy() { }
     public virtual void btn_sell() { }
@@ -54,7 +54,17 @@ public abstract class GroupSlot : MonoBehaviour
     #endregion
 
     #region normal method
-    
+    public void importShopData(ShopData data)
+    {
+        if (shopData != data)
+            shopData = data;
+        if (shopData == null) return;
+        removeAllItem();
+        foreach (Item it in shopData.items)
+        {
+            addItem(it.itdt, it.NumIt);
+        }
+    }
     public void SortAndMergeSlots()
     {
         for (int i = 0; i < slots.Count - 1; i++)
@@ -120,6 +130,13 @@ public abstract class GroupSlot : MonoBehaviour
         if (slot.numItem <= 0)
         {
             slot.clear();
+        }
+    }
+    public void removeAllItem()
+    {
+        foreach(slotItem sl in slots)
+        {
+            sl.clear();
         }
     }
 

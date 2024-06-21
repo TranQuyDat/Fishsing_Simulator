@@ -11,7 +11,6 @@ public class storeShip : GroupSlot
     private void Awake()
     {
 
-        importShopData();
     }
 
     // Update is called once per frame
@@ -25,14 +24,6 @@ public class storeShip : GroupSlot
         else ui_btnBuy.interactable = true;
     }
 
-    public void importShopData()
-    {
-        if (shopData == null) return;
-        foreach (Item it in shopData.items)
-        {
-            addItem(it.itdt, it.NumIt);
-        }
-    }
 
     public override void btn_buy()
     {
@@ -43,7 +34,7 @@ public class storeShip : GroupSlot
         {
             //unlock
             iv.coin -= curSlot.item.price;
-            sl.status = Status.unlock;
+            sl.item.status = Status.unlock;
 
             sl.canUpdateIcon = true;
             sl.icon_lock.SetActive(false);
@@ -60,7 +51,7 @@ public class storeShip : GroupSlot
         if (sl.status == Status.equiped)
         {
             // unEquip
-            sl.status = Status.unlock;
+            sl.item.status = Status.unlock;
             it_Equiped = null;
             sl.canUpdateIcon = true;
             sl.icon_Equip.SetActive(false);
@@ -68,7 +59,7 @@ public class storeShip : GroupSlot
         else if (sl.status == Status.unlock)
         {
             //Equip
-            sl.status = Status.equiped;
+            sl.item.status = Status.equiped;
             it_Equiped = curSlot.item;
             sl.canUpdateIcon = true;
             sl.icon_Equip.SetActive(true);

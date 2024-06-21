@@ -20,7 +20,15 @@ public class slotItem_ship : slotItem
         updateIcon();
         updateEquiped();
     }
-
+    public override void updateSlot(itemData it, int num)
+    {
+        base.updateSlot(it, num);
+        if(item != null && item.status != status)
+        {
+            status = item.status;
+            canUpdateIcon = true;
+        }
+    }
     public void updateIcon()
     {
         if (!canUpdateIcon) return;
@@ -34,8 +42,7 @@ public class slotItem_ship : slotItem
         storeShip st = groupSlot.GetComponent<storeShip>();
         if(st.it_Equiped != item)
         {
-            status = Status.unlock;
-
+            item.status = Status.unlock;
             canUpdateIcon = true;
         }
     }

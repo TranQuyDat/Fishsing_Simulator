@@ -14,7 +14,7 @@ public class dialog : MonoBehaviour
     public NPC npc;
     //public playerInfo player;
     [TextArea(0,500)] public string txt_content;
-
+    public GameObject iv;
     private void Start()
     {
         
@@ -39,9 +39,10 @@ public class dialog : MonoBehaviour
 
     public void btn_shop()
     {
-        npc.st.shopData = npc.shopdata;
-        npc.st.gameObject.SetActive(true);
+        npc.st.importShopData(npc.shopdata);
         npc.st.transform.parent.gameObject.SetActive(true);
+        npc.st.gameObject.SetActive(true);
+        if (npc.st.canOpenIven) iv.SetActive(true);
     }
 
 

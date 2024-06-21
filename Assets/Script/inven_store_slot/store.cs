@@ -9,7 +9,6 @@ public class store : GroupSlot
     public inventory iv;
     private void Awake()
     {
-        importShopData();
         txt_name.text = name;
     }
     private void Update()
@@ -18,14 +17,6 @@ public class store : GroupSlot
         updateGroupSlot();
     }
 
-    public void importShopData()
-    {
-        if (shopData == null) return;
-        foreach (Item it in shopData.items)
-        {
-            addItem(it.itdt, it.NumIt);
-        }
-    }
 
     override
     public void btn_buy()

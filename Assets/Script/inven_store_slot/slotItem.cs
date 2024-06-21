@@ -18,7 +18,7 @@ public class slotItem : MonoBehaviour
     {
         updateSlot(item, numItem);
     }
-    public void updateSlot(itemData it,int num)
+    public virtual void updateSlot(itemData it,int num)
     {
         if (it == null ) return;
         item = it;
