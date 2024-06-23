@@ -11,6 +11,9 @@ public class itemData :ScriptableObject
     public Sprite imgItem;
     public int price;
     [TextArea] public string detail;
+    public Mesh meshren;
+    public Material mat;
+    public tag tag;
     public int maxNuminSlot=10;
     public Status status;
 }

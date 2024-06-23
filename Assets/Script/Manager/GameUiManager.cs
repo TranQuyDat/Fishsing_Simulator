@@ -16,7 +16,10 @@ public class GameUiManager : MonoBehaviour
     }
     private void Update()
     {
-        setActiveChildOfUI_if(ui_inven_shop,false);
+        if (ui_inven_shop != null)
+        {
+            setActiveChildOfUI_if(ui_inven_shop, false);
+        }
     }
     public void setActiveChildOfUI_if(GameObject ui,bool b)
     {

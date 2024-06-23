@@ -12,6 +12,10 @@ TagManager:
   - ship
   - rice
   - slotitem
+  - meet
+  - fish
+  - fakeBait
+  - woom
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - post
   - bait
   - npc
-  - 
+  - ship
   - 
   - 
   - 

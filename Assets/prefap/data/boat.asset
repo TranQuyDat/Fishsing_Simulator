@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: boat
   m_EditorClassIdentifier: 
   tyleItem: 2
-  nameItem: 
+  nameItem: wood_BoatV1
   imgItem: {fileID: 1579248240, guid: 358cde081d2a70e4ea52ad664aa324f6, type: 3}
   price: 0
   detail: boat
+  obj: {fileID: 6872243824899630401, guid: 17c56660cef6fcc4088e1f30292e8e4a, type: 3}
   maxNuminSlot: 1
+  status: 0

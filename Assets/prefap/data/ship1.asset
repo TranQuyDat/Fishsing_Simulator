@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ship1
   m_EditorClassIdentifier: 
   tyleItem: 2
-  nameItem: 
+  nameItem: speed_BoatV1
   imgItem: {fileID: 948531988, guid: 92f6a40beadb2514ea3bdb239fdb2c9c, type: 3}
   price: 100
   detail: ship1
+  obj: {fileID: 583817008190249557, guid: d87fb7b5f82313c44b727c3c26f51f29, type: 3}
   maxNuminSlot: 1
   status: 1

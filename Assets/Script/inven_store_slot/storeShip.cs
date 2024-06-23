@@ -6,11 +6,14 @@ public class storeShip : GroupSlot
 {
     public inventory iv;
     public itemData it_Equiped;
+    public GameObject[] ships;
+    public GameObject curShip;
     public slotItem_ship sl;
+    public TriggerChangeScene triggerChange;
     // Start is called before the first frame update
     private void Awake()
     {
-
+        setActiveShips();
     }
 
     // Update is called once per frame
@@ -61,8 +64,22 @@ public class storeShip : GroupSlot
             //Equip
             sl.item.status = Status.equiped;
             it_Equiped = curSlot.item;
+            setActiveShips();
+            triggerChange.target = curShip.GetComponent<BoatController>().posSit.gameObject;
             sl.canUpdateIcon = true;
             sl.icon_Equip.SetActive(true);
+        }
+    }
+
+    public void setActiveShips()
+    {
+        foreach(GameObject obj in ships)
+        {
+            obj.SetActive(obj.name == it_Equiped.nameItem);
+            if(obj.name == it_Equiped.nameItem)
+            {
+                curShip = obj;
+            }
         }
     }
 

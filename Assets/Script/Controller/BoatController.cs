@@ -13,6 +13,8 @@ public class BoatController : MonoBehaviour
 
     public bool isdriveShip;
     public bool isFishing;
+    public Transform posSit;
+    public Transform posFishing;
     private void Awake()
     {
         playerCtrl = FindObjectOfType<PlayerController>();

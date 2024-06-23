@@ -11,6 +11,8 @@ public class slotItem_ship : slotItem
     public bool canUpdateIcon=false;
     private void Start()
     {
+        if(item !=null)
+            status = item.status;
         icon_Equip.SetActive(status == Status.equiped);
         icon_lock.SetActive(status == Status.Lock);
     }

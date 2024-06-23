@@ -10,6 +10,7 @@ public class inventory : GroupSlot
     public TextMeshProUGUI txt_coin;
     public int coin;
     public store st;
+    public UseItem useItem;
     private void Awake()
     {
 
@@ -58,6 +59,7 @@ public class inventory : GroupSlot
             int cost = curSlot.item.price * num;
             coin += cost;
             print("sell" + curSlot.item);
+            //sell
             st.addItem(curSlot.item, num);
             removeItem(curSlot, num);
             ui_ok_close.SetActive(false);
@@ -74,6 +76,8 @@ public class inventory : GroupSlot
         {
             print("use"+curSlot.item);
             //use
+            useItem.use(curSlot.item);
+
             removeItem(curSlot, 1);
             ui_ok_close.SetActive(false);
             btnOK.onClick.RemoveAllListeners();
@@ -88,6 +92,7 @@ public class inventory : GroupSlot
         btnOK.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
             print("drop" + curSlot.item);
+            //drop
             removeItem(curSlot,(int)(slider.value * curSlot.numItem)) ;
 
             SortAndMergeSlots();

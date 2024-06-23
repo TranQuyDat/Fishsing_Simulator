@@ -44,3 +44,8 @@ public enum Status
 {
     equiped,Lock,unlock,normal,
 }
+
+public enum Scenes
+{
+    port,city,sea1,sea2,
+}

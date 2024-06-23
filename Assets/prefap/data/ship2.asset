@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ship2
   m_EditorClassIdentifier: 
   tyleItem: 2
-  nameItem: 
+  nameItem: scout_BoatV1
   imgItem: {fileID: 465797283, guid: c630fb572ce8450478429b66297d452e, type: 3}
   price: 200
   detail: ship2
+  obj: {fileID: 6072604615910421198, guid: 2e2d231831b4ad44b982cd0558675e33, type: 3}
   maxNuminSlot: 1
   status: 1

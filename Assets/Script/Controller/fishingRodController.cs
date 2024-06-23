@@ -11,6 +11,7 @@ public class fishingRodController : MonoBehaviour
 
     public Transform rodtip;
     public Transform hook;
+    public Transform bait;
 
     public lineScript rope1;
     public lineScript rope2;

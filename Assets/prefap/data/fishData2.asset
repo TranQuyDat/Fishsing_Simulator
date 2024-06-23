@@ -17,5 +17,8 @@ MonoBehaviour:
   imgItem: {fileID: -1074519428, guid: e1c0e46133f871c488768373c6304e09, type: 3}
   price: 3
   detail: fish2
+  meshren: {fileID: 3100006622114138374, guid: 4c1d9eac0dd5a2e458806c2d17f7df31, type: 3}
+  mat: {fileID: -3846018093981099296, guid: 4c1d9eac0dd5a2e458806c2d17f7df31, type: 3}
+  tag: 0
   maxNuminSlot: 10
   status: 3
