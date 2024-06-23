@@ -19,7 +19,7 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Update()
     {
-        setActive(fishingUI, gameMngr.boatCtrl.isFishing);
+        setActive(fishingUI, gameMngr.shipMngr.curShipCtrl.isFishing);
         setActive(fishInfoUI, gameMngr.fishingRodCtrl.wasCaughtFish);
         updateAmount();
     }

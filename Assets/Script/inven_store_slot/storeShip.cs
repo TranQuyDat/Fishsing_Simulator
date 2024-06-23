@@ -5,18 +5,9 @@ using UnityEngine;
 public class storeShip : GroupSlot
 {
     public inventory iv;
-    public itemData it_Equiped;
-    public GameObject[] ships;
-    public GameObject curShip;
     public slotItem_ship sl;
-    public TriggerChangeScene triggerChange;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        setActiveShips();
-    }
+    public ShipManager shipMngr;
 
-    // Update is called once per frame
     void Update()
     {
         if(curSlot !=null && (sl ==null|| sl.gameObject !=curSlot.gameObject)) sl = curSlot.GetComponent<slotItem_ship>();
@@ -25,6 +16,8 @@ public class storeShip : GroupSlot
             ui_btnBuy.interactable = false;
         }
         else ui_btnBuy.interactable = true;
+
+        
     }
 
 
@@ -55,7 +48,7 @@ public class storeShip : GroupSlot
         {
             // unEquip
             sl.item.status = Status.unlock;
-            it_Equiped = null;
+            shipMngr.it_Equiped = null;
             sl.canUpdateIcon = true;
             sl.icon_Equip.SetActive(false);
         }
@@ -63,24 +56,13 @@ public class storeShip : GroupSlot
         {
             //Equip
             sl.item.status = Status.equiped;
-            it_Equiped = curSlot.item;
-            setActiveShips();
-            triggerChange.target = curShip.GetComponent<BoatController>().posSit.gameObject;
+            shipMngr.it_Equiped = curSlot.item;
+            shipMngr.setActiveShips();
             sl.canUpdateIcon = true;
             sl.icon_Equip.SetActive(true);
         }
     }
 
-    public void setActiveShips()
-    {
-        foreach(GameObject obj in ships)
-        {
-            obj.SetActive(obj.name == it_Equiped.nameItem);
-            if(obj.name == it_Equiped.nameItem)
-            {
-                curShip = obj;
-            }
-        }
-    }
+   
 
 }

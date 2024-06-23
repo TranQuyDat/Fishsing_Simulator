@@ -47,11 +47,6 @@ public class fishingRodController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.LeftControl))
-        //{
-        //    isPull = true;
-            
-        //}
 
         castLine();
         reelLine();
@@ -88,6 +83,7 @@ public class fishingRodController : MonoBehaviour
         {
             rope1.snapHook = false;
             rope1.legthRope = 2;
+            rope2.legthRope = 2;
         }
         if (startACTionCasting && !isCasting)
         {
@@ -118,13 +114,17 @@ public class fishingRodController : MonoBehaviour
         if (isReeling)
         {
             rope2.legthRope = 5f;
-            if (Vector3.Distance(fishingPoint.position, rope1.endPos.position) > 0.5f)
+            Vector3 pos = fishingPoint.position;
+            pos.y = surFaceWaterObj.transform.position.y-0.5f;
+            if (Vector3.Distance(pos, rope1.endPos.position) > 0.5f)
             {
-                Vector3 dir = (fishingPoint.position - rope1.endPos.position).normalized;
+                Vector3 dir = (pos - rope1.endPos.position).normalized;
                 rope1.endPos.position += dir * 3f * Time.deltaTime;
                 return;
             }
 
+            rope1.resetLine();
+            rope2.resetLine();
             isReeling = false;
             gameMngr.playerCtrl.changeAction(Action.fishing_idle);
         }

@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameUiManager uiMngr;
     public fishManager fishMngr;
-    public BoatController boatCtrl;
+    public ShipManager shipMngr;
     public PlayerController playerCtrl;
     public fishingRodController fishingRodCtrl;
     private void Update()

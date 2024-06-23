@@ -42,7 +42,7 @@ public class slotItem_ship : slotItem
     {
         if (status == Status.Lock) return;
         storeShip st = groupSlot.GetComponent<storeShip>();
-        if(st.it_Equiped != item)
+        if(st.shipMngr.it_Equiped != item)
         {
             item.status = Status.unlock;
             canUpdateIcon = true;
