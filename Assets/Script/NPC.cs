@@ -14,12 +14,12 @@ public class NPC : MonoBehaviour
     public PlayerController playerCTRL;
     private void Awake()
     {
-        playerCTRL = FindObjectOfType<PlayerController>();
+
     }
     private void Update()
     {
         activeOption();
-        if(this.gameObject != playerCTRL.gameObject)
+        if(playerCTRL !=null && this.gameObject != playerCTRL.targetNPC)
         {
             showOption = false;
         }
@@ -33,7 +33,6 @@ public class NPC : MonoBehaviour
             print(this);
             dia.gameObject.SetActive(true);
             dia.setTxt_content(aboutNPC);
-            showOption = true;
             dia.npc = this;
         }
 

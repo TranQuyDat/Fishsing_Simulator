@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShipManager : MonoBehaviour
 {
 
-    public itemData it_Equiped;
-    public GameObject[] ships;
+    public ItemData it_Equiped;
+    public List<GameObject> ships;
     public GameObject curShip;
     public BoatController curShipCtrl;
     public storeShip st;
@@ -42,6 +42,17 @@ public class ShipManager : MonoBehaviour
                 curShipCtrl = obj.GetComponent<BoatController>();
 
                 triggerChange.target = curShipCtrl.posSit.gameObject;
+            }
+        }
+    }
+
+    public void destroyShipslike(GameObject obj)
+    {
+        foreach(GameObject s in ships)
+        {
+            if(s.name == obj.name && s != obj)
+            {
+                Destroy(s);
             }
         }
     }

@@ -19,14 +19,18 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Update()
     {
-        setActive(fishingUI, gameMngr.shipMngr.curShipCtrl.isFishing);
-        setActive(fishInfoUI, gameMngr.fishingRodCtrl.wasCaughtFish);
+        if(fishingUI != null && gameMngr.shipMngr != null)
+            setActive(fishingUI, gameMngr.shipMngr.curShipCtrl.isFishing);
+        if (fishInfoUI != null && gameMngr.fishingRodCtrl != null) 
+            setActive(fishInfoUI, gameMngr.fishingRodCtrl.wasCaughtFish);
         updateAmount();
     }
 
 
     public void updateAmount()
     {
+        bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.active;
+        if (b) return;
         if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
             btn.editImg.imgValue.fillAmount >= 0 && btn.editImg.imgValue.fillAmount < 1f)
         {

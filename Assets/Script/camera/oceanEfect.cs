@@ -52,7 +52,7 @@ public class oceanEfect : MonoBehaviour
         hit = Physics.OverlapSphere(transform.position, radiusCheck, layerCheck);
         if (hit.Length > 0)
         {
-            if (hit[0].CompareTag("underwater"))
+            if (hit[0].CompareTag("UnderWater"))
             {
                 RenderSettings.fogEndDistance = 50f;
                 return;

@@ -22,7 +22,7 @@ public class slotItem_ship : slotItem
         updateIcon();
         updateEquiped();
     }
-    public override void updateSlot(itemData it, int num)
+    public override void updateSlot(ItemData it, int num)
     {
         base.updateSlot(it, num);
         if(item != null && item.status != status)

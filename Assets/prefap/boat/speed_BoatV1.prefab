@@ -67,9 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10627e72452efa041b46b3876b6b3962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   imgIcon: {fileID: 2820159182867664702}
   target: {fileID: 397619647777677911}
-  player: {fileID: 0}
   cameraAct: {fileID: 0}
   cameraNotActive: {fileID: 0}
   isFaceRight: 1
@@ -91,13 +91,14 @@ GameObject:
   - component: {fileID: 2196972676460319935}
   - component: {fileID: 7179408736967067681}
   - component: {fileID: 482777514983423461}
+  - component: {fileID: 3024268625313182645}
   m_Layer: 10
   m_Name: speed_BoatV1
   m_TagString: ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6573810581893893708
 Transform:
   m_ObjectHideFlags: 0
@@ -239,6 +240,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5893029891874791259, guid: fb2bcf6de7a3fd14f8e4ec1f1a2e1bc1, type: 3}
+--- !u!114 &3024268625313182645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583817008190249557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc3ffee75f64f1409187d28ec0186df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectid: 
 --- !u!1 &1595379284918683532
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +359,7 @@ MonoBehaviour:
         - m_Target: {fileID: 417900295282058333}
           m_TargetAssemblyTypeName: TriggerChangeScene, Assembly-CSharp
           m_MethodName: movePlayerToTarget
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -505,7 +519,7 @@ MonoBehaviour:
         - m_Target: {fileID: 7455643012277379702}
           m_TargetAssemblyTypeName: TriggerChangeScene, Assembly-CSharp
           m_MethodName: movePlayerToTarget
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -626,9 +640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10627e72452efa041b46b3876b6b3962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   imgIcon: {fileID: 1595379284918683532}
   target: {fileID: 5226135660557908979}
-  player: {fileID: 0}
   cameraAct: {fileID: 0}
   cameraNotActive: {fileID: 0}
   isFaceRight: 1

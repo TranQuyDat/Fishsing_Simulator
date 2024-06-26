@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region public values
+    public GameManager gameMngr;
     public float speedMove;
     public Animator ani;
     public float axis;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public GameObject dirobj;
     public Transform mainCamera;
+    public Scenes scenes;
     public area inArea;
     public Action cur_action;
     public GameObject targetNPC;
@@ -20,13 +22,16 @@ public class PlayerController : MonoBehaviour
     public Vector3 boxSize = new Vector3(1,1,1);
     public LayerMask maskNPC;
     public GameObject instructionBTN;
+    public bool ischangeScene = false;
     #endregion
 
 
     #region Default Method
     private void Awake()
     {
+        gameMngr = FindObjectOfType<GameManager>();
         rb = this.GetComponent<Rigidbody>();
+        instructionBTN = gameMngr.instructionBTN;
     }
     // Start is called before the first frame update
     void Start()
@@ -41,7 +46,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
        // Debug.Log((dirobj.transform.position - rb.position).normalized);
-
+       if(instructionBTN == null)
+            instructionBTN = gameMngr.instructionBTN;
         movement();
         flip();
         checkNPC();
@@ -50,6 +56,12 @@ public class PlayerController : MonoBehaviour
 
 
     #region public method
+    public void resetInput()
+    {
+        gameMngr = FindObjectOfType<GameManager>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        gameMngr.playerCtrl = this;
+    }
     public void movement()
     {
         if (!canMove) return;
@@ -84,6 +96,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void setFaceDir(float euler)
+    {
+        transform.eulerAngles = new Vector3(0, euler, 0);
+    }
+
     public void setCanMove(bool canmove)
     {
         canMove = canmove;
@@ -112,6 +129,7 @@ public class PlayerController : MonoBehaviour
     public void checkNPC()
     {
         npcs = Physics.OverlapBox(transform.position, boxSize, Quaternion.identity, maskNPC);
+        if (instructionBTN == null) return;
         if (npcs.Length > 0)
         {
             NPC npc = npcs[0].GetComponent<NPC>();
@@ -123,6 +141,7 @@ public class PlayerController : MonoBehaviour
             //hien thi instructionBTN
             instructionBTN.SetActive(true);
             npc.showOption = true;
+            npc.playerCTRL = this;
             if (npc.dia.gameObject.active)
             {
                 instructionBTN.SetActive(false);

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class fishingRodController : MonoBehaviour
 {
     public GameManager gameMngr;
+    public PlayerController playerCTRL;
     public bool isfishbite;
     public bool wasCaughtFish;
     
@@ -28,9 +29,23 @@ public class fishingRodController : MonoBehaviour
     public bool isPull;
     public float pullforce =0.5f;
 
-    void Start()
+    private void Awake()
     {
-        
+        surFaceWaterObj = GameObject.FindGameObjectWithTag("water");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(gameMngr ==null && playerCTRL.gameMngr != null)
+        {
+            gameMngr = playerCTRL.gameMngr;
+            gameMngr.fishingRodCtrl = this;
+        }
+        castLine();
+        reelLine();
+        pullrod();
+        fishWasCaught();
     }
     private void OnEnable()
     {
@@ -44,16 +59,6 @@ public class fishingRodController : MonoBehaviour
         rope1.resetLine();
         rope2.resetLine();
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-        castLine();
-        reelLine();
-        pullrod();
-        fishWasCaught();
-    }
-
     public void Reset()
     {
         wasCaughtFish = false;

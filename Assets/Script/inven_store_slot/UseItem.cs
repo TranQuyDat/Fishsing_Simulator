@@ -9,7 +9,7 @@ public class UseItem : MonoBehaviour
     {
         gameMngr = FindObjectOfType<GameManager>();
     }
-    public void use(itemData it)
+    public void use(ItemData it)
     {
         switch (it.tyleItem)
         {
@@ -19,7 +19,7 @@ public class UseItem : MonoBehaviour
                 break;
         }
     }
-    public void addBait2Rod(itemData bait)
+    public void addBait2Rod(ItemData bait)
     {
         GameObject baitObj = gameMngr.fishingRodCtrl.hook.Find("bait").gameObject;
         MeshRenderer baitObjMeshR = baitObj.GetComponent<MeshRenderer>();

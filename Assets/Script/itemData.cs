@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="itemdata",menuName ="data/itemdata")]
-public class itemData :ScriptableObject
+public class ItemData :ScriptableObject
 {
     public TyleItem tyleItem;
     public string nameItem;

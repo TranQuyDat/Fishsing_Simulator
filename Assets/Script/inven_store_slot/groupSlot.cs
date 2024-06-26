@@ -105,7 +105,7 @@ public abstract class GroupSlot : MonoBehaviour
         }
     }
 
-    public void addItem(itemData it, int numItem = 1)
+    public void addItem(ItemData it, int numItem = 1)
     {
         if (it == null) return;
         print(slots[0].name);

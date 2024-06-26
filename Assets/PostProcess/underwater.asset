@@ -1,27 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8791892268284444578
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
-  m_Name: LiftGammaGain
-  m_EditorClassIdentifier: 
-  active: 1
-  lift:
-    m_OverrideState: 1
-    m_Value: {x: 0.23599356, y: 0.99999964, z: 1, w: 0}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 0.2980401, y: 0.9837853, z: 1, w: 0}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 0.13976616, y: 0.9945953, z: 1, w: 0}
 --- !u!114 &-5924700894018241275
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -37,19 +15,19 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.23872411, y: 0.5941267, z: 1, w: 0.31750333}
+    m_Value: {x: 0.8911762, y: 0.9956378, z: 1, w: 0.29582787}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0.35225648, y: 0.6673031, z: 1, w: 0.07734062}
+    m_Value: {x: 0.49872237, y: 1, z: 0.91022426, w: -1}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0.46545583, y: 0.5586652, z: 1, w: 0.20895553}
+    m_Value: {x: 0.3856932, y: 0.7059122, z: 1, w: -0.05815374}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
   shadowsEnd:
     m_OverrideState: 0
-    m_Value: 0.3
+    m_Value: 3.21
   highlightsStart:
     m_OverrideState: 0
     m_Value: 0.55
@@ -70,4 +48,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -5924700894018241275}
-  - {fileID: -8791892268284444578}
+  - {fileID: 4294277044692506235}
+--- !u!114 &4294277044692506235
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 0.34192502, y: 0.92682856, z: 1, w: 0.04298338}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 1, z: 0.91060805, w: 0.19469018}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 0.915596, z: 1, w: 0.21997525}

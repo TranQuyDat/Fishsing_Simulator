@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class demo : MonoBehaviour
 {
-    public GroupSlot iv;
-    public Button btn;
-    public itemData it;
+    public Transform ob1;
+    public Transform ob2;
     public void button()
     {
-        iv.addItem(it);
+        ob1.position = ob2.position;
     }
 }

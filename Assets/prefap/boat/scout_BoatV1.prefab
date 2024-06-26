@@ -67,9 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10627e72452efa041b46b3876b6b3962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   imgIcon: {fileID: 2746237272246323560}
   target: {fileID: 1771508199154838939}
-  player: {fileID: 0}
   cameraAct: {fileID: 0}
   cameraNotActive: {fileID: 0}
   isFaceRight: 1
@@ -183,7 +183,7 @@ MonoBehaviour:
         - m_Target: {fileID: 5910406905053044056}
           m_TargetAssemblyTypeName: TriggerChangeScene, Assembly-CSharp
           m_MethodName: movePlayerToTarget
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -304,9 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10627e72452efa041b46b3876b6b3962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   imgIcon: {fileID: 8789977589070018763}
   target: {fileID: 2825250792570041578}
-  player: {fileID: 0}
   cameraAct: {fileID: 0}
   cameraNotActive: {fileID: 0}
   isFaceRight: 1
@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 4101790530262297398}
   - component: {fileID: 562820788585711400}
   - component: {fileID: 6450358217494953527}
+  - component: {fileID: 1731002928762375814}
   m_Layer: 10
   m_Name: scout_BoatV1
   m_TagString: ship
@@ -476,6 +477,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2301742320778191154, guid: 17fba420b298c554a9c20e1a8f31e827, type: 3}
+--- !u!114 &1731002928762375814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072604615910421198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc3ffee75f64f1409187d28ec0186df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectid: 
 --- !u!1 &8789977589070018763
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +596,7 @@ MonoBehaviour:
         - m_Target: {fileID: 1390189761955824795}
           m_TargetAssemblyTypeName: TriggerChangeScene, Assembly-CSharp
           m_MethodName: movePlayerToTarget
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

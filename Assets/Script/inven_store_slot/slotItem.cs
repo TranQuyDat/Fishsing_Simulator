@@ -8,7 +8,7 @@ using TMPro;
 public class slotItem : MonoBehaviour 
 {
     public GroupSlot groupSlot;
-    public itemData item;
+    public ItemData item;
     public int numItem;
     public int maxNumItem;
     public Image imgItem;
@@ -18,7 +18,7 @@ public class slotItem : MonoBehaviour
     {
         updateSlot(item, numItem);
     }
-    public virtual void updateSlot(itemData it,int num)
+    public virtual void updateSlot(ItemData it,int num)
     {
         if (it == null ) return;
         item = it;
