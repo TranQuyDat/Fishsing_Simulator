@@ -10,8 +10,15 @@ public class GameManager : MonoBehaviour
     public ShipManager shipMngr;
     public PlayerController playerCtrl;
     public fishingRodController fishingRodCtrl;
+    public inventory iv;
     public GameObject instructionBTN;
-
+    public cameraFollow mainCamera;
+    private void Awake()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+        mainCamera = FindObjectOfType<cameraFollow>();
+    }
     private void Start()
     {
         PlayerController player = FindObjectOfType<PlayerController>();

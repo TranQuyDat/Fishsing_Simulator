@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 2fce1ea17600dba479f00ea72854b8f8, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1586,7 +1586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287232011}
   m_LocalRotation: {x: 0.095845714, y: -0, z: -0, w: 0.99539626}
-  m_LocalPosition: {x: 37.802124, y: -3.1341362, z: 6.412019}
+  m_LocalPosition: {x: 37.802124, y: -3.1341362, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a483f2beb44ae44a50924e5da469d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  target: {fileID: 0}
   speed: 0
   followZ: 0
   dis: 0
@@ -1656,6 +1656,7 @@ MonoBehaviour:
   gameMngr: {fileID: 0}
   limitL: {fileID: 1750144303}
   limitR: {fileID: 1787078174}
+  isCameraUp: 0
 --- !u!114 &287232017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4793,7 +4794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750144302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.38, y: -7.64, z: 17.69}
+  m_LocalPosition: {x: 8.63, y: -7.64, z: 17.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5091,7 +5092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852568187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.29, y: 1.2, z: 3.0499997}
+  m_LocalPosition: {x: 55.29, y: 1.31, z: 3.0499997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5337,7 +5338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 16ca5feb16ef2d744852096378401523, type: 2}
+  - {fileID: 2100000, guid: 460199944108e4646a20e08b325ffc5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

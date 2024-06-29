@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    public GameManager gameMngr;
     public bool istalking;
     public Sprite avt;
     public dialog dia;
     public bool showOption = false;
-    public ShopData shopdata;
+    public GroupSlotData shopdata;
     public GroupSlot st;
     [TextArea] public string aboutNPC;
     public PlayerController playerCTRL;
     private void Awake()
     {
-
+        gameMngr = FindObjectOfType<GameManager>();
     }
     private void Update()
     {
@@ -27,7 +28,7 @@ public class NPC : MonoBehaviour
   
     public void activeOption()
     {
-        if (!showOption) return;
+        if (!showOption || !gameMngr.instructionBTN.active) return;
         if (Input.GetKeyDown(KeyCode.E))
         {
             print(this);

@@ -8,9 +8,11 @@ public class fishManager : MonoBehaviour
     public fishingRodController fishRodCtrl;
 
     public List<GameObject> listFish;
+    public List<GameObject> listFishLikeBait;
     public List<GameObject> listFishAroundHook;
     public GameObject theLuckyFish;
     public fishAI theLuckyFishAI;
+
     public List<GameObject> listPrefapFish;
     public List<Transform> listPosSpawn;
 
@@ -22,39 +24,76 @@ public class fishManager : MonoBehaviour
     public float dis;
     public int maxCountFish;
     public int curCountFish;
+    public float timeRandomfish1 = 3;
+    public float timeRandomfish2 = 5;
+
+    float timeDF1;
+    float timeDF2;
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
         fishRodCtrl = gameMngr.fishingRodCtrl;
         curCountFish = listFish.Count;
     }
+
+    private void Start()
+    {
+        timeDF1 = timeRandomfish1;
+        timeDF2 = timeRandomfish2;
+    }
     private void Update()
     {
-        
         spawnFish();
         randomFish();
         updateDisOfTLKFish();
-
+        if (theLuckyFish !=null && theLuckyFishAI.acFish == Action.eatBait &&listFishAroundHook.Count>0)
+        {
+            listFishAroundHook.Remove(theLuckyFish);
+            GameObject obj = listFishAroundHook[0];
+            listFishAroundHook.Clear();
+            obj.GetComponent<fishAI>().food = null;
+        }
     }
     public void randomFish()
     {
-        if(theLuckyFish == null && listFishAroundHook.Count>0)
+        if (theLuckyFish != null || listFishLikeBait.Count<=0) return;
+        if(listFishAroundHook.Count <= 0) timeRandomfish1 -= 1 * Time.deltaTime;
+        if (listFishAroundHook.Count >= 2) timeRandomfish2 -= 1 * Time.deltaTime;
+
+        // random fish in list fish  like bait => 2 fish add to listFishAroundHook (timeRandomfish1)
+
+        if (timeRandomfish1 <= 0 && listFishAroundHook.Count < 2)
+        {
+            GameObject fish1 = listFishLikeBait[Random.Range(0, listFishLikeBait.Count)];
+            listFishAroundHook.Add(fish1);
+            fish1.GetComponent<fishAI>().food = fishRodCtrl.bait.gameObject;
+            listFishLikeBait.Remove(fish1);
+
+            GameObject fish2 = listFishLikeBait[Random.Range(0, listFishLikeBait.Count)];
+            listFishAroundHook.Add(fish2);
+            fish2.GetComponent<fishAI>().food = fishRodCtrl.bait.gameObject;
+            listFishLikeBait.Remove(fish2);
+            timeRandomfish1 = timeDF1;
+        }
+
+        //random fish in list fish around hook => 1 fish add to the lucky fish; (timeRandomfish2)
+
+        if (timeRandomfish2 <= 0)
         {
             theLuckyFish = listFishAroundHook[Random.Range(0, listFishAroundHook.Count)];
+            listFishLikeBait.Clear();
+
+            //setUp the lucky fish
             theLuckyFishAI = theLuckyFish.GetComponent<fishAI>();
-            
             Vector3 pos = theLuckyFish.transform.position;
             pos.y = surfaceWater.position.y;
             maxdis = (theLuckyFish.transform.position - pos).magnitude;
             theLuckyFishAI.playAction(Action.eatBait, 8f, theLuckyFishAI.acFish == Action.checkBait || theLuckyFishAI.acFish == Action.eatBait);
             gameMngr.fishingRodCtrl.fish = theLuckyFishAI;
+            timeRandomfish2 = timeDF2;
+            
         }
 
-        if(theLuckyFish != null && theLuckyFishAI.acFish==Action.idle)
-        {
-            Reset();
-            fishRodCtrl.isfishbite = false;
-        }
     }
 
 
@@ -78,9 +117,10 @@ public class fishManager : MonoBehaviour
 
     public void Reset()
     {
-        listFishAroundHook.Clear();
         theLuckyFish = null;
         theLuckyFishAI = null;
+        dis = 0;
+        maxdis = 0;
     }
 
 
@@ -101,10 +141,7 @@ public class fishManager : MonoBehaviour
             listFish.Add(fish);
         }
     }
-    public void destroyFish(GameObject fish)
-    {
-        Destroy(fish);
-    }
+ 
 
     #region gizmos
     private void OnDrawGizmos()

@@ -22,13 +22,13 @@ public class BoatController : MonoBehaviour
     }
     private void Update()
     {
-        checkPlayer();
+        activeOption();
         playerCtrl.updateTranform(transform,area.ship);
         playerCtrl.rb.isKinematic = (playerCtrl.inArea == area.ship);
         movement();
     }
 
-    public void checkPlayer()
+    public void activeOption()
     {
         foreach(GameObject obj in listOption)
         {

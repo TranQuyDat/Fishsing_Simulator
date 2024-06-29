@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: fishData2
   m_EditorClassIdentifier: 
   tyleItem: 0
-  nameItem: 
+  nameItem: fishv2
   imgItem: {fileID: -1074519428, guid: e1c0e46133f871c488768373c6304e09, type: 3}
   price: 3
   detail: fish2

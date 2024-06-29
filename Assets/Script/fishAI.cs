@@ -16,14 +16,12 @@ public class fishAI : MonoBehaviour
     public GameObject food;
     public LayerMask maskFood;
     public bait[] likefood;
-    public bool isMeetFood;
     public bool canMove = true;
     public bool canChangeDirRandom = true;
-    public Collider[] checkBait;
     public fishManager fishMngr;
     public Action acFish;
     Vector3 dir;
-    bool isAroundHook;
+    bool hadSeeFood = false;
     #region default method
     private void Awake()
     {
@@ -40,7 +38,12 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        eatEvent();
+        if(fishMngr.fishRodCtrl!=null&& fishMngr.fishRodCtrl.isfishing && !hadSeeFood)
+        {
+            checkLikeFood(fishMngr.fishRodCtrl.bait.gameObject);
+            hadSeeFood = true;
+        }
+        fishEvent();
         switchBwtAC();
         
         //movement
@@ -56,9 +59,7 @@ public class fishAI : MonoBehaviour
         head.transform.LookAt(target.transform.position);
         head.transform.Rotate(-90, 0, 0, Space.Self);
         head.transform.Rotate(0, 90, 0, Space.Self);
-
-
-        if(!isMeetFood) updateTarget( (target.transform.position - head.transform.position).normalized );
+        updateTarget( (target.transform.position - head.transform.position).normalized );
     }
 
     public void updateTarget(Vector3 dir, float dis = 3f, float x = 3f)
@@ -102,15 +103,7 @@ public class fishAI : MonoBehaviour
         InvokeRepeating("randomDir", timeChangeDir, timeChangeDir);
     }
 
-    public void playAction(Action ac,float time ,bool b = true)
-    {
-        if(b) StartCoroutine(waittoPlayAc(time,ac));
-    }
-    IEnumerator waittoPlayAc(float time,Action ac)
-    {
-        yield return new WaitForSeconds(time);
-        acFish = ac;
-    }
+
     public void switchBwtAC()
     {
         switch (acFish)
@@ -130,62 +123,64 @@ public class fishAI : MonoBehaviour
                 fishAteBait();
                 break;
             default:
-                // hanh dong mac dinh
+                // hanh dong mac dinh (idle
                 setDefault();
                 break;
         }
     }
-
     public void setDefault()
     {
         canMove = true;
-        isMeetFood = false;
-        food = null;
+        canChangeDirRandom = true;
         speed = 5;
         if (!IsInvoking("randomDir")) randomDir();
     }
 
-    public void eatEvent()
+    public void playAction(Action ac, float time, bool b = true)
     {
-        isMeetFood = checkLikeFood()  ;
-        bool isMaxfishTag2bait = (fishMngr.listFishAroundHook.Count >= 2 && !fishMngr.listFishAroundHook.Contains(this.gameObject));
+        if (b) StartCoroutine(waittoPlayAc(time, ac));
+    }
+    IEnumerator waittoPlayAc(float time, Action ac)
+    {
+        yield return new WaitForSeconds(time);
+        acFish = ac;
+    }
 
-        fishingRodController  fishingRodCtrl = (food != null)? food.GetComponentInParent<fishingRodController>():null;
-        bool hadFishBite = fishMngr.listFishAroundHook.Contains(this.gameObject) && fishMngr.theLuckyFish !=this.gameObject;
+    public void fishEvent()
+    {
+        playAction(Action.idle, 0, acFish != Action.idle && (food == null || !fishMngr.fishRodCtrl.isfishing));
+
+        playAction(Action.checkBait,0, acFish == Action.idle && food != null && !fishMngr.fishRodCtrl.wasCaughtFish);
         
-        if (!isMeetFood || (isMeetFood && isMaxfishTag2bait) || hadFishBite)
+        playAction(Action.ateBait, 0, acFish == Action.eatBait && fishMngr.fishRodCtrl.isfishbite);
+    }
+    public void checkLikeFood(GameObject bait)
+    {
+        //check xem 'bait' co nam trong list like food ko
+        foreach (bait lf in likefood)
         {
-            playAction(Action.idle, 0);
+            if (!bait.CompareTag(lf.ToString())) continue;
+            fishMngr.listFishLikeBait.Add(this.gameObject);
             return;
         }
-
-        playAction(Action.checkBait,0, acFish == Action.idle  && !fishingRodCtrl.isfishbite && !fishMngr.fishRodCtrl.wasCaughtFish);
-        playAction(Action.ateBait, 0, acFish == Action.eatBait && fishingRodCtrl.isfishbite);
     }
-    public bool checkLikeFood()
+
+    public void destroy()
     {
-        checkBait = Physics.OverlapSphere(head.transform.position, olfaction, maskFood);
-
-        if (checkBait == null || checkBait.Length <= 0) return false;
-
-        //check xem 'bait' co nam trong list like food ko
-        foreach (bait b in likefood)
-        {
-            if (checkBait[0].tag != b.ToString()) continue;
-            food = checkBait[0].gameObject;
-            return true;
-        }
-        return false;
-
-
+        Destroy(this.gameObject);
     }
 
-
-   
     #region ACTION
     float timeEventEat;
     public void moveAroundfood(float orbitRadius, float orbitSpeed ) //di chuyen xuong quanh obj
     {
+        canChangeDirRandom = false;
+        if (food != null &&(food.transform.parent.position - head.transform.position).magnitude >= 2)
+        {
+            Vector3 dir = (food.transform.parent.position - head.transform.position).normalized;
+            updateTarget(dir);
+            return;
+        }
         timeEventEat += 1 * Time.deltaTime;
         float numDir = 1;
         // hanh dong den gan moi && ktra moi( bang cach di quanh moi)
@@ -194,66 +189,75 @@ public class fishAI : MonoBehaviour
             timeEventEat = 0;
             numDir = Random.Range(0, 2)*2-1 ; // de thay doi huong quay
         }
-        if (!isAroundHook)
+        if (IsInvoking("randomDir"))
         {
-            isAroundHook = true;
-            fishMngr.listFishAroundHook.Add(this.gameObject);// them vao list around hook
             CancelInvoke("randomDir");
         }
+        if (fishMngr.listFishAroundHook.Count<=0) return;
         float eulerStart = 360f / (fishMngr.listFishAroundHook.IndexOf(this.gameObject) + 1);// goc bat dau quay cho moi con ca
         // Tính toán vị trí quay xung quanh vật thể mục tiêu
         float orbitAngle = (Time.time * orbitSpeed + eulerStart) * numDir;
         float x = Mathf.Cos(orbitAngle) * orbitRadius;
         float z = Mathf.Sin(orbitAngle) * orbitRadius;
-        target.transform.position = new Vector3(x, 0, z) + food.transform.position;
+        //print(x + "0 " + z);
+        target.transform.position = new Vector3(x, 0, z) + food.transform.parent.position;
     }
     public void fishEatBait() 
     {
-        Vector3 dir = (food.transform.position - head.transform.position).normalized;
+        Vector3 dir = (food.transform.parent.position - head.transform.position).normalized;
         updateTarget(dir);
-        if((head.transform.position - head.transform.position).magnitude <= 0.5f)
+        if(dir.magnitude <= 1f)
         {
             fishingRodController fishingRodCtrl = food.GetComponentInParent<fishingRodController>();
             fishingRodCtrl.isfishbite = true;
         }
     }
 
-    public float maxDisPull = 20f;
+    public float maxDisPull = 10f;
     public float minDisPull = 2f;
+    public int countPull;
     public void fishAteBait()
     {
         canMove = false;
-        canChangeDirRandom = false;
         if (food == null || fishMngr.gameMngr.fishingRodCtrl.wasCaughtFish 
             || fishMngr.gameMngr.fishingRodCtrl.isPull) return;
 
-            fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = true;
-            fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
-            fishMngr.gameMngr.fishingRodCtrl.rope2.snapRopTip = false;
+        fishMngr.gameMngr.fishingRodCtrl.rope1.snapHook = true;
+        fishMngr.gameMngr.fishingRodCtrl.rope2.snapHook = true;
+        fishMngr.gameMngr.fishingRodCtrl.rope2.snapRopTip = false;
 
-            Vector3 dir_FishPullRod = (head.transform.position - fishMngr.fishRodCtrl.rodtip.position).normalized;
-            Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
-            Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
-            Vector3 randir = Vector3.Slerp(dir_min, dir_max, Random.Range(0, 1));
-            updateTarget(randir);
+        Vector3 dir_FishPullRod = (head.transform.position - fishMngr.fishRodCtrl.rodtip.position).normalized;
+        Vector3 dir_min = (dir_FishPullRod + Vector3.right).normalized;
+        Vector3 dir_max = (dir_FishPullRod + Vector3.down).normalized;
+        Vector3 randir = Vector3.Slerp(dir_min, dir_max, Random.Range(0, 1));
+        updateTarget(randir);
 
-            if (fishMngr.dis >= maxDisPull && !rb.isKinematic)// stop pull
-            {
-                maxDisPull += (fishMngr.dis < 10f)?1:0;
-                rb.isKinematic = true;
+        if (fishMngr.dis >= maxDisPull && !rb.isKinematic)// stop pull
+        {
+            maxDisPull += (fishMngr.dis < 10f)?1:0;
+            if(fishMngr.dis == 10f) countPull++;
+            if (countPull > 5)//escape
+            {                
+                food = null;
+                fishMngr.theLuckyFish = null;
+                fishMngr.fishRodCtrl.bait.tag = "noneBait";
+                fishMngr.fishRodCtrl.Reset();
+                countPull = 0;
             }
-            if (fishMngr.dis >= maxDisPull - 1 && rb.isKinematic) // stop pull and move to dir
-            {
-                speed = 2;
-                transform.position -= dir_FishPullRod * speed * Time.deltaTime;
-            }
-            if (fishMngr.dis < (maxDisPull - 1)) // pull
-            {
-                speed = 10;
-                rb.isKinematic = false;
-                Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
-                rb.AddForce(ranDir * speed, ForceMode.Impulse);
-            }
+            rb.isKinematic = true;
+        }
+        if (fishMngr.dis >= maxDisPull - 1 && rb.isKinematic) // stop pull and move to dir
+        {
+            speed = 2;
+            transform.position -= dir_FishPullRod * speed * Time.deltaTime;
+        }
+        if (fishMngr.dis < (maxDisPull - 1)) // pull
+        {
+            speed = 10;
+            rb.isKinematic = false;
+            Vector3 ranDir = Vector3.Slerp(dir_min, dir_max, Random.Range(0f, 1f));
+            rb.AddForce(ranDir * speed, ForceMode.Impulse);
+        }
         
     }
     #endregion

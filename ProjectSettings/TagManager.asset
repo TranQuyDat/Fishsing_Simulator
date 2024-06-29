@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - SurfaceWater
-  - underwater
   - player
   - posSit
   - posFishing
@@ -16,6 +15,11 @@ TagManager:
   - fish
   - fakeBait
   - woom
+  - posCamera
+  - UnderWater
+  - water
+  - hook
+  - noneBait
   layers:
   - Default
   - TransparentFX
@@ -28,7 +32,7 @@ TagManager:
   - bait
   - npc
   - ship
-  - 
+  - rod
   - 
   - 
   - 

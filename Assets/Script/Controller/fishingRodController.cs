@@ -22,6 +22,7 @@ public class fishingRodController : MonoBehaviour
     [Range(5,10)]public float castforce = 10f;
     public bool isReeling;
     public bool isCasting;
+    public bool isfishing;
     public bool startACTionCasting;
     public Transform fishingPoint;
     public Transform dirCast;
@@ -46,6 +47,11 @@ public class fishingRodController : MonoBehaviour
         reelLine();
         pullrod();
         fishWasCaught();
+        activeDeactive_Bait();
+    }
+    private void FixedUpdate()
+    {
+        fishWasBite();
     }
     private void OnEnable()
     {
@@ -70,10 +76,19 @@ public class fishingRodController : MonoBehaviour
         rope2.legthRope = 2;
         rope1.resetLine();
         rope2.resetLine();
+        fish = null;
     }
-    private void FixedUpdate()
+    public void activeDeactive_Bait()
     {
-        fishWasBite();
+        if(bait.CompareTag("noneBait") && bait.gameObject.active)
+        {
+            bait.gameObject.SetActive(false);
+            return;
+        }
+        if(!bait.CompareTag("noneBait") && !bait.gameObject.active)
+        {
+            bait.gameObject.SetActive(true);
+        }
     }
     public void fishWasBite()
     {
@@ -98,8 +113,10 @@ public class fishingRodController : MonoBehaviour
             Vector3 dir = dirCast.forward + dirCast.up;
             rope1.endPos.GetComponent<Rigidbody>().AddForce(dir*castforce, ForceMode.Impulse);
                 isCasting = true;
+            isfishing = false;
             return;
         }
+        if (surFaceWaterObj == null) surFaceWaterObj = GameObject.FindGameObjectWithTag("water"); ;
         if (rope1.endPos.position.y >= surFaceWaterObj.transform.position.y || !isCasting) return;
         
         gameMngr.playerCtrl.changeAction(Action.fishing_reel);
@@ -115,7 +132,7 @@ public class fishingRodController : MonoBehaviour
         if (!isReeling) rope1.resetLine();
         isCasting = false;
         isReeling = true;
-
+        isfishing = false;
         if (isReeling)
         {
             rope2.legthRope = 5f;
@@ -130,6 +147,7 @@ public class fishingRodController : MonoBehaviour
 
             rope1.resetLine();
             rope2.resetLine();
+            isfishing = true;
             isReeling = false;
             gameMngr.playerCtrl.changeAction(Action.fishing_idle);
         }
@@ -168,7 +186,7 @@ public class fishingRodController : MonoBehaviour
     public void fishWasCaught()
     {
         wasCaughtFish = imgvalue.fillAmount >= 0.99f;
-        if (!wasCaughtFish) return;
+        if (!wasCaughtFish || fish == null) return;
         #region set Default Rod
         if (isfishbite) 
         {

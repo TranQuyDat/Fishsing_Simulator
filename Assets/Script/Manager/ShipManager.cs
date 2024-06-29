@@ -28,20 +28,28 @@ public class ShipManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(curShip == null && it_Equiped != null)
+        {
+            setActiveShips();
+        }
     }
 
     public void setActiveShips()
     {
         foreach (GameObject obj in ships)
         {
-            obj.SetActive(it_Equiped != null  && obj.name == it_Equiped.nameItem);
+            if (obj == null)
+            {
+                ships.Remove(obj);
+                continue;
+            }
+                obj.SetActive(it_Equiped != null  && obj.name == it_Equiped.nameItem);
             if (it_Equiped != null && obj.name == it_Equiped.nameItem)
             {
                 curShip = obj;
                 curShipCtrl = obj.GetComponent<BoatController>();
 
-                triggerChange.target = curShipCtrl.posSit.gameObject;
+                if(triggerChange!=null) triggerChange.target = curShipCtrl.posSit.gameObject;
             }
         }
     }
@@ -52,6 +60,7 @@ public class ShipManager : MonoBehaviour
         {
             if(s.name == obj.name && s != obj)
             {
+                ships.Remove(s);
                 Destroy(s);
             }
         }

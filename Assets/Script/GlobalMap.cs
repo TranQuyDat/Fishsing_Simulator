@@ -17,7 +17,16 @@ public class GlobalMap : MonoBehaviour
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
         obj.ischangeScene = true;
-        DontDestroyOnLoad(obj.gameObject);
+        if (obj.transform.parent == null)
+        {
+            DontDestroyOnLoad(obj.gameObject);
+        }
+        else
+        {
+            GameObject parent = obj.transform.parent.gameObject;
+            parent.transform.parent = null;
+            DontDestroyOnLoad(parent);
+        }
         GameManager gameManager;
         gameManager = FindObjectOfType<GameManager>();
         gameManager.changeScene(Scenes.port);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cameraFollow : MonoBehaviour
 {
-    public GameObject Player;
+    public GameObject target;
     public float speed;
     public bool followZ;
     public float dis;
@@ -13,6 +13,7 @@ public class cameraFollow : MonoBehaviour
     public Transform limitL;
     public Transform limitR;
     Vector3 PosCam;
+    public bool isCameraUp;
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
@@ -22,29 +23,36 @@ public class cameraFollow : MonoBehaviour
     void Update()
     {
         followPlayer();
-        if (gameMngr.playerCtrl != null && Player == null)
+        if (gameMngr.playerCtrl != null && target == null)
         {
-            Player = GameObject.FindGameObjectWithTag("posCamera");
+            target = GameObject.FindGameObjectWithTag("posCamera");
             gameMngr.playerCtrl.updateMainCamera(this.transform);
+        }
+        if (target.CompareTag("posCamera"))
+        {
+            isCameraUp = true;
+        }
+        else if (target.CompareTag("hook"))
+        {
+            isCameraUp = false;
         }
     }
 
     public void followPlayer()
     {
-        if (Player == null) return;
+        if (target == null) return;
         PosCam =(!followZ) 
-            ? new Vector3(Player.transform.position.x+dis, Player.transform.position.y+ height, this.transform.position.z)
-            : this.transform.position = new Vector3(Player.transform.position.x+dis, Player.transform.position.y+ height, Player.transform.position.z+dis) ;
+            ? new Vector3(target.transform.position.x+dis, target.transform.position.y+ height, this.transform.position.z)
+            : this.transform.position = new Vector3(target.transform.position.x+dis, target.transform.position.y+ height, target.transform.position.z+dis) ;
         PosCam.x = Mathf.Clamp(PosCam.x, limitL.position.x+5, limitR.position.x-5);
         transform.position = PosCam;
 
     }
 
 
-
-    public void setHeight(float h)
+    public void changeTarget(GameObject newTarget)
     {
-        height = h;
+        target = newTarget;
     }
 
 

@@ -21,7 +21,8 @@ public class dialog : MonoBehaviour
     }
     private void Update()
     {
-        setDialogValue(npc);
+        if(npc !=null)
+            setDialogValue(npc);
     }
     public void setTxt_content( string txt)
     {
@@ -49,7 +50,6 @@ public class dialog : MonoBehaviour
 
     public void setDialogValue(NPC npc)
     {
-        if (npc == null ) return;
         name.text = npc.name;
         avatar.sprite = npc.avt;
     }

@@ -28,7 +28,7 @@ public abstract class GroupSlot : MonoBehaviour
     public string name;
     public List<slotItem> slots;
 
-    public ShopData shopData;
+    public GroupSlotData Data;
     public int maxCoutSlot;
     public slotItem curSlot;
     public bool canOpenIven ;
@@ -54,13 +54,13 @@ public abstract class GroupSlot : MonoBehaviour
     #endregion
 
     #region normal method
-    public void importShopData(ShopData data)
+    public void importShopData(GroupSlotData data)
     {
-        if (shopData != data)
-            shopData = data;
-        if (shopData == null) return;
+        if (Data != data)
+            Data = data;
+        if (Data == null) return;
         removeAllItem();
-        foreach (Item it in shopData.items)
+        foreach (Item it in Data.items)
         {
             addItem(it.itdt, it.NumIt);
         }
@@ -104,11 +104,12 @@ public abstract class GroupSlot : MonoBehaviour
             slots[i].transform.SetSiblingIndex(i);
         }
     }
-
+    public void addIt2Data(ItemData itdt ,int numItem = 1)
+    {
+    }
     public void addItem(ItemData it, int numItem = 1)
     {
         if (it == null) return;
-        print(slots[0].name);
         for (int i = 0; i < slots.Count; i++)
         {
             //  slot !=null && numItem == maxNumItem || item != it => continue

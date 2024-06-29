@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/port.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/city.unity
+    guid: ef7a8677167712a4b8600903d81ce039
+  - enabled: 1
+    path: Assets/Scenes/sea1.unity
+    guid: 0befce665f061e9418e2fd92a49ec141
+  - enabled: 1
+    path: Assets/Scenes/sea2.unity
+    guid: c8516c127e7ddec4c90ec8e69d35702e
   m_configObjects: {}
