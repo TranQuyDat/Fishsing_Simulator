@@ -8,15 +8,18 @@ public class FishingUI
 {
     public GameObject ui;
     public Animation ani;
+    public Button btnfishingcast;
     public void btnCastRod()
     {
         ani = ani.GetComponent<Animation>();
         ani.Play("uiFishingOpen");
+        btnfishingcast.interactable = false;
     }
 
     public void btnStopFishing()
     {
         ani.Play("uiFishingClose");
+        btnfishingcast.interactable = true;
     }
 }
 [System.Serializable]
@@ -67,6 +70,11 @@ public class gamePlayPanel : MonoBehaviour
         {
             fishInfoUI.setUp(gameMngr.fishingRodCtrl.fish.fishData);
         }
+
+        if (gameMngr.fishingRodCtrl.wasCaughtFish)
+        {
+            btnStopFishing();
+        }
     }
 
     public void updateAmount()
@@ -94,22 +102,20 @@ public class gamePlayPanel : MonoBehaviour
             btn.editImg.setFillAmount(1);
         }
     }
-    public void btnFishingcast(Button btn )
+    public void btnFishingcast( )
     {
         if (gameMngr.playerCtrl.cur_action == Action.fishing_cast
          || gameMngr.playerCtrl.cur_action == Action.fishing_reel) return;
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
         fishingUI.btnCastRod();
-        btn.interactable = false;
         print(fishingUI.ani["uiFishingOpen"]);
     }
 
-    public void btnStopFishing(Button btn)
+    public void btnStopFishing()
     {
         fishingUI.btnStopFishing();
         gameMngr.fishMngr.Reset();
         gameMngr.fishingRodCtrl.Reset();
-        btn.interactable = true;
     }
 
     public void btnUpDownSurfaceWater()

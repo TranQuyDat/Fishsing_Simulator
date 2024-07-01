@@ -5310,6 +5310,7 @@ MonoBehaviour:
   fishingUI:
     ui: {fileID: 8823913522322209921}
     ani: {fileID: 1840719007348152771}
+    btnfishingcast: {fileID: 7479626890306570327}
   fishInfoUI:
     ui: {fileID: 5886361434093993971}
     txt_name: {fileID: 6903851944169464903}
@@ -8902,10 +8903,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5708710654376935082}
         m_TargetAssemblyTypeName: gamePlayPanel, Assembly-CSharp
         m_MethodName: btnStopFishing
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 7479626890306570327}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10581,10 +10582,10 @@ MonoBehaviour:
       - m_Target: {fileID: 5708710654376935082}
         m_TargetAssemblyTypeName: gamePlayPanel, Assembly-CSharp
         m_MethodName: btnFishingcast
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 7479626890306570327}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
