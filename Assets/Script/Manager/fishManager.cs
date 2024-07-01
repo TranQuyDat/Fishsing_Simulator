@@ -46,17 +46,19 @@ public class fishManager : MonoBehaviour
         spawnFish();
         randomFish();
         updateDisOfTLKFish();
-        if (theLuckyFish !=null && theLuckyFishAI.acFish == Action.eatBait &&listFishAroundHook.Count>0)
+        if (theLuckyFish != null && theLuckyFishAI.acFish == Action.eatBait && listFishAroundHook.Count > 0)
         {
             listFishAroundHook.Remove(theLuckyFish);
             GameObject obj = listFishAroundHook[0];
             listFishAroundHook.Clear();
             obj.GetComponent<fishAI>().food = null;
         }
+
+        
     }
     public void randomFish()
     {
-        if (theLuckyFish != null || listFishLikeBait.Count<=0) return;
+        if (theLuckyFish != null || listFishLikeBait.Count <= 0 || !fishRodCtrl.isfishing) return;
         if(listFishAroundHook.Count <= 0) timeRandomfish1 -= 1 * Time.deltaTime;
         if (listFishAroundHook.Count >= 2) timeRandomfish2 -= 1 * Time.deltaTime;
 
@@ -81,7 +83,6 @@ public class fishManager : MonoBehaviour
         if (timeRandomfish2 <= 0)
         {
             theLuckyFish = listFishAroundHook[Random.Range(0, listFishAroundHook.Count)];
-            listFishLikeBait.Clear();
 
             //setUp the lucky fish
             theLuckyFishAI = theLuckyFish.GetComponent<fishAI>();
@@ -117,6 +118,8 @@ public class fishManager : MonoBehaviour
 
     public void Reset()
     {
+        listFishAroundHook.Clear();
+        listFishLikeBait.Clear();
         theLuckyFish = null;
         theLuckyFishAI = null;
         dis = 0;

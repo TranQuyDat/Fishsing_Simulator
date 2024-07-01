@@ -21,7 +21,6 @@ public class fishAI : MonoBehaviour
     public fishManager fishMngr;
     public Action acFish;
     Vector3 dir;
-    bool hadSeeFood = false;
     #region default method
     private void Awake()
     {
@@ -38,11 +37,7 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fishMngr.fishRodCtrl!=null&& fishMngr.fishRodCtrl.isfishing && !hadSeeFood)
-        {
-            checkLikeFood(fishMngr.fishRodCtrl.bait.gameObject);
-            hadSeeFood = true;
-        }
+        checkLikeFood(fishMngr.fishRodCtrl.bait.gameObject);
         fishEvent();
         switchBwtAC();
         
@@ -148,20 +143,32 @@ public class fishAI : MonoBehaviour
 
     public void fishEvent()
     {
+        if (food!=null && fishMngr.theLuckyFish !=this.gameObject
+                       && !fishMngr.listFishAroundHook.Contains(this.gameObject) )
+        {
+            food = null;
+        }
         playAction(Action.idle, 0, acFish != Action.idle && (food == null || !fishMngr.fishRodCtrl.isfishing));
 
         playAction(Action.checkBait,0, acFish == Action.idle && food != null && !fishMngr.fishRodCtrl.wasCaughtFish);
         
-        playAction(Action.ateBait, 0, acFish == Action.eatBait && fishMngr.fishRodCtrl.isfishbite);
+        playAction(Action.ateBait, 0, acFish == Action.eatBait && food != null && fishMngr.fishRodCtrl.isfishbite);
     }
     public void checkLikeFood(GameObject bait)
     {
         //check xem 'bait' co nam trong list like food ko
+        if (bait == null|| fishMngr.listFishAroundHook.Contains(this.gameObject) 
+            || fishMngr.theLuckyFish == this.gameObject) return;
         foreach (bait lf in likefood)
         {
             if (!bait.CompareTag(lf.ToString())) continue;
+            if (fishMngr.listFishLikeBait.Contains(this.gameObject)) return;
             fishMngr.listFishLikeBait.Add(this.gameObject);
             return;
+        }
+        if (fishMngr.listFishLikeBait.Contains(this.gameObject))
+        {
+            fishMngr.listFishLikeBait.Remove(this.gameObject);
         }
     }
 
@@ -174,6 +181,7 @@ public class fishAI : MonoBehaviour
     float timeEventEat;
     public void moveAroundfood(float orbitRadius, float orbitSpeed ) //di chuyen xuong quanh obj
     {
+        if (food == null) return;
         canChangeDirRandom = false;
         if (food != null &&(food.transform.parent.position - head.transform.position).magnitude >= 2)
         {
@@ -204,6 +212,7 @@ public class fishAI : MonoBehaviour
     }
     public void fishEatBait() 
     {
+        if (food == null) return;
         Vector3 dir = (food.transform.parent.position - head.transform.position).normalized;
         updateTarget(dir);
         if(dir.magnitude <= 1f)

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public inventory iv;
     public GameObject instructionBTN;
     public cameraFollow mainCamera;
+    public Notifycation notify;
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;

@@ -67,8 +67,16 @@ public class fishingRodController : MonoBehaviour
     }
     public void Reset()
     {
+        gameMngr.playerCtrl.changeAction(Action.fishing_idle);
+        rope1.endPos.GetComponent<Rigidbody>().isKinematic = true;
         wasCaughtFish = false;
         isfishbite = false;
+        isfishing = false;
+        isCasting = false;
+        isReeling = false;
+        startACTionCasting = false;
+
+        resetHookAndBuoys();
         rope1.snapHook = false;
         rope2.snapHook = false;
         rope2.snapRopTip = true;
@@ -77,6 +85,14 @@ public class fishingRodController : MonoBehaviour
         rope1.resetLine();
         rope2.resetLine();
         fish = null;
+    }
+    public void resetHookAndBuoys()
+    {
+        rope1.snapHook = true;
+        rope2.snapHook = true;
+        Vector3 dir = (fishingPoint.position - rodtip.position);
+        rope1.endPos.position = rodtip.position+ dir * 0.5f;
+        hook.position = rodtip.position+ dir * 1f;
     }
     public void activeDeactive_Bait()
     {
@@ -99,6 +115,8 @@ public class fishingRodController : MonoBehaviour
     public void castLine()
     {
         if (gameMngr.playerCtrl.cur_action != Action.fishing_cast) return;
+
+        isfishing = false;
         if (!startACTionCasting)
         {
             rope1.snapHook = false;
@@ -113,7 +131,6 @@ public class fishingRodController : MonoBehaviour
             Vector3 dir = dirCast.forward + dirCast.up;
             rope1.endPos.GetComponent<Rigidbody>().AddForce(dir*castforce, ForceMode.Impulse);
                 isCasting = true;
-            isfishing = false;
             return;
         }
         if (surFaceWaterObj == null) surFaceWaterObj = GameObject.FindGameObjectWithTag("water"); ;
@@ -129,7 +146,6 @@ public class fishingRodController : MonoBehaviour
         if (gameMngr.playerCtrl.cur_action != Action.fishing_reel) return;
         rope1.snapHook = true;
         rope1.endPos.GetComponent<Rigidbody>().isKinematic = true;
-        if (!isReeling) rope1.resetLine();
         isCasting = false;
         isReeling = true;
         isfishing = false;

@@ -7,6 +7,17 @@ using TMPro;
 public class FishingUI
 {
     public GameObject ui;
+    public Animation ani;
+    public void btnCastRod()
+    {
+        ani = ani.GetComponent<Animation>();
+        ani.Play("uiFishingOpen");
+    }
+
+    public void btnStopFishing()
+    {
+        ani.Play("uiFishingClose");
+    }
 }
 [System.Serializable]
 public class FishInfoUI 
@@ -60,9 +71,13 @@ public class gamePlayPanel : MonoBehaviour
 
     public void updateAmount()
     {
-        bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.ui.active;
-        if (b) return;
-        if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
+        bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.ui.active || !gameMngr.fishingRodCtrl.isfishing;
+        if (b)
+        {
+            btn.editImg.setFillAmount(0);
+            return;
+        }
+            if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
             btn.editImg.imgValue.fillAmount >= 0 && btn.editImg.imgValue.fillAmount < 1f)
         {
             btn.editImg.setFillAmount(1 - Mathf.Round((gameMngr.fishMngr.dis / gameMngr.fishMngr.maxdis) * 100f) * 0.01f);
@@ -79,11 +94,22 @@ public class gamePlayPanel : MonoBehaviour
             btn.editImg.setFillAmount(1);
         }
     }
-    public void btnFishingcast()
+    public void btnFishingcast(Button btn )
     {
         if (gameMngr.playerCtrl.cur_action == Action.fishing_cast
          || gameMngr.playerCtrl.cur_action == Action.fishing_reel) return;
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
+        fishingUI.btnCastRod();
+        btn.interactable = false;
+        print(fishingUI.ani["uiFishingOpen"]);
+    }
+
+    public void btnStopFishing(Button btn)
+    {
+        fishingUI.btnStopFishing();
+        gameMngr.fishMngr.Reset();
+        gameMngr.fishingRodCtrl.Reset();
+        btn.interactable = true;
     }
 
     public void btnUpDownSurfaceWater()
@@ -107,6 +133,7 @@ public class gamePlayPanel : MonoBehaviour
         gameMngr.fishMngr.Reset();
         gameMngr.fishingRodCtrl.Reset();
         btn.editImg.setFillAmount(0);
+        gameMngr.notify.setUpAndShow("fish added to inventory");
     }
 
     #endregion
