@@ -24,12 +24,11 @@ public enum Action
     //action of fish
     checkBait,eatBait,ateBait,
 }
-public enum bait
+public enum Bait
 {
-    fakeBait,
-    woom,
+    worm,
     rice,
-    meet,
+    meat,
     fish,
 }
 public enum GizmosTyle
@@ -38,7 +37,7 @@ public enum GizmosTyle
 }
 public enum TyleItem
 {
-    fish,bait,ship,
+    fish,bait,ship,fish_Or_bait,
 }
 public enum Status
 {

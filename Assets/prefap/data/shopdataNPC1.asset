@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: shopdataNPC1
   m_EditorClassIdentifier: Assembly-CSharp::ShopData
   items:
-  - itdt: {fileID: 11400000, guid: ebe970eaf2a411d4e92f5eceeecc3124, type: 2}
+  - itdt: {fileID: 11400000, guid: 515895674f60deb4ea068bf7fb2e17d7, type: 2}
+    NumIt: 10
+  - itdt: {fileID: 11400000, guid: 5d7cd0ccb7f353947868f99d36cc7f7c, type: 2}
+    NumIt: 10
+  - itdt: {fileID: 11400000, guid: 8d2e11a79c32d6a45906d718aae8dd96, type: 2}
+    NumIt: 10
+  - itdt: {fileID: 11400000, guid: 6eb01a20387ffc94087654e12e34cc3a, type: 2}
     NumIt: 10

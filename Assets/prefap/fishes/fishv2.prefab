@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ebb14dd5aaae841a5861d11e81e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 11400000, guid: 1c9ee4e6ce9608f45ab3a05c69bd2618, type: 2}
+  fishData: {fileID: 11400000, guid: 5d7cd0ccb7f353947868f99d36cc7f7c, type: 2}
   rb: {fileID: -4782157917398144019}
   speed: 5
   timeChangeDir: 8
@@ -738,14 +738,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   likefood: 000000000100000002000000
-  isMeetFood: 0
   canMove: 1
   canChangeDirRandom: 1
-  checkBait: []
   fishMngr: {fileID: 0}
   acFish: 0
   maxDisPull: 10
   minDisPull: 2
+  countPull: 0
 --- !u!4 &7793426975797438068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4c1d9eac0dd5a2e458806c2d17f7df31, type: 3}

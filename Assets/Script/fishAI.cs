@@ -15,7 +15,7 @@ public class fishAI : MonoBehaviour
     public GameObject target;
     public GameObject food;
     public LayerMask maskFood;
-    public bait[] likefood;
+    public Bait[] likefood;
     public bool canMove = true;
     public bool canChangeDirRandom = true;
     public fishManager fishMngr;
@@ -159,7 +159,7 @@ public class fishAI : MonoBehaviour
         //check xem 'bait' co nam trong list like food ko
         if (bait == null|| fishMngr.listFishAroundHook.Contains(this.gameObject) 
             || fishMngr.theLuckyFish == this.gameObject) return;
-        foreach (bait lf in likefood)
+        foreach (Bait lf in likefood)
         {
             if (!bait.CompareTag(lf.ToString())) continue;
             if (fishMngr.listFishLikeBait.Contains(this.gameObject)) return;

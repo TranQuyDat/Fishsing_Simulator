@@ -11,15 +11,15 @@ TagManager:
   - ship
   - rice
   - slotitem
-  - meet
   - fish
   - fakeBait
-  - woom
   - posCamera
   - UnderWater
   - water
   - hook
   - noneBait
+  - worm
+  - meat
   layers:
   - Default
   - TransparentFX

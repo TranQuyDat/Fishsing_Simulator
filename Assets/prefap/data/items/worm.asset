@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13663c719dafe6e449d0e548fe7b65e1, type: 3}
+  m_Name: worm
+  m_EditorClassIdentifier: 
+  tyleItem: 1
+  nameItem: worm
+  imgItem: {fileID: 730895436, guid: 0fb76ee956891e245b61b6b97318f166, type: 3}
+  price: 3
+  detail: 'worm is the bait , price : 10'
+  meshren: {fileID: -3168918542085528509, guid: a1ff10265640c54468f4330389d54db0, type: 3}
+  mat: {fileID: 2100000, guid: caefa7bb0a85d604c81fd24f580ddfca, type: 2}
+  maxNuminSlot: 10
+  status: 3
+  bait: 0
+  scale: {x: 0.1, y: 0.1, z: 0.1}

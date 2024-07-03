@@ -13,21 +13,21 @@ public class UseItem : MonoBehaviour
     {
         switch (it.tyleItem)
         {
-            case TyleItem.fish:
+            case TyleItem.fish_Or_bait:
             case TyleItem.bait:
-                addBait2Rod(it);
+                addBait2Rod((baitData)it);
                 break;
         }
     }
-    public void addBait2Rod(ItemData bait)
+    public void addBait2Rod(baitData baitDT)
     {
         GameObject baitObj = gameMngr.fishingRodCtrl.hook.Find("bait").gameObject;
         MeshRenderer baitObjMeshR = baitObj.GetComponent<MeshRenderer>();
         MeshFilter baitObjMeshF = baitObj.GetComponent<MeshFilter>();
 
-        baitObjMeshR.materials[0] = bait.mat;
-        baitObjMeshF.mesh = bait.meshren;
-        baitObj.tag = bait.tyleItem.ToString();
+        baitObjMeshR.materials[0] = baitDT.mat;
+        baitObjMeshF.mesh = baitDT.meshren;
+        baitObj.tag = baitDT.bait.ToString();
 
     }
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject instructionBTN;
     public cameraFollow mainCamera;
     public Notifycation notify;
+    public SaveLoadGame saveLoadGame;
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.resetInput();
-
+            saveLoadGame.player = player.transform;
             Debug.Log("Update input");
         }
     }
