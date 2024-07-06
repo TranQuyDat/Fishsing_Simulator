@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     public float speedMove;
     public Animator ani;
     public float axis;
-    public bool canMove;
+    public bool canMove;//save
     public Rigidbody rb;
     public GameObject dirobj;
     public Transform mainCamera;
-    public Scenes scenes;
-    public area inArea;
-    public Action cur_action;
+    public Scenes scenes;//save
+    public area inArea;//save
+    public Action cur_action;//save
     public GameObject targetNPC;
     public float faceRight;
     public float faceLeft;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         gameMngr = FindObjectOfType<GameManager>();
         rb = this.GetComponent<Rigidbody>();
         instructionBTN = gameMngr.instructionBTN;
+        mainCamera = gameMngr.mainCamera.transform;
     }
     // Start is called before the first frame update
     void Start()
@@ -60,8 +61,20 @@ public class PlayerController : MonoBehaviour
     {
         gameMngr = FindObjectOfType<GameManager>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        gameMngr.playerCtrl = this;
     }
+
+    public void loadData(DataPlayer dataPlayer)
+    {
+        print("load data");
+        gameMngr.iv.coin = dataPlayer.coins;
+        transform.position = dataPlayer.pos;
+        inArea = dataPlayer.inArea;
+        cur_action = dataPlayer.action;
+        scenes = dataPlayer.scene;
+        canMove = dataPlayer.canMove;
+        transform.eulerAngles = dataPlayer.rotation;
+    }
+
     public void movement()
     {
         if (!canMove) return;

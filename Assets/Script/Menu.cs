@@ -8,6 +8,6 @@ public class Menu : MonoBehaviour
 
     public void btn_continue()
     {
-        gameMngr.changeScene(Scenes.port);
+        //gameMngr.changeScene(Scenes.port);
     }
 }

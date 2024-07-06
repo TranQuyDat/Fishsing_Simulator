@@ -11,4 +11,10 @@ public class slotSave : MonoBehaviour
         gamePausePanel gamePause = GameObject.FindObjectOfType<gamePausePanel>();
         gamePause.selectBoxSave(this);
     }
+
+    public void delete()
+    {
+        GameManager gameMngr = FindObjectOfType<GameManager>();
+        gameMngr.saveLoadGame.deleteFileSave(this);
+    }
 }

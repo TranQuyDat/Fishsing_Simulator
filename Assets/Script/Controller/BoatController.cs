@@ -15,13 +15,15 @@ public class BoatController : MonoBehaviour
     public bool isFishing;
     public Transform posSit;
     public Transform posFishing;
+    GameManager gameMngr;
     private void Awake()
     {
-        playerCtrl = FindObjectOfType<PlayerController>();
-
+        gameMngr = FindObjectOfType<GameManager>();
     }
     private void Update()
     {
+        if (gameMngr.playerCtrl == null) return;
+        else if (playerCtrl == null) playerCtrl = gameMngr.playerCtrl;
         activeOption();
         playerCtrl.updateTranform(transform,area.ship);
         playerCtrl.rb.isKinematic = (playerCtrl.inArea == area.ship);

@@ -12,4 +12,10 @@ public class slotLoad : MonoBehaviour
         gamePausePanel gamePause = GameObject.FindObjectOfType<gamePausePanel>();
         gamePause.btnLoad(this);
     }
+
+    public void delete()
+    {
+        GameManager gameMngr = FindObjectOfType<GameManager>();
+        gameMngr.saveLoadGame.deleteFileSave(this);
+    }
 }

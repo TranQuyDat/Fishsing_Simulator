@@ -15,31 +15,36 @@ public class GameManager : MonoBehaviour
     public cameraFollow mainCamera;
     public Notifycation notify;
     public SaveLoadGame saveLoadGame;
+
+    public LoadData loadData;
     private void Awake()
     {
+
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+        playerCtrl = FindObjectOfType<PlayerController>();
         mainCamera = FindObjectOfType<cameraFollow>();
     }
     private void Start()
     {
-        PlayerController player = FindObjectOfType<PlayerController>();
-        if (player != null)
+    }
+    private void Update()
+    {
+        if(playerCtrl == null) playerCtrl = FindObjectOfType<PlayerController>();
+        if (playerCtrl != null && saveLoadGame.playerCtrl == null)
         {
-            player.resetInput();
-            saveLoadGame.player = player.transform;
+            playerCtrl.resetInput();
+            saveLoadGame.playerCtrl = playerCtrl;
             Debug.Log("Update input");
         }
     }
 
-    private void Update()
-    {
-    }
 
-
-    public void changeScene(Scenes scene)
+    public void change2LoadingScene(Scenes oldScene,Scenes nextScene,DataSave dataSave = null)
     {
-        SceneManager.LoadScene(scene.ToString());
+        bool isloadFrSave = (dataSave == null) ? false : true;
+        loadData.setLoadData(oldScene,nextScene, isloadFrSave, dataSave);
+        SceneManager.LoadScene(Scenes.loading.ToString());
     }
 
 }

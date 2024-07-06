@@ -10,11 +10,12 @@ public class ShipManager : MonoBehaviour
     public GameObject curShip;
     public BoatController curShipCtrl;
     public storeShip st;
-
+    public GameManager gameMngr;
     public TriggerChangeScene triggerChange;
     // Start is called before the first frame update
     private void Awake()
     {
+        gameMngr = FindObjectOfType<GameManager>();
         foreach (slotItem_ship sl in st.slots)
         {
             bool b = sl.item == null || sl.item.status != Status.equiped;
@@ -32,22 +33,32 @@ public class ShipManager : MonoBehaviour
         {
             setActiveShips();
         }
+        updateShips();
     }
 
+    public void updateShips()
+    {
+        if (gameMngr.playerCtrl == null || gameMngr.playerCtrl.transform.parent == null
+            ||ships.Contains(gameMngr.playerCtrl.transform.parent.gameObject)) return;
+
+        GameObject obj = gameMngr.playerCtrl.transform.parent.gameObject;
+        ships.Add(obj);
+        obj.transform.SetParent(gameMngr.shipMngr.transform);
+    }
     public void setActiveShips()
     {
-        foreach (GameObject obj in ships)
+        for(int i = 0; i<ships.Count;i++)
         {
-            if (obj == null)
+            if (ships[i] == null)
             {
-                ships.Remove(obj);
+                ships.Remove(ships[i]);
                 continue;
             }
-                obj.SetActive(it_Equiped != null  && obj.name == it_Equiped.nameItem);
-            if (it_Equiped != null && obj.name == it_Equiped.nameItem)
+            ships[i].SetActive(it_Equiped != null  && ships[i].name == it_Equiped.nameItem);
+            if (it_Equiped != null && ships[i].name == it_Equiped.nameItem)
             {
-                curShip = obj;
-                curShipCtrl = obj.GetComponent<BoatController>();
+                curShip = ships[i];
+                curShipCtrl = ships[i].GetComponent<BoatController>();
 
                 if(triggerChange!=null) triggerChange.target = curShipCtrl.posSit.gameObject;
             }

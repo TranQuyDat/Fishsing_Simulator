@@ -33,3 +33,14 @@ public class Item
         this.NumIt = NumIt;
     }
 }
+[System.Serializable]
+public class GroupSlotDataSave 
+{
+    public string name;
+    public List<Item> items;
+    public GroupSlotDataSave(GroupSlotData grdt)
+    {
+        name = grdt.name;
+        items = new List<Item>(grdt.items);
+    }
+}

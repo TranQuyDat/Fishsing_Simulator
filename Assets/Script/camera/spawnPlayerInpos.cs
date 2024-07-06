@@ -22,6 +22,7 @@ public class spawnPlayerInpos : MonoBehaviour
     {
         if (gameMngr.playerCtrl != null && playerCTRL == null)
         {
+            
             playerCTRL = gameMngr.playerCtrl;
             if (playerCTRL.transform.parent == null)
                 spawnPlayer();
@@ -30,7 +31,7 @@ public class spawnPlayerInpos : MonoBehaviour
                 spawnParentOfPlayer();
                 bool b = playerCTRL == null || !oldScene.Contains(playerCTRL.scenes) || !playerCTRL.ischangeScene;
 
-
+                
             }
 
         }
@@ -38,7 +39,7 @@ public class spawnPlayerInpos : MonoBehaviour
 
     public void spawnPlayer()
     {
-        bool b = playerCTRL == null || !oldScene.Contains(playerCTRL.scenes) || !playerCTRL.ischangeScene;
+        bool b = playerCTRL == null || !oldScene.Contains(gameMngr.loadData.oldScene) || !playerCTRL.ischangeScene;
         if (b) return;
         float euler = (isFaceRight) ? playerCTRL.faceRight : playerCTRL.faceLeft;
         playerCTRL.transform.position = transform.position;
@@ -48,19 +49,12 @@ public class spawnPlayerInpos : MonoBehaviour
     }
     public void spawnParentOfPlayer()
     {
-        bool b = playerCTRL == null || !oldScene.Contains(playerCTRL.scenes) || !playerCTRL.ischangeScene;
+        bool b = playerCTRL == null || !oldScene.Contains(gameMngr.loadData.oldScene) || !playerCTRL.ischangeScene;
         if (b) return;
         playerCTRL.transform.parent.position = transform.position;
 
         playerCTRL.ischangeScene = false;
         playerCTRL.scenes = newScene;
-
-        if (gameMngr.shipMngr == null) return;
-
-        GameObject obj = playerCTRL.transform.parent.gameObject;
-        gameMngr.shipMngr.ships.Add(obj);
-        obj.transform.SetParent(gameMngr.shipMngr.transform);
-        print("aaa");
-        
+        print("okok");
     }
 }

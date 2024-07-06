@@ -71,7 +71,7 @@ public class gamePlayPanel : MonoBehaviour
             fishInfoUI.setUp(gameMngr.fishingRodCtrl.fish.fishData);
         }
 
-        if (gameMngr.fishingRodCtrl.wasCaughtFish)
+        if (gameMngr.fishingRodCtrl != null && gameMngr.fishingRodCtrl.wasCaughtFish)
         {
             btnStopFishing();
         }
@@ -114,8 +114,8 @@ public class gamePlayPanel : MonoBehaviour
     public void btnStopFishing()
     {
         fishingUI.btnStopFishing();
-        gameMngr.fishMngr.Reset();
         gameMngr.fishingRodCtrl.Reset();
+        gameMngr.fishMngr.Reset();
     }
 
     public void btnUpDownSurfaceWater()

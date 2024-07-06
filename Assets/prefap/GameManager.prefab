@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6935307629901637296}
   - component: {fileID: 877931380202264161}
   - component: {fileID: 5053960223387683167}
+  - component: {fileID: 4715433127868941638}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &877931380202264161
 MonoBehaviour:
@@ -47,9 +48,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiMngr: {fileID: 5053960223387683167}
   fishMngr: {fileID: 0}
-  boatCtrl: {fileID: 0}
+  shipMngr: {fileID: 0}
   playerCtrl: {fileID: 0}
   fishingRodCtrl: {fileID: 0}
+  iv: {fileID: 0}
+  instructionBTN: {fileID: 0}
+  mainCamera: {fileID: 0}
+  notify: {fileID: 0}
+  saveLoadGame: {fileID: 4715433127868941638}
+  loadData: {fileID: 11400000, guid: ff1fa2b7ba0479a4a9bfea336f95271a, type: 2}
 --- !u!114 &5053960223387683167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,3 +74,30 @@ MonoBehaviour:
   gamePause: {fileID: 0}
   gameMngr: {fileID: 877931380202264161}
   ischangeState: 0
+--- !u!114 &4715433127868941638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544664178137953992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4ea6c58ba580c4e9dabb5f3e4827d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMngr: {fileID: 877931380202264161}
+  grSlots:
+  - {fileID: 11400000, guid: f1e60549e50a0bc4193b770728527dce, type: 2}
+  - {fileID: 11400000, guid: d1912ec979a053e4fa44cda6b80c4f5e, type: 2}
+  - {fileID: 11400000, guid: a9f1e69ede3eaa84ea9490e869143f92, type: 2}
+  - {fileID: 11400000, guid: d32134582f6234945baff9ee0efd4df4, type: 2}
+  playerCtrl: {fileID: 0}
+  pathSave: 
+  dirPath: 
+  prefabSave: {fileID: 7919300778041639741, guid: 7a678e0d0c2df4f4886222c8b57cb608, type: 3}
+  parentSave: {fileID: 0}
+  prefabLoad: {fileID: 7919300778041639741, guid: 1e69511aec3ef63448cddb61accb7922, type: 3}
+  parentLoad: {fileID: 0}
+  saveFiles: []
+  curLengthFiles: 0

@@ -38,7 +38,7 @@ public class fishingRodController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameMngr ==null && playerCTRL.gameMngr != null)
+        if((gameMngr ==null && playerCTRL.gameMngr != null) || (gameMngr!=null && gameMngr.fishingRodCtrl ==null) )
         {
             gameMngr = playerCTRL.gameMngr;
             gameMngr.fishingRodCtrl = this;

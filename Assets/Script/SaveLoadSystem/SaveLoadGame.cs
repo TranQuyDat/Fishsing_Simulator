@@ -2,27 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
+
 public class SaveLoadGame : MonoBehaviour
 {
     public GameManager gameMngr;
-    public inventory iv;
     public List<GroupSlotData> grSlots;
-    public Transform player;
+    public Dictionary<string, GroupSlotData> dicSlots = new Dictionary<string, GroupSlotData>();
+    public PlayerController playerCtrl;
 
+    #region save load values
     public string pathSave ;
-    string dirPath;
+    public string dirPath;
     public GameObject prefabSave;
     public Transform parentSave;
     public GameObject prefabLoad;
     public Transform parentLoad;
     public string[] saveFiles;
+    public Dictionary<string, slotSave> dicSlotSave = new Dictionary<string, slotSave>();
+    public Dictionary<string, slotLoad> dicSlotLoad = new Dictionary<string, slotLoad>();
     public int curLengthFiles;
+    #endregion
+
     private void Awake()
     {
         dirPath = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(dirPath))
         {
             Directory.CreateDirectory(dirPath);
+        }
+        foreach(GroupSlotData gr in grSlots)
+        {
+            dicSlots.Add(gr.name, gr);
         }
     }
     private void Update()
@@ -42,57 +54,107 @@ public class SaveLoadGame : MonoBehaviour
             saveFiles = Directory.GetFiles(dirPath, "*.json");
             foreach (string filePath in saveFiles)
             {
-                
-                CreateSaveBox(filePath, prefabSave, parentSave);
-                CreateLoadBox(filePath, prefabLoad, parentLoad);
+                string json = File.ReadAllText(filePath);
+                DataSave loadData = JsonUtility.FromJson<DataSave>(json);
+                CreateSaveBox(loadData, prefabSave, parentSave);
+                CreateLoadBox(loadData, prefabLoad, parentLoad);
             }
         }
     }
-    public void CreateSaveBox(string filePath,GameObject prefab,Transform parent)
+    public void CreateSaveBox(DataSave loadData, GameObject prefab,Transform parent)
     {
-        string json = File.ReadAllText(filePath);
-        SaveData loadData = JsonUtility.FromJson<SaveData>(json);
+        
         GameObject savebox = Instantiate(prefab, parent);
         slotSave save = savebox.GetComponent<slotSave>();
         save.nameFile.text = loadData.name;
         save.dateTime.text = loadData.dateTime;
+        dicSlotSave.Add(save.nameFile.text, save);
     }
-    public void CreateLoadBox(string filePath,GameObject prefab,Transform parent)
+    public void CreateLoadBox(DataSave loadData, GameObject prefab,Transform parent)
     {
-        string json = File.ReadAllText(filePath);
-        SaveData loadData = JsonUtility.FromJson<SaveData>(json);
         GameObject savebox = Instantiate(prefab, parent);
         slotLoad save = savebox.GetComponent<slotLoad>();
         save.nameFile.text = loadData.name;
         save.dateTime.text = loadData.dateTime;
+        dicSlotLoad.Add(save.nameFile.text, save);
+    }
+    public DataSave getData(string nameFile)
+    {
+        string json = File.ReadAllText(dirPath + "/filesave_" + nameFile + ".json");
+        DataSave loadData = JsonUtility.FromJson<DataSave>(json);
+        return loadData;
     }
     public void save(string name, Scenes scene)
     {
 
         pathSave = dirPath +"/filesave_"+name+".json";
-        SaveData saveData = new SaveData(name, player.position, scene,iv, grSlots);
+        DataSave saveData;
+        inventory iv = gameMngr.iv;
+        if (playerCtrl.transform.parent == null)
+        {
+            DataPlayer dataPlayer = new DataPlayer(playerCtrl.transform.position,playerCtrl.transform.eulerAngles ,
+                iv.coin, scene,playerCtrl.inArea);
+            saveData = new DataSave(name, grSlots, dataPlayer);
+        }
+        else
+        {
+            Transform parent = playerCtrl.transform.parent;
+            DataPlayer dataPlayer = new DataPlayer(playerCtrl.transform.position, playerCtrl.transform.eulerAngles, 
+                iv.coin, scene, playerCtrl.inArea,playerCtrl.cur_action,playerCtrl.canMove, parent.name,parent.position);
+            saveData = new DataSave(name , grSlots, dataPlayer);
+        }
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(pathSave, json);
+
+        print(saveData.listStore.Count);
+        print(json);
+        DataSave save = getData(name);
+        if (!dicSlotSave.ContainsKey(name)) return;
+        dicSlotSave[name].dateTime.text = save.dateTime;
+        dicSlotLoad[name].dateTime.text = save.dateTime;
     }
 
     public void load(string name)
     {
-        pathSave = dirPath + "filesave_" + name + ".json";
-
-        if(Directory.Exists(pathSave))
+        print(Directory.Exists(dirPath));
+        if (Directory.Exists(dirPath))
         {
-            string json = File.ReadAllText(pathSave);
-            SaveData loadData = JsonUtility.FromJson<SaveData>(json);
-            player.position = loadData.posPlayer;
-            gameMngr.changeScene(loadData.scene);
-            iv = loadData.iv;
-            for (int i = 0; i < grSlots.Count; i++)
+            DataSave loadData = getData(name);
+            
+            gameMngr.change2LoadingScene(playerCtrl.scenes,loadData.dataPlayer.scene,loadData);
+            
+            foreach(GroupSlotDataSave gr in loadData.listStore)
             {
-                if (loadData.dicStore.TryGetValue(grSlots[i].name, out GroupSlotData loadedGrSlot))
-                {
-                    grSlots[i] = loadedGrSlot;
-                }
+                dicSlots[gr.name].items = gr.items;
             }
         }
+    }
+
+
+    public void deleteFileSave(slotSave slot)
+    {
+        string path = dirPath + "/filesave_" + slot.nameFile.text + ".json";
+        File.Delete(path);
+
+        GameObject obj = dicSlotSave[slot.nameFile.text].gameObject;
+        dicSlotSave.Remove(slot.nameFile.text);
+        Destroy(obj);
+
+        obj = dicSlotLoad[slot.nameFile.text].gameObject;
+        dicSlotLoad.Remove(slot.nameFile.text);
+        Destroy(obj);
+    }
+    public void deleteFileSave(slotLoad slot)
+    {
+        string path = dirPath + "/filesave_" + slot.nameFile.text + ".json";
+        File.Delete(path);
+
+        GameObject obj = dicSlotSave[slot.nameFile.text].gameObject;
+        dicSlotSave.Remove(slot.nameFile.text);
+        Destroy(obj);
+
+        obj = dicSlotLoad[slot.nameFile.text].gameObject;
+        dicSlotLoad.Remove(slot.nameFile.text);
+        Destroy(obj);
     }
 }

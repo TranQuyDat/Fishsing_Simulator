@@ -46,5 +46,5 @@ public enum Status
 
 public enum Scenes
 {
-    port,city,sea1,sea2,
+    port,city,sea1,sea2, loading, menu,
 }

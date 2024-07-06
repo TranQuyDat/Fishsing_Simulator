@@ -37,7 +37,10 @@ public class fishAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkLikeFood(fishMngr.fishRodCtrl.bait.gameObject);
+        if (fishMngr.fishRodCtrl != null)
+        {
+            checkLikeFood(fishMngr.fishRodCtrl.bait.gameObject);
+        }
         fishEvent();
         switchBwtAC();
         
