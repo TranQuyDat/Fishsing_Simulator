@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tyleItem: 3
   nameItem: fishV3
-  imgItem: {fileID: -1074519428, guid: e1c0e46133f871c488768373c6304e09, type: 3}
+  imgItem: {fileID: -402002386, guid: 302b27c51dc5ba74d9f284910e247028, type: 3}
   price: 15
-  detail: 
+  detail: fishV3
   meshren: {fileID: 7834934524071737294, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
   mat: {fileID: -876546973899608171, guid: ae51ad94fa7d3764d957aa512d506d00, type: 3}
   maxNuminSlot: 10

@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3691811845625461320, guid: 1de4b6114b7b2604391f0c180dfa412b, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3691811845625461320, guid: 1de4b6114b7b2604391f0c180dfa412b, type: 3}
       propertyPath: m_IsKinematic
@@ -374,6 +374,10 @@ PrefabInstance:
     - target: {fileID: 3438381100840647811, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323480542972283925, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
+      propertyPath: curScene
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4323480542972283925, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
       propertyPath: mainCamera

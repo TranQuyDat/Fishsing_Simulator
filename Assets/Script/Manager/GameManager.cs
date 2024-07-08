@@ -17,11 +17,10 @@ public class GameManager : MonoBehaviour
     public SaveLoadGame saveLoadGame;
     public GlobalMap globalMap;
     public LoadData loadData;
-
+    public Scenes curScene;
     public bool isStopGame = false;
     private void Awake()
     {
-
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         playerCtrl = FindObjectOfType<PlayerController>();

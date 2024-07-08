@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tyleItem: 0
   nameItem: Shark
-  imgItem: {fileID: 0}
+  imgItem: {fileID: -700592006, guid: 5ab9fbbfbf320344aa44b03e3c5c18e4, type: 3}
   price: 200
   detail: shark
   meshren: {fileID: -4108424097152807243, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}

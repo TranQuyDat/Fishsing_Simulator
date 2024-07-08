@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 0}
     m_Source: {fileID: 0}
-    m_DampPosition: 0
-    m_DampRotation: 0
+    m_DampPosition: 0.25
+    m_DampRotation: 0.5
     m_MaintainAim: 1
 --- !u!1 &3240205925759812641
 GameObject:
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 7899297691043123106}
     m_Source: {fileID: 5871092360947266048}
-    m_DampPosition: 0
-    m_DampRotation: 0
+    m_DampPosition: 0.25
+    m_DampRotation: 0.5
     m_MaintainAim: 1
 --- !u!1 &3724748334144668607
 GameObject:
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 1212198452886035643}
     m_Source: {fileID: 7899297691043123106}
-    m_DampPosition: 0
-    m_DampRotation: 0
+    m_DampPosition: 0.25
+    m_DampRotation: 0.5
     m_MaintainAim: 1
 --- !u!1 &4020617890027627564
 GameObject:
@@ -252,8 +252,8 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 6388252694453977520}
     m_Source: {fileID: 6014482353069520853}
-    m_DampPosition: 0
-    m_DampRotation: 0
+    m_DampPosition: 0.25
+    m_DampRotation: 0.5
     m_MaintainAim: 1
 --- !u!1 &8701367700368954160
 GameObject:
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 6014482353069520853}
     m_Source: {fileID: 1212198452886035643}
-    m_DampPosition: 0
-    m_DampRotation: 0
+    m_DampPosition: 0.25
+    m_DampRotation: 0.5
     m_MaintainAim: 1
 --- !u!1 &8931955856449543855
 GameObject:

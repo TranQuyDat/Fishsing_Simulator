@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
         instructionBTN = gameMngr.instructionBTN;
         mainCamera = gameMngr.mainCamera.transform;
+        if (gameMngr.curScene == Scenes.loading) rb.useGravity = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour
         cur_action = Action.idle;
         faceRight = (mainCamera.rotation.ToEuler() * Mathf.Rad2Deg).y - 90;
         faceLeft = faceRight + 180;
+        if(cur_action == Action.idle && gameMngr.curScene != Scenes.loading)
+        {
+            rb.useGravity = true;
+        }
     }
 
     // Update is called once per frame

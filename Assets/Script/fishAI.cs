@@ -8,7 +8,6 @@ public class fishAI : MonoBehaviour
     public Rigidbody rb;
     public float speed;
     public float timeChangeDir;
-    public float olfaction;
     public Transform limitXYmin;
     public Transform limitXYmax;
     public GameObject head;
@@ -71,10 +70,10 @@ public class fishAI : MonoBehaviour
     {
         bool islimit = (target.transform.position.x <= limitXYmin.position.x || target.transform.position.y <= limitXYmin.position.y ||
                         target.transform.position.x >= limitXYmax.position.x || target.transform.position.y >= limitXYmax.position.y
-                        || target.transform.position.z>3 || target.transform.position.z<-3);
+                        || target.transform.position.z>5 || target.transform.position.z<-5);
         bool isOutRange = (transform.position.x <= limitXYmin.position.x || transform.position.y <= limitXYmin.position.y ||
                         transform.position.x >= limitXYmax.position.x || transform.position.y >= limitXYmax.position.y
-                        || transform.position.z>3 || transform.position.z<-3);
+                        || transform.position.z>5 || transform.position.z<-5);
 
         if (!islimit) return;
         if (isOutRange)
@@ -279,8 +278,6 @@ public class fishAI : MonoBehaviour
     #region gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(head.transform.position, olfaction);
         Gizmos.color = Color.black;
         if (target == null || head == null) return;
         
