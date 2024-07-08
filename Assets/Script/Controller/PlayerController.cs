@@ -46,15 +46,16 @@ public class PlayerController : MonoBehaviour
         cur_action = Action.idle;
         faceRight = (mainCamera.rotation.ToEuler() * Mathf.Rad2Deg).y - 90;
         faceLeft = faceRight + 180;
-        if(cur_action == Action.idle && gameMngr.curScene != Scenes.loading)
-        {
-            rb.useGravity = true;
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cur_action == Action.idle && gameMngr.curScene != Scenes.loading && !rb.useGravity)
+        {
+            rb.useGravity = true;
+        }
         if (gameMngr.uiMngr.stopCtrlWhenUIsActive && cur_action !=Action.running) return;
         if (gameMngr.uiMngr.stopCtrlWhenUIsActive)
         {

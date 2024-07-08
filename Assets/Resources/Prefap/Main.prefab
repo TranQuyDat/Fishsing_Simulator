@@ -21291,6 +21291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5544664178137953992, guid: 5922ca4c14d105342b5411ac1bdf087b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 792754842739196113}
+    - targetCorrespondingSourceObject: {fileID: 5544664178137953992, guid: 5922ca4c14d105342b5411ac1bdf087b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4502393873340951978}
   m_SourcePrefab: {fileID: 100100000, guid: 5922ca4c14d105342b5411ac1bdf087b, type: 3}
 --- !u!114 &4323480542972283925 stripped
 MonoBehaviour:
@@ -21351,6 +21354,27 @@ MonoBehaviour:
   parentLoad: {fileID: 4418393954416968595}
   saveFiles: []
   curLengthFiles: 0
+--- !u!114 &4502393873340951978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997494847062158524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1de48c6e4ef32489def88de3f9d3c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sun: {fileID: 0}
+  moon: {fileID: 0}
+  dawnSkybox: {fileID: 2100000, guid: a645f793536a4674b920d2aa358beb7c, type: 2}
+  daySkybox: {fileID: 2100000, guid: 02675c98e35cf5e4e881d0faea18e30f, type: 2}
+  eveningSkybox: {fileID: 2100000, guid: 0a7e7928537cdab419012ac0a3937702, type: 2}
+  nightSkybox: {fileID: 2100000, guid: 5a990e89c74579c4ba79fed385de534f, type: 2}
+  timeOfDay: 0
+  speedCloud: 5
+  offset: 0
 --- !u!1001 &4859020824216403654
 PrefabInstance:
   m_ObjectHideFlags: 0
