@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13663c719dafe6e449d0e548fe7b65e1, type: 3}
-  m_Name: fishV2
+  m_Name: meat
   m_EditorClassIdentifier: 
-  tyleItem: 3
-  nameItem: fishv2
-  imgItem: {fileID: -1074519428, guid: e1c0e46133f871c488768373c6304e09, type: 3}
-  price: 10
-  detail: fishv2
-  meshren: {fileID: 3100006622114138374, guid: 29e1dce899102f54d9facb529a679d54, type: 3}
-  mat: {fileID: -3846018093981099296, guid: 29e1dce899102f54d9facb529a679d54, type: 3}
-  maxNuminSlot: 10
-  status: 3
-  bait: 3
+  tyleItem: 1
+  nameItem: meat
+  imgItem: {fileID: -1523661995, guid: c4987a4f51960284db8f67f6ebd62c0a, type: 3}
+  price: 20
+  detail: meat
+  meshren: {fileID: -1935031821256707543, guid: b4401b400319d9c4b942ccf15d0f3789, type: 3}
+  mat: {fileID: 2100000, guid: e128f8b7fd2b1c245bb73f4cb9e88d00, type: 2}
+  maxNuminSlot: 5
+  status: 0
+  bait: 2
   scale: {x: 0.5, y: 0.5, z: 0.5}

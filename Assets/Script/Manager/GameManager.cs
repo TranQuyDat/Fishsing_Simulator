@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
     public cameraFollow mainCamera;
     public Notifycation notify;
     public SaveLoadGame saveLoadGame;
-
+    public GlobalMap globalMap;
     public LoadData loadData;
+
+    public bool isStopGame = false;
     private void Awake()
     {
 
@@ -30,8 +32,15 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if(playerCtrl == null) playerCtrl = FindObjectOfType<PlayerController>();
-        if (playerCtrl != null && saveLoadGame.playerCtrl == null)
+        if (isStopGame) Time.timeScale = 0;
+        else Time.timeScale = 1;
+        if (playerCtrl == null)
+        {
+            playerCtrl = FindObjectOfType<PlayerController>();
+            fishingRodCtrl = playerCtrl.fishingRod;
+        }
+
+            if (playerCtrl != null && saveLoadGame.playerCtrl == null)
         {
             playerCtrl.resetInput();
             saveLoadGame.playerCtrl = playerCtrl;
@@ -43,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void change2LoadingScene(Scenes oldScene,Scenes nextScene,DataSave dataSave = null)
     {
         bool isloadFrSave = (dataSave == null) ? false : true;
+
         loadData.setLoadData(oldScene,nextScene, isloadFrSave, dataSave);
         SceneManager.LoadScene(Scenes.loading.ToString());
     }

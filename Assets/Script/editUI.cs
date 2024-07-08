@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public class editImgUI 
+public class EditImgUI 
 {
     public Image imgValue;
     
@@ -16,10 +16,4 @@ public class editImgUI
         imgValue.fillAmount = Mathf.Round(v*100f)*0.01f ;
     }
 
-}
-[System.Serializable]
-public class buttons 
-{
-    public editImgUI editImg;
-    
 }

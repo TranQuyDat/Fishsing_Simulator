@@ -99,7 +99,10 @@ public class fishManager : MonoBehaviour
 
 
 
-
+    public void StopFishing()
+    {
+        gameMngr.uiMngr.gamePlay.btnStopFishing();
+    }
 
     public void updateDisOfTLKFish()
     {

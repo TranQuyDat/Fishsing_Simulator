@@ -22,11 +22,10 @@ public class BoatController : MonoBehaviour
     }
     private void Update()
     {
-        if (gameMngr.playerCtrl == null) return;
+        if (gameMngr.playerCtrl == null || gameMngr.uiMngr.stopCtrlWhenUIsActive) return;
         else if (playerCtrl == null) playerCtrl = gameMngr.playerCtrl;
         activeOption();
         playerCtrl.updateTranform(transform,area.ship);
-        playerCtrl.rb.isKinematic = (playerCtrl.inArea == area.ship);
         movement();
     }
 

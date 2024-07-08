@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class dialog : MonoBehaviour
 {
+    public GameManager gameMngr;
     public boxdialog boxDialog;
     public float timedelay;
     public Image avatar;
@@ -15,9 +16,9 @@ public class dialog : MonoBehaviour
     //public playerInfo player;
     [TextArea(0,500)] public string txt_content;
     public GameObject iv;
-    private void Start()
+    private void Awake()
     {
-        
+        gameMngr = FindObjectOfType<GameManager>();
     }
     private void Update()
     {
@@ -53,8 +54,4 @@ public class dialog : MonoBehaviour
         name.text = npc.name;
         avatar.sprite = npc.avt;
     }
-    //public void setDialogValue(PlayerInfo npc)
-    //{
-
-    //}
 }

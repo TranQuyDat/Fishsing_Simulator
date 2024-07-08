@@ -11,14 +11,13 @@ public class TriggerChangeScene : MonoBehaviour
     public GameObject cameraNotActive;
 
     public bool isFaceRight;
-    public bool activeCheckTrigger = true;
+    public bool onlyEnableImgIcon = true;
+    public bool onlyOpenGlbMap = false;
 
     public tag triggerTag;
     public area nextArea;
     public Action setAct = Action.idle;
     PlayerController playerctrl;
-    // Start is called before the first frame update
-
 
     #region default Method
 
@@ -46,12 +45,12 @@ public class TriggerChangeScene : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if (activeCheckTrigger && playerctrl.inArea == nextArea)
+        if (onlyEnableImgIcon && playerctrl.inArea == nextArea)
         {
             imgIcon.SetActive(false);
             return;
         }
-        if (activeCheckTrigger && other != null && other.CompareTag(triggerTag.ToString()))
+        if (onlyEnableImgIcon && other != null && other.CompareTag(triggerTag.ToString()))
         {
             imgIcon.SetActive(true);
         }
@@ -59,7 +58,7 @@ public class TriggerChangeScene : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-       if(activeCheckTrigger) imgIcon.SetActive(false);
+       if(onlyEnableImgIcon) imgIcon.SetActive(false);
     }
 
    
@@ -91,5 +90,15 @@ public class TriggerChangeScene : MonoBehaviour
         cameraAct.SetActive(true);
         cameraNotActive.SetActive(false);
         playerctrl.updateMainCamera(cameraAct.transform);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!onlyOpenGlbMap) return;
+        if (other.CompareTag(triggerTag.ToString()))
+        {
+            gameMngr.globalMap.gameObject.SetActive(true);
+        }
     }
 }

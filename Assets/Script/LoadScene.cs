@@ -13,6 +13,7 @@ public class LoadScene : MonoBehaviour
         PlayerController[] players = FindObjectsOfType<PlayerController>();
         if (players.Length == 1 && !isloaded && gameMngr.playerCtrl !=null)
         {
+            gameMngr.playerCtrl.rb.isKinematic = true;
             if (!loadData.isloadFrSave)
             {
                 loadScene();
@@ -49,6 +50,7 @@ public class LoadScene : MonoBehaviour
     {
         //add player to ship if have ship
         DataPlayer dataPlayer = loadData.dataSave.dataPlayer;
+        DataRod dataRod = loadData.dataSave.datagRod;
         if (dataPlayer.parentName != "")
         {
             Transform parent = GameObject.Find(dataPlayer.parentName).transform;
@@ -59,7 +61,8 @@ public class LoadScene : MonoBehaviour
         }
         else DontDestroyOnLoad(gameMngr.playerCtrl.gameObject);
         
-        gameMngr.playerCtrl.loadData(dataPlayer);
+        gameMngr.playerCtrl.importData(dataPlayer);
+        gameMngr.fishingRodCtrl.importData(dataRod);
         SceneManager.LoadSceneAsync(loadData.nextScene.ToString());
     }
 

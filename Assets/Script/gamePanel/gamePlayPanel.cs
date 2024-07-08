@@ -21,6 +21,12 @@ public class FishingUI
         ani.Play("uiFishingClose");
         btnfishingcast.interactable = true;
     }
+
+    public void playAniFishingNormal()
+    {
+        btnfishingcast.interactable = true;
+        ani.Play("uiFishingNormal");
+    }
 }
 [System.Serializable]
 public class FishInfoUI 
@@ -49,7 +55,7 @@ public class gamePlayPanel : MonoBehaviour
     public FishingUI fishingUI;
     public FishInfoUI fishInfoUI;
     public GameManager gameMngr;
-    public buttons btn;
+    public EditImgUI editImgUI;
 
     private void Awake()
     {
@@ -57,24 +63,21 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Start()
     {
-        btn.editImg.setFillAmount(0);
+        editImgUI.setFillAmount(0);
     }
     private void Update()
     {
-        if(fishingUI != null && gameMngr.shipMngr != null && gameMngr.shipMngr.curShipCtrl !=null)
-            setActive(fishingUI.ui, gameMngr.shipMngr.curShipCtrl.isFishing);
-        if (fishInfoUI != null && gameMngr.fishingRodCtrl != null) 
-            setActive(fishInfoUI.ui, gameMngr.fishingRodCtrl.wasCaughtFish && gameMngr.fishingRodCtrl.fish != null);
+        if(fishingUI != null )
+            setActive(fishingUI.ui, gameMngr.shipMngr!=null && gameMngr.shipMngr.curShipCtrl != null && gameMngr.shipMngr.curShipCtrl.isFishing);
+        if (fishInfoUI != null ) 
+            setActive(fishInfoUI.ui,gameMngr.fishingRodCtrl != null && gameMngr.fishingRodCtrl.wasCaughtFish && gameMngr.fishingRodCtrl.fish != null);
         updateAmount();
         if (fishInfoUI.ui.active)
         {
             fishInfoUI.setUp(gameMngr.fishingRodCtrl.fish.fishData);
         }
 
-        if (gameMngr.fishingRodCtrl != null && gameMngr.fishingRodCtrl.wasCaughtFish)
-        {
-            btnStopFishing();
-        }
+     
     }
 
     public void updateAmount()
@@ -82,13 +85,13 @@ public class gamePlayPanel : MonoBehaviour
         bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.ui.active || !gameMngr.fishingRodCtrl.isfishing;
         if (b)
         {
-            btn.editImg.setFillAmount(0);
+            editImgUI.setFillAmount(0);
             return;
         }
             if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
-            btn.editImg.imgValue.fillAmount >= 0 && btn.editImg.imgValue.fillAmount < 1f)
+            editImgUI.imgValue.fillAmount >= 0 && editImgUI.imgValue.fillAmount < 1f)
         {
-            btn.editImg.setFillAmount(1 - Mathf.Round((gameMngr.fishMngr.dis / gameMngr.fishMngr.maxdis) * 100f) * 0.01f);
+            editImgUI.setFillAmount(1 - Mathf.Round((gameMngr.fishMngr.dis / gameMngr.fishMngr.maxdis) * 100f) * 0.01f);
         }
     }
 
@@ -97,9 +100,9 @@ public class gamePlayPanel : MonoBehaviour
     public void btnFishing()
     {
         gameMngr.fishingRodCtrl.isPull = true;
-        if (btn.editImg.imgValue.fillAmount >= 0.95f)
+        if (editImgUI.imgValue.fillAmount >= 0.95f)
         {
-            btn.editImg.setFillAmount(1);
+            editImgUI.setFillAmount(1);
         }
     }
     public void btnFishingcast( )
@@ -116,6 +119,8 @@ public class gamePlayPanel : MonoBehaviour
         fishingUI.btnStopFishing();
         gameMngr.fishingRodCtrl.Reset();
         gameMngr.fishMngr.Reset();
+        GameObject target = GameObject.FindGameObjectWithTag("posCamera");
+        gameMngr.mainCamera.changeTarget(target);
     }
 
     public void btnUpDownSurfaceWater()
@@ -138,8 +143,10 @@ public class gamePlayPanel : MonoBehaviour
         gameMngr.fishingRodCtrl.fish.destroy();
         gameMngr.fishMngr.Reset();
         gameMngr.fishingRodCtrl.Reset();
-        btn.editImg.setFillAmount(0);
+        editImgUI.setFillAmount(0);
         gameMngr.notify.setUpAndShow("fish added to inventory");
+
+        btnStopFishing();
     }
 
     #endregion

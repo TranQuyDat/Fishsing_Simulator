@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 public class fishingRodController : MonoBehaviour
 {
     public GameManager gameMngr;
@@ -8,8 +9,7 @@ public class fishingRodController : MonoBehaviour
     public bool isfishbite;
     public bool wasCaughtFish;
     
-    public Image imgvalue;
-
+    
     public Transform rodtip;
     public Transform hook;
     public Transform bait;
@@ -33,15 +33,17 @@ public class fishingRodController : MonoBehaviour
     private void Awake()
     {
         surFaceWaterObj = GameObject.FindGameObjectWithTag("water");
+        gameMngr = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if((gameMngr ==null && playerCTRL.gameMngr != null) || (gameMngr!=null && gameMngr.fishingRodCtrl ==null) )
+        if(gameMngr!=null && gameMngr.fishingRodCtrl ==null )
         {
             gameMngr = playerCTRL.gameMngr;
             gameMngr.fishingRodCtrl = this;
+            gameMngr.fishMngr.fishRodCtrl = this;
         }
         castLine();
         reelLine();
@@ -55,15 +57,25 @@ public class fishingRodController : MonoBehaviour
     }
     private void OnEnable()
     {
-        wasCaughtFish = false;
-        isfishbite = false;
-        rope1.snapHook = false;
-        rope2.snapHook = false;
-        rope2.snapRopTip = true;
-        rope1.legthRope = 2;
-        rope2.legthRope = 2;
-        rope1.resetLine();
-        rope2.resetLine();
+        gameMngr.fishMngr.Reset();
+        Reset();
+        gameMngr.uiMngr.gamePlay.fishingUI.playAniFishingNormal();
+    }
+
+    public void importData(DataRod dataRod)
+    {
+        bait.tag = dataRod.tagBait;
+        MeshFilter meshBai = bait.GetComponent<MeshFilter>();
+        MeshRenderer matBait = bait.GetComponent<MeshRenderer>();
+        meshBai.mesh = DataSave.GetDtFrPath<Mesh>(dataRod.meshBaitPath);
+        matBait.material = DataSave.GetDtFrPath<Material>(dataRod.matBaitPath); 
+    }
+    public DataRod exportData()
+    {
+        MeshFilter meshBai = bait.GetComponent<MeshFilter>();
+        MeshRenderer matBait = bait.GetComponent<MeshRenderer>();
+        DataRod dataRod = new DataRod(bait.tag, meshBai.sharedMesh, matBait.sharedMaterial);
+        return dataRod;
     }
     public void Reset()
     {
@@ -201,7 +213,7 @@ public class fishingRodController : MonoBehaviour
 
     public void fishWasCaught()
     {
-        wasCaughtFish = imgvalue.fillAmount >= 0.99f;
+        wasCaughtFish = gameMngr.uiMngr.gamePlay.editImgUI.imgValue.fillAmount >= 0.99f;
         if (!wasCaughtFish || fish == null) return;
         #region set Default Rod
         if (isfishbite) 

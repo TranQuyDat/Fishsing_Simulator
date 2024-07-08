@@ -13,18 +13,29 @@ public class DrawRec : DrawParent
 {
     public Transform obj1;
     public Transform obj2;
-
+    public bool onlyObj1;
+    public Vector3 boxsize = new Vector3(1,1,1);
     public override void Draw()
     {
-        if (obj1 == null || obj2 == null) return;
+        
         Gizmos.color = color;
-        Gizmos.DrawLine(obj1.position, new Vector3(obj1.position.x, obj2.position.y));
-        Gizmos.DrawLine(obj1.position, new Vector3(obj2.position.x, obj1.position.y));
-
-        Gizmos.DrawLine(obj2.position, new Vector3(obj2.position.x, obj1.position.y));
-        Gizmos.DrawLine(obj2.position, new Vector3(obj1.position.x, obj2.position.y));
+        drawRecWithObj1();
+        drawRecWith2Obj();
     }
+    public void drawRecWithObj1()
+    {
+        if (!onlyObj1) return;
+        Gizmos.DrawWireCube(obj1.position, boxsize);
+    }
+    public void drawRecWith2Obj()
+    {
+        if (obj1 == null || obj2 == null || onlyObj1) return;
+        Gizmos.DrawLine(obj1.position, new Vector3(obj1.position.x, obj2.position.y, obj1.position.z));
+        Gizmos.DrawLine(obj1.position, new Vector3(obj2.position.x, obj1.position.y, obj1.position.z));
 
+        Gizmos.DrawLine(obj2.position, new Vector3(obj2.position.x, obj1.position.y, obj2.position.z));
+        Gizmos.DrawLine(obj2.position, new Vector3(obj1.position.x, obj2.position.y,obj2.position.z));
+    }
 }
 [System.Serializable]
 public class DrawLine : DrawParent

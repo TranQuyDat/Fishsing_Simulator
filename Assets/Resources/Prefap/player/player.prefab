@@ -68,7 +68,7 @@ Transform:
   - {fileID: 7480218946105025842}
   - {fileID: 3784156658457581010}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &7773947261596902209
 MonoBehaviour:
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMngr: {fileID: 0}
+  fishingRod: {fileID: 1121734648408357188}
   speedMove: 5
   ani: {fileID: 7885680692639174119}
   axis: 0
@@ -278,11 +279,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5459640819947400777, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
+      propertyPath: m_TagString
+      value: rice
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
+--- !u!114 &1121734648408357188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1900197341501621031, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
+  m_PrefabInstance: {fileID: 1571730784253393507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a591f81f22389a24d8396422335da833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4291855797641009053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3332756950553193982, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}

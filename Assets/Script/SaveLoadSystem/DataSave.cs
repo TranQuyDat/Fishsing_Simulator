@@ -1,11 +1,23 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 
-
+[Serializable]
+public class DataRod
+{
+    public String tagBait;
+    public string meshBaitPath;
+    public string matBaitPath;
+    public DataRod(string tagBait, Mesh meshBait, Material matBait)
+    {
+        this.tagBait = tagBait;
+        this.meshBaitPath = DataSave.savePathIt(meshBait) ;
+        this.matBaitPath = DataSave.savePathIt(matBait);
+    }
+}
 
 [Serializable]
 public class DataPlayer
@@ -42,20 +54,65 @@ public class DataSave
     public List<GroupSlotDataSave>  listStore= new List<GroupSlotDataSave>();
 
     public DataPlayer dataPlayer;
-    public DataSave(string name , List<GroupSlotData> grSlots , DataPlayer dataPlayer)
+    public DataRod datagRod;
+    public DataSave(string name , List<GroupSlotData> grSlots , DataPlayer dataPlayer, DataRod datagRod)
     {
         this.name = name;
         dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         this.dataPlayer = dataPlayer;
-        
+        this.datagRod = datagRod;
         
         listStore.Clear();
+        
         foreach (GroupSlotData grsl in grSlots)
         {
             listStore.Add(new GroupSlotDataSave(grsl));
         }
     }
   
+    public static T GetDtFrPath<T>(string p) where T : UnityEngine.Object
+    {
+        //"Assets/Resources/"
+        T obj = Resources.Load<T>(p);
+        if (p.StartsWith("Assets/Resources/"))
+        {
+            string[] pathSplit = p.Split("."); ;
+            string path = pathSplit[0].Substring("Assets/Resources/".Length);
+            obj = Resources.Load<T>(path);
+            Debug.Log(path + " | obj:" + obj);
+        }
+        if(obj == null)
+        {
+            Debug.Log("not find path" + p);
+        }
+        return obj;
+    }
+    public static T GetDtFrPathTsprite<T>(string p) where T : UnityEngine.Object
+    {
+       //"Assets/Resources/img/fish.png_fish_0"
+        T obj = Resources.Load<T>(p);
+        if (p.StartsWith("Assets/Resources/")) {
+            string[] pathSplit = p.Split("_");
+            int id = int.Parse(pathSplit[2]);
+            pathSplit = pathSplit[0].Split(".");
+            string path = pathSplit[0].Substring("Assets/Resources/".Length);
+            obj = Resources.LoadAll<T>(path)[id];
+        }
+        if(obj == null)
+        {
+            Debug.Log("not find path" + p);
+        }
+        return obj;
+    }
 
+    public static string savePathIt(UnityEngine.Object obj)
+    {
+        string path = AssetDatabase.GetAssetPath(obj);
+        if (String.IsNullOrEmpty(path))
+        {
+            Debug.Log("path is null or empty");
+        }
+        return path;
+    }
 
 }

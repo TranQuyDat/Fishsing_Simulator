@@ -54,8 +54,13 @@ public class SaveLoadGame : MonoBehaviour
             saveFiles = Directory.GetFiles(dirPath, "*.json");
             foreach (string filePath in saveFiles)
             {
+
                 string json = File.ReadAllText(filePath);
                 DataSave loadData = JsonUtility.FromJson<DataSave>(json);
+                if (dicSlotSave.ContainsKey(loadData.name))
+                {
+                    continue;
+                }
                 CreateSaveBox(loadData, prefabSave, parentSave);
                 CreateLoadBox(loadData, prefabLoad, parentLoad);
             }
@@ -88,26 +93,19 @@ public class SaveLoadGame : MonoBehaviour
     {
 
         pathSave = dirPath +"/filesave_"+name+".json";
-        DataSave saveData;
-        inventory iv = gameMngr.iv;
-        if (playerCtrl.transform.parent == null)
-        {
-            DataPlayer dataPlayer = new DataPlayer(playerCtrl.transform.position,playerCtrl.transform.eulerAngles ,
-                iv.coin, scene,playerCtrl.inArea);
-            saveData = new DataSave(name, grSlots, dataPlayer);
-        }
-        else
-        {
-            Transform parent = playerCtrl.transform.parent;
-            DataPlayer dataPlayer = new DataPlayer(playerCtrl.transform.position, playerCtrl.transform.eulerAngles, 
-                iv.coin, scene, playerCtrl.inArea,playerCtrl.cur_action,playerCtrl.canMove, parent.name,parent.position);
-            saveData = new DataSave(name , grSlots, dataPlayer);
-        }
+
+        DataPlayer dataPlayer = playerCtrl.exportData();
+
+        DataRod dataRod = gameMngr.fishingRodCtrl.exportData();
+
+        DataSave saveData = new DataSave(name, grSlots, dataPlayer,dataRod);
+        
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(pathSave, json);
 
         print(saveData.listStore.Count);
         print(json);
+
         DataSave save = getData(name);
         if (!dicSlotSave.ContainsKey(name)) return;
         dicSlotSave[name].dateTime.text = save.dateTime;
@@ -126,7 +124,12 @@ public class SaveLoadGame : MonoBehaviour
             foreach(GroupSlotDataSave gr in loadData.listStore)
             {
                 dicSlots[gr.name].items = gr.items;
+                foreach (Item it in dicSlots[gr.name].items)
+                {
+                    it.Load();
+                }
             }
+            
         }
     }
 

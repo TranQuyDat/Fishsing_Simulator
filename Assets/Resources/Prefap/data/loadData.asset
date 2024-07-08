@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ad38530f0f6a449a61c2f33c94a5a7, type: 3}
+  m_Name: loadData
+  m_EditorClassIdentifier: 
+  oldScene: 0
+  nextScene: 0
+  isloadFrSave: 1
+  dataSave:
+    name: a
+    dateTime: 2024-07-08 04:19:22
+    listStore:
+    - name: inventory
+      items: []
+    - name: shopdataNPC1
+      items:
+      - itdt: {fileID: 11400000, guid: 515895674f60deb4ea068bf7fb2e17d7, type: 2}
+        itdtS:
+          tyleItem: 3
+          nameItem: fishv1
+          imgItemPath: Assets/Resources/img/fish.png_fish_0
+          price: 5
+          detail: fishv1
+          meshrenPath: Assets/Resources/model_mat_texture/fishs/fishv1.fbx
+          matPath: 
+          maxNuminSlot: 10
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/fishV1.asset
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 5d7cd0ccb7f353947868f99d36cc7f7c, type: 2}
+        itdtS:
+          tyleItem: 3
+          nameItem: fishv2
+          imgItemPath: _0
+          price: 10
+          detail: fishv2
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 10
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/fishV2.asset
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 8d2e11a79c32d6a45906d718aae8dd96, type: 2}
+        itdtS:
+          tyleItem: 3
+          nameItem: fishV3
+          imgItemPath: _0
+          price: 15
+          detail: 
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 10
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/fishV3.asset
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 6eb01a20387ffc94087654e12e34cc3a, type: 2}
+        itdtS:
+          tyleItem: 3
+          nameItem: fishV4
+          imgItemPath: _0
+          price: 50
+          detail: 
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 10
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/fishV4.asset
+        NumIt: 10
+    - name: shopdataNPC2
+      items:
+      - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
+        itdtS:
+          tyleItem: 1
+          nameItem: rice
+          imgItemPath: _0
+          price: 1
+          detail: 
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 10
+          status: 0
+          pathItem: Assets/Resources/Prefap/data/items/rice.asset
+        NumIt: 20
+      - itdt: {fileID: 11400000, guid: c451a30fc4fef144e9f3e99a9f747dce, type: 2}
+        itdtS:
+          tyleItem: 1
+          nameItem: worm
+          imgItemPath: _0
+          price: 3
+          detail: 'worm is the bait , price : 10'
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 10
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/worm.asset
+        NumIt: 15
+      - itdt: {fileID: 11400000, guid: 72abbf4217922cc4e8bc47dc95eef30f, type: 2}
+        itdtS:
+          tyleItem: 1
+          nameItem: meat
+          imgItemPath: _0
+          price: 20
+          detail: meat
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 5
+          status: 0
+          pathItem: Assets/Resources/Prefap/data/items/meat.asset
+        NumIt: 10
+    - name: shopdataNPC3
+      items:
+      - itdt: {fileID: 11400000, guid: 257cefa67208c024a90d83532342e770, type: 2}
+        itdtS:
+          tyleItem: 2
+          nameItem: wood_BoatV1
+          imgItemPath: _0
+          price: 0
+          detail: boat
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 1
+          status: 0
+          pathItem: Assets/Resources/Prefap/data/items/boat.asset
+        NumIt: 1
+      - itdt: {fileID: 11400000, guid: d97f5d5a3ac74a345b656cfd7b95def6, type: 2}
+        itdtS:
+          tyleItem: 2
+          nameItem: speed_BoatV1
+          imgItemPath: _0
+          price: 100
+          detail: ship1
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 1
+          status: 1
+          pathItem: Assets/Resources/Prefap/data/items/ship1.asset
+        NumIt: 1
+      - itdt: {fileID: 11400000, guid: 331d5940956cdcf41b2affa607474e73, type: 2}
+        itdtS:
+          tyleItem: 2
+          nameItem: scout_BoatV1
+          imgItemPath: _0
+          price: 200
+          detail: ship2
+          meshrenPath: 
+          matPath: 
+          maxNuminSlot: 1
+          status: 1
+          pathItem: Assets/Resources/Prefap/data/items/ship2.asset
+        NumIt: 1
+    dataPlayer:
+      pos: {x: -47.23, y: 3.1682568, z: 0}
+      coins: 200
+      parentName: 
+      posParent: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 270, z: 0}
+      scene: 0
+      action: 0
+      inArea: 2
+      canMove: 1
+    datagRod:
+      tagBait: rice
+      meshBait: {fileID: 0}

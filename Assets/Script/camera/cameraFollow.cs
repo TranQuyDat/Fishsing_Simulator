@@ -7,7 +7,7 @@ public class cameraFollow : MonoBehaviour
     public GameObject target;
     public float speed;
     public bool followZ;
-    public float dis;
+    public float dis = 5;
     public float height;
     public GameManager gameMngr;
     public Transform limitL;
@@ -42,11 +42,13 @@ public class cameraFollow : MonoBehaviour
     {
         if (target == null) return;
         PosCam =(!followZ) 
-            ? new Vector3(target.transform.position.x+dis, target.transform.position.y+ height, this.transform.position.z)
-            : this.transform.position = new Vector3(target.transform.position.x+dis, target.transform.position.y+ height, target.transform.position.z+dis) ;
-        PosCam.x = Mathf.Clamp(PosCam.x, limitL.position.x+5, limitR.position.x-5);
-        transform.position = PosCam;
+            ? new Vector3(target.transform.position.x, target.transform.position.y+ height, this.transform.position.z)
+            : this.transform.position = new Vector3(target.transform.position.x, target.transform.position.y+ height, target.transform.position.z+dis) ;
+        PosCam.x = Mathf.Clamp(PosCam.x, limitL.position.x+2.5f, limitR.position.x-2.5f);
+        PosCam.z = target.transform.position.z - dis;
 
+        transform.position = PosCam;
+        
     }
 
 

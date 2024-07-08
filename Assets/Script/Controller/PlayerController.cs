@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     #region public values
     public GameManager gameMngr;
+    public fishingRodController fishingRod;
     public float speedMove;
     public Animator ani;
     public float axis;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
+        gameMngr.fishingRodCtrl = fishingRod;
         rb = this.GetComponent<Rigidbody>();
         instructionBTN = gameMngr.instructionBTN;
         mainCamera = gameMngr.mainCamera.transform;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         ani.SetBool("isrun", false);
         cur_action = Action.idle;
         faceRight = (mainCamera.rotation.ToEuler() * Mathf.Rad2Deg).y - 90;
@@ -46,12 +49,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Debug.Log((dirobj.transform.position - rb.position).normalized);
-       if(instructionBTN == null)
+        if (gameMngr.uiMngr.stopCtrlWhenUIsActive && cur_action !=Action.running) return;
+        if (gameMngr.uiMngr.stopCtrlWhenUIsActive)
+        {
+            cur_action = Action.idle;
+            axis = 0;
+            return;
+        }
+            if (instructionBTN == null)
             instructionBTN = gameMngr.instructionBTN;
         movement();
         flip();
         checkNPC();
+        rb.isKinematic = (inArea == area.ship);
     }
     #endregion
 
@@ -63,7 +73,7 @@ public class PlayerController : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
-    public void loadData(DataPlayer dataPlayer)
+    public void importData(DataPlayer dataPlayer)
     {
         print("load data");
         gameMngr.iv.coin = dataPlayer.coins;
@@ -74,9 +84,21 @@ public class PlayerController : MonoBehaviour
         canMove = dataPlayer.canMove;
         transform.eulerAngles = dataPlayer.rotation;
     }
-
+    public DataPlayer exportData()
+    {
+        string parentName = (transform.parent != null) ? transform.parent.name : "";
+        Vector3 poParent = (transform.parent != null) ? transform.parent.position : default;
+        DataPlayer dataPlayer = new DataPlayer(transform.position,transform.eulerAngles,
+                gameMngr.iv.coin, scenes, inArea,cur_action,canMove,parentName, poParent);
+        return dataPlayer;
+    }
     public void movement()
     {
+        if(!canMove && cur_action == Action.running)
+        {
+            cur_action = Action.idle;
+            return;
+        }
         if (!canMove) return;
         if (axis != 0)
         {

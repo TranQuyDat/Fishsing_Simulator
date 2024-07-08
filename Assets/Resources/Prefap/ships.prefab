@@ -33,7 +33,7 @@ Transform:
   - {fileID: 496867815136580717}
   - {fileID: 8048363312357804541}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4990380014142382106
 MonoBehaviour:
@@ -113,6 +113,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6450358217494953527, guid: 2e2d231831b4ad44b982cd0558675e33, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6450358217494953527, guid: 2e2d231831b4ad44b982cd0558675e33, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -184,6 +192,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: wood_BoatV1
       objectReference: {fileID: 0}
+    - target: {fileID: 7140168948977267069, guid: 17c56660cef6fcc4088e1f30292e8e4a, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140168948977267069, guid: 17c56660cef6fcc4088e1f30292e8e4a, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7267473770934246997, guid: 17c56660cef6fcc4088e1f30292e8e4a, type: 3}
       propertyPath: m_Constraints
       value: 124
@@ -215,6 +231,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5792116024679381705}
     m_Modifications:
+    - target: {fileID: 482777514983423461, guid: d87fb7b5f82313c44b727c3c26f51f29, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 482777514983423461, guid: d87fb7b5f82313c44b727c3c26f51f29, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 583817008190249557, guid: d87fb7b5f82313c44b727c3c26f51f29, type: 3}
       propertyPath: m_Name
       value: speed_BoatV1

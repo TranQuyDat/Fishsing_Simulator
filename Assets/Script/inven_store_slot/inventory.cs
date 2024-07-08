@@ -8,7 +8,7 @@ using TMPro;
 public class inventory : GroupSlot
 {
     public TextMeshProUGUI txt_coin;
-    public int coin;
+    public int coin;//save
     public store st;
     public UseItem useItem;
     private void Awake()

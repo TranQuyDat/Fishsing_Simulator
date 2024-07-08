@@ -79,6 +79,7 @@ public class fishAI : MonoBehaviour
         if (!islimit) return;
         if (isOutRange)
         {
+            //print("outRange");
             Vector3 mid = (limitXYmax.position + limitXYmin.position) / 2;
             Vector3 dir = (mid - head.transform.position).normalized;
             updateTarget(dir);
@@ -247,13 +248,13 @@ public class fishAI : MonoBehaviour
         if (fishMngr.dis >= maxDisPull && !rb.isKinematic)// stop pull
         {
             maxDisPull += (fishMngr.dis < 10f)?1:0;
-            if(fishMngr.dis == 10f) countPull++;
+            if(fishMngr.dis >= 10f) countPull++;
             if (countPull > 5)//escape
             {                
                 food = null;
                 fishMngr.theLuckyFish = null;
                 fishMngr.fishRodCtrl.bait.tag = "noneBait";
-                fishMngr.fishRodCtrl.Reset();
+                fishMngr.StopFishing(); 
                 countPull = 0;
             }
             rb.isKinematic = true;

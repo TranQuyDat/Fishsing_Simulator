@@ -33,9 +33,15 @@ public class GlobalMap : MonoBehaviour
     public void btn2Sea1()
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
-        if (obj.inArea != area.ship)
+        if (obj.inArea != area.ship )
         {
-            gameManager.notify.setUpAndShow("you are not in ship");
+            gameManager.notify.setUpAndShow("you are not in Boat ");
+            return;
+        }
+        GameObject parent = obj.transform.parent.gameObject;
+        if(parent.name != "speed_BoatV1" && parent.name != "scout_BoatV1")
+        {
+            gameManager.notify.setUpAndShow("you need 'Speed Boat' or 'Scout Boat' ");
             return;
         }
         obj.ischangeScene = true;
@@ -48,6 +54,13 @@ public class GlobalMap : MonoBehaviour
         if (obj.inArea != area.ship)
         {
             gameManager.notify.setUpAndShow("you are not in ship");
+            return;
+        }
+
+        GameObject parent = obj.transform.parent.gameObject;
+        if (parent.name != "scout_BoatV1")
+        {
+            gameManager.notify.setUpAndShow("you need 'Scout Boat' ");
             return;
         }
         obj.ischangeScene = true;

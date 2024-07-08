@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8c802200ca259246b4040c909078de5, type: 3}
-  m_Name: boat
+  m_Name: ship2
   m_EditorClassIdentifier: 
   tyleItem: 2
-  nameItem: wood_BoatV1
-  imgItem: {fileID: 1579248240, guid: 358cde081d2a70e4ea52ad664aa324f6, type: 3}
-  price: 0
-  detail: boat
-  obj: {fileID: 6872243824899630401, guid: 17c56660cef6fcc4088e1f30292e8e4a, type: 3}
+  nameItem: scout_BoatV1
+  imgItem: {fileID: 465797283, guid: c630fb572ce8450478429b66297d452e, type: 3}
+  price: 200
+  detail: ship2
+  meshren: {fileID: -3811911705681396582, guid: 0e6c567c9eb17644780f66c4dea0324b, type: 3}
+  mat: {fileID: -4814387500147316422, guid: 0e6c567c9eb17644780f66c4dea0324b, type: 3}
   maxNuminSlot: 1
-  status: 0
+  status: 1

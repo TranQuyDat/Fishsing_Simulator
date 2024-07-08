@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
         if (!showOption || !gameMngr.instructionBTN.active) return;
         if (Input.GetKeyDown(KeyCode.E))
         {
-            print(this);
+            //print(this);
             dia.gameObject.SetActive(true);
             dia.setTxt_content(aboutNPC);
             dia.npc = this;

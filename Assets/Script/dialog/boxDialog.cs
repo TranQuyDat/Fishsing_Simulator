@@ -33,17 +33,18 @@ public class boxdialog : MonoBehaviour
     }
     public void startText(string txtmain)
     {
+        if(IsInvoking("nextChar"))CancelInvoke("nextChar");
         countWord = 0;
+        lastWord = "";
         listChar = txtmain.ToCharArray().ToList(); //Debug.Log(listChar);
         txtbox.text = "";
-        CancelInvoke("nextChar");
         InvokeRepeating("nextChar", 0f, timedelay);
     }
     public void nextChar()
     {
         if (listChar == null || listChar.Count <= 0) // dieu kien de endText
         {
-            StartCoroutine(waitToEndText());
+            endText();
             return;
         }
         if (countWord >= this.maxCountWord) return;
@@ -57,16 +58,6 @@ public class boxdialog : MonoBehaviour
     public void endText()
     {
         CancelInvoke("nextChar");
-    }
-    IEnumerator waitToEndText()
-    {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            endText();
-            StopCoroutine(waitToEndText());
-        }
-        yield return new WaitForSeconds(1.5f);
-        endText();
     }
 
     public void skipTimedelaytxt()
