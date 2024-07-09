@@ -68,7 +68,7 @@ Transform:
   - {fileID: 7480218946105025842}
   - {fileID: 3784156658457581010}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &7773947261596902209
 MonoBehaviour:
@@ -105,8 +105,8 @@ Rigidbody:
     m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
@@ -160,11 +160,11 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.40299088, y: 0.3244207, z: 0.27098835}
-  m_Center: {x: -0.02222906, y: 0.15995705, z: -0.044989794}
+  m_Size: {x: 0.40299088, y: 0.32158482, z: 0.27098835}
+  m_Center: {x: -0.02222906, y: 0.15853912, z: -0.044989794}
 --- !u!136 &4259219605932287987
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -227,6 +227,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3637977388677946201}
     m_Modifications:
+    - target: {fileID: 377915241052216401, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1900197341501621031, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
       propertyPath: playerCTRL
       value: 
@@ -281,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5459640819947400777, guid: 4f9803ed31b25c049b47eaf15bcb0c32, type: 3}
       propertyPath: m_TagString
-      value: rice
+      value: noneBait
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -51,14 +51,16 @@ public class DataSave
 {
     public string name;
     public string dateTime;
+    public float timeIngame;
     public List<GroupSlotDataSave>  listStore= new List<GroupSlotDataSave>();
 
     public DataPlayer dataPlayer;
     public DataRod datagRod;
-    public DataSave(string name , List<GroupSlotData> grSlots , DataPlayer dataPlayer, DataRod datagRod)
+    public DataSave(string name , float timeIngame, List<GroupSlotData> grSlots , DataPlayer dataPlayer, DataRod datagRod)
     {
         this.name = name;
         dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        this.timeIngame = timeIngame;
         this.dataPlayer = dataPlayer;
         this.datagRod = datagRod;
         

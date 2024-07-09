@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6935307629901637296}
   - component: {fileID: 877931380202264161}
   - component: {fileID: 5053960223387683167}
+  - component: {fileID: 5036851060709714697}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   uiMngr: {fileID: 5053960223387683167}
   fishMngr: {fileID: 0}
   shipMngr: {fileID: 0}
+  TimeMngr: {fileID: 5036851060709714697}
   playerCtrl: {fileID: 0}
   fishingRodCtrl: {fileID: 0}
   iv: {fileID: 0}
@@ -55,7 +57,10 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   notify: {fileID: 0}
   saveLoadGame: {fileID: 0}
+  globalMap: {fileID: 0}
   loadData: {fileID: 11400000, guid: ff1fa2b7ba0479a4a9bfea336f95271a, type: 2}
+  curScene: 1
+  isStopGame: 0
 --- !u!114 &5053960223387683167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +74,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui_inven_shop: {fileID: 0}
+  uiDialog: {fileID: 0}
+  uiGlobalMap: {fileID: 0}
   gamePlay: {fileID: 0}
   gamePause: {fileID: 0}
   gameMngr: {fileID: 877931380202264161}
-  ischangeState: 0
+  stopCtrlWhenUIsActive: 0
+  countClick: 0
+  isdoubleClick: 0
+--- !u!114 &5036851060709714697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544664178137953992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1de48c6e4ef32489def88de3f9d3c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMngr: {fileID: 877931380202264161}
+  sun: {fileID: 0}
+  moon: {fileID: 0}
+  dawnSkybox: {r: 0.6313726, g: 0.34901962, b: 0.34901962, a: 1}
+  daySkybox: {r: 0.5372549, g: 0.65882355, b: 0.7529412, a: 1}
+  eveningSkybox: {r: 0.5647059, g: 0.3254902, b: 0.24313726, a: 1}
+  nightSkybox: {r: 0.09019608, g: 0.16862746, b: 0.3019608, a: 1}
+  timeOfDay: 6
+  speedTime: 0.01
+  offset: 0
+  speedCloud: 3

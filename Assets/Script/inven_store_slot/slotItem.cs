@@ -61,6 +61,7 @@ public class slotItem : MonoBehaviour
     {
         item = null;
         imgItem.sprite = null;
+        numItem = 0;
         imgItem.gameObject.SetActive(false);
     }
 

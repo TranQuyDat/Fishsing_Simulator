@@ -10,12 +10,16 @@ public class LoadData : ScriptableObject
     public Scenes nextScene;
     public bool isloadFrSave;
     public DataSave dataSave;
+    public float time;
 
-    public void setLoadData(Scenes oldScene , Scenes scene, bool isloadFrSave, DataSave dataSave)
+    public string newNameSave;
+    public void setLoadData(Scenes oldScene , Scenes scene, float time , bool isloadFrSave, DataSave dataSave)
     {
         this.oldScene = oldScene;
         this.nextScene = scene;
+        this.time = time;
         this.isloadFrSave = isloadFrSave;
         this.dataSave = dataSave;
+
     }
 }

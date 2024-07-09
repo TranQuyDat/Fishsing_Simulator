@@ -545,7 +545,6 @@ MonoBehaviour:
   rb: {fileID: -4558419591134668789}
   speed: 4
   timeChangeDir: 8
-  olfaction: 3
   limitXYmin: {fileID: 0}
   limitXYmax: {fileID: 0}
   head: {fileID: 6193001578506824636}

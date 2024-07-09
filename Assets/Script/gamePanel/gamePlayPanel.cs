@@ -50,13 +50,36 @@ public class FishInfoUI
         ui.SetActive(false);
     }
 }
+
+[System.Serializable]
+public class UiTimesOfDay
+{
+    public Sprite dawn;
+    public Sprite day;
+    public Sprite evening;
+    public Sprite night;
+
+    public Image imgIcon;
+    public TextMeshProUGUI txt;
+
+    public void swtIconTimeOfDay( float t)
+    {
+        (imgIcon.sprite,txt.text) = t switch
+        {
+            _ when (t>=3f && t<6f) => (dawn ,"Dawn") ,
+            _ when (t>=6f && t<15f) => (day, "day"),
+            _ when (t>=15f && t<18f) => (evening, "evening"),
+            _ when (t>=18f || t<3f) => (night, "night"),
+        };
+    }
+}
 public class gamePlayPanel : MonoBehaviour
 {
+    public GameManager gameMngr;
     public FishingUI fishingUI;
     public FishInfoUI fishInfoUI;
-    public GameManager gameMngr;
     public EditImgUI editImgUI;
-
+    public UiTimesOfDay uiTimesOfDay;
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
@@ -82,7 +105,8 @@ public class gamePlayPanel : MonoBehaviour
 
     public void updateAmount()
     {
-        bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.ui.active || !gameMngr.fishingRodCtrl.isfishing;
+        bool b = gameMngr == null || gameMngr.fishMngr == null || !fishingUI.ui.active 
+           || gameMngr.fishingRodCtrl==null || !gameMngr.fishingRodCtrl.isfishing;
         if (b)
         {
             editImgUI.setFillAmount(0);

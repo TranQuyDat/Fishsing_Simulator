@@ -1,23 +1,28 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+    public GameManager gameMngr;
     public Light sun;
     public Light moon;
-    public Material dawnSkybox;
-    public Material daySkybox;
-    public Material eveningSkybox;
-    public Material nightSkybox;
+    public Color dawnSkybox;
+    public Color daySkybox;
+    public Color eveningSkybox;
+    public Color nightSkybox;
 
     [Range(0, 24)]
     public float timeOfDay;
-    [Range(0.1f,1)]
+    [Range(0.0f,1)]
     public float speedTime = 0.1f;
     [Range(0, 360)]
     public float offset;
     public float speedCloud =5f;
+    private void Awake()
+    {
+        timeOfDay =  gameMngr.loadData.time;
+    }
     private void Update()
     {
         UpdateLighting(timeOfDay / 24f);
@@ -30,53 +35,57 @@ public class TimeManager : MonoBehaviour
 
     private void UpdateLighting(float timePercent)
     {
-        RenderSettings.skybox = GetCurrentSkybox(timePercent);
+        RenderSettings.skybox.SetColor("_Tint", GetCurrentSkybox(timePercent)) ;
          offset = (offset+ speedCloud * Time.deltaTime)%360;
         RenderSettings.skybox.SetFloat("_Rotation", offset);
-        sun.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
+        sun.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 80f, 90f, 0));
         sun.intensity = GetLightIntensitySun(timePercent);
 
     }
 
-    private Material GetCurrentSkybox(float timePercent)
+    private Color GetCurrentSkybox(float timePercent)
     {
-        if (timePercent < 0.25f)
+        if (timePercent < 0.25f)//0 -> 0.25 dawn
         {
             sun.gameObject.SetActive(true);
             moon.gameObject.SetActive(false);
-            return dawnSkybox;
+            Color currentColor = Color.Lerp(nightSkybox, dawnSkybox, timePercent / 0.25f);
+            return currentColor;
         }
-        else if (timePercent < 0.5f)
+        else if (timePercent < 0.5f)//0.25 -> 0.5 day
         {
-            return daySkybox;
+            Color currentColor = Color.Lerp(dawnSkybox, daySkybox, (timePercent-0.25f) / 0.125f);
+            return currentColor;
         }
-        else if (timePercent < 0.75f)
+        else if (timePercent < 0.75f) //0.5 -> 0.75 evening
         {
-            return eveningSkybox;
+            Color currentColor = Color.Lerp(daySkybox, eveningSkybox, (timePercent-0.5f) / 0.125f);
+            return currentColor;
         }
-        else
+        else //0.75 -> 1 night
         {
             sun.gameObject.SetActive(false);
             moon.gameObject.SetActive(true);
-            return nightSkybox;
+            Color currentColor = Color.Lerp(eveningSkybox, nightSkybox, (timePercent-0.75f) / 0.125f);
+            return currentColor;
         }
     }
 
     private float GetLightIntensitySun(float timePercent)
     {
-        if (timePercent < 0.25f)
+        if (timePercent < 0.25f) //dawn
         {
             return Mathf.Lerp(1f, 6f, timePercent / 0.25f);
         }
-        else if (timePercent < 0.5f)
+        else if (timePercent < 0.5f) // day
         {
             return 6f;
         }
-        else if (timePercent < 0.75f)
+        else if (timePercent < 0.75f) // evening
         {
             return Mathf.Lerp(6f, 1f, (timePercent - 0.5f) / 0.25f);
         }
-        else
+        else // night
         {
             return 1f;
         }

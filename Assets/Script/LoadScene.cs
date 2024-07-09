@@ -60,7 +60,7 @@ public class LoadScene : MonoBehaviour
             DontDestroyOnLoad(parent.gameObject);
         }
         else DontDestroyOnLoad(gameMngr.playerCtrl.gameObject);
-        
+        loadData.time = loadData.dataSave.timeIngame;
         gameMngr.playerCtrl.importData(dataPlayer);
         gameMngr.fishingRodCtrl.importData(dataRod);
         SceneManager.LoadSceneAsync(loadData.nextScene.ToString());

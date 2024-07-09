@@ -25,6 +25,7 @@ public abstract class GroupSlot : MonoBehaviour
     public TextMeshProUGUI txt_minmax;
     public TextMeshProUGUI txt_cost;
     #endregion
+    public GameManager gameMngr;
     public string name;
     public List<slotItem> slots;
 
@@ -32,6 +33,11 @@ public abstract class GroupSlot : MonoBehaviour
     public int maxCoutSlot;
     public slotItem curSlot;
     public bool canOpenIven ;
+    public bool canAddToData = false;
+    private void Awake()
+    {
+        gameMngr = FindObjectOfType<GameManager>();
+    }
     #region Virtual
     public virtual void btn_buy() { }
     public virtual void btn_sell() { }
@@ -104,25 +110,26 @@ public abstract class GroupSlot : MonoBehaviour
             slots[i].transform.SetSiblingIndex(i);
         }
     }
-    public void addIt2Data(ItemData itdt ,int numItem = 1)
-    {
-    }
     public void addItem(ItemData it, int numItem = 1)
     {
         if (it == null) return;
         for (int i = 0; i < slots.Count; i++)
         {
-            //  slot !=null && numItem == maxNumItem || item != it => continue
+            //  slot !=null && (numItem == maxNumItem || item != it) => continue
             bool b = slots[i].item != null && (slots[i].numItem == slots[i].maxNumItem || slots[i].item != it);
             if (b) continue;
             if (slots[i].item != null && slots[i].item == it)// slot != null && item == it && numItem < maxNumItem => numItem++
             {
+                canAddToData = true;
                 slots[i].addNumItem(numItem);
                 return;
             }
+            canAddToData =  true ;
             slots[i].updateSlot(it, numItem);// slot == null
             return;
         }
+        canAddToData = false;
+        gameMngr.notify.setUpAndShow("inventory full");
     }
     public void removeItem(slotItem slot, int numItem = 1)
     {

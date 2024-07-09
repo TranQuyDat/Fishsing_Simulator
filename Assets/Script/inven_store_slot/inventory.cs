@@ -23,7 +23,7 @@ public class inventory : GroupSlot
 
     private void OnEnable()
     {
-        //importShopData(Data);
+        importShopData(Data);
         SortAndMergeSlots();
         txt_coin.text = "" + coin;
     }

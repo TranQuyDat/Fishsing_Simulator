@@ -9,8 +9,8 @@ public class slotLoad : MonoBehaviour
     public TextMeshProUGUI dateTime;
     public void btnLoad()
     {
-        gamePausePanel gamePause = GameObject.FindObjectOfType<gamePausePanel>();
-        gamePause.btnLoad(this);
+        GameUiManager uiMngr = GameObject.FindObjectOfType<GameUiManager>();
+        uiMngr.btnLoad(this);
     }
 
     public void delete()

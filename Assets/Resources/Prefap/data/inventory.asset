@@ -12,4 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988ee4f616c981e4c9dcf256eed29537, type: 3}
   m_Name: inventory
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - itdt: {fileID: 11400000, guid: c451a30fc4fef144e9f3e99a9f747dce, type: 2}
+    itdtS:
+      tyleItem: 1
+      nameItem: worm
+      imgItemPath: Assets/Resources/img/worm.png_worm_0
+      price: 3
+      detail: 'worm is the bait , price : 10'
+      meshrenPath: Assets/Resources/model_mat_texture/bait/worm.fbx
+      matPath: Assets/Resources/model_mat_texture/bait/chr_m_189.mat
+      maxNuminSlot: 10
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/worm.asset
+    NumIt: 6

@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
-        gameMngr.fishingRodCtrl = fishingRod;
+        
         rb = this.GetComponent<Rigidbody>();
         instructionBTN = gameMngr.instructionBTN;
         mainCamera = gameMngr.mainCamera.transform;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameMngr.fishingRodCtrl = fishingRod;
         ani.SetBool("isrun", false);
         cur_action = Action.idle;
         faceRight = (mainCamera.rotation.ToEuler() * Mathf.Rad2Deg).y - 90;
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         gameMngr = FindObjectOfType<GameManager>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        
     }
 
     public void importData(DataPlayer dataPlayer)

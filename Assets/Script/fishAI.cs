@@ -78,7 +78,7 @@ public class fishAI : MonoBehaviour
         if (!islimit) return;
         if (isOutRange)
         {
-            //print("outRange");
+            print("outRange"+this.name);
             Vector3 mid = (limitXYmax.position + limitXYmin.position) / 2;
             Vector3 dir = (mid - head.transform.position).normalized;
             updateTarget(dir);
@@ -93,7 +93,7 @@ public class fishAI : MonoBehaviour
         float randY = Random.RandomRange(transform.position.y - 2f, transform.position.y + 2f);
 
         Vector3 newPos = new Vector3(randX, randY, 0);
-        dir = (newPos - target.transform.transform.position).normalized;
+        dir = (newPos - target.transform.position).normalized;
         Debug.DrawLine(target.transform.position, newPos,Color.white);
         target.transform.localPosition = target.transform.InverseTransformDirection(dir);
         timeChangeDir = Random.RandomRange(2f, 10f);

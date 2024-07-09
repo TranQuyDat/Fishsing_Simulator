@@ -34,6 +34,7 @@ public class store : GroupSlot
                 print("buy"+curSlot.item);
                 iv.coin -= cost;
                 iv.addItem(curSlot.item, num);
+                if (iv.canAddToData) iv.Data.add(curSlot.item, num);
                 removeItem(curSlot, num);
                 ui_ok_close.SetActive(false);
                 curSlot = null;

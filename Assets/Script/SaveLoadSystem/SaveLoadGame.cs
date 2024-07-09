@@ -89,7 +89,7 @@ public class SaveLoadGame : MonoBehaviour
         DataSave loadData = JsonUtility.FromJson<DataSave>(json);
         return loadData;
     }
-    public void save(string name, Scenes scene)
+    public void save(string name)
     {
 
         pathSave = dirPath +"/filesave_"+name+".json";
@@ -98,11 +98,11 @@ public class SaveLoadGame : MonoBehaviour
 
         DataRod dataRod = gameMngr.fishingRodCtrl.exportData();
 
-        DataSave saveData = new DataSave(name, grSlots, dataPlayer,dataRod);
+        DataSave saveData = new DataSave(name,gameMngr.TimeMngr.timeOfDay, grSlots, dataPlayer,dataRod);
         
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(pathSave, json);
-
+        gameMngr.loadData.newNameSave = name;
         print(saveData.listStore.Count);
         print(json);
 
@@ -118,8 +118,8 @@ public class SaveLoadGame : MonoBehaviour
         if (Directory.Exists(dirPath))
         {
             DataSave loadData = getData(name);
-            
-            gameMngr.change2LoadingScene(playerCtrl.scenes,loadData.dataPlayer.scene,loadData);
+            Scenes scene = (gameMngr.curScene!=Scenes.menu) ? playerCtrl.scenes : Scenes.menu;
+            gameMngr.change2LoadingScene(scene, loadData.dataPlayer.scene,loadData);
             
             foreach(GroupSlotDataSave gr in loadData.listStore)
             {

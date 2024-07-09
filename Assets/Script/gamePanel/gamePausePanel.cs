@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
@@ -20,19 +21,12 @@ public class GameLoadUI
 {
     public GameObject ui;
 }
-[System.Serializable]
-public class GameSettingUI
-{
-    public GameObject ui;
-}
 public class gamePausePanel : MonoBehaviour
 {
     public GameManager gameMngr;
     public GameSaveUI gameSaveUI;
     public GameLoadUI gameLoadUI;
-    public GameSettingUI gameSettingUI;
-    public int countClick = 0;
-    public bool isdoubleClick = false;
+    public SettingUI settingUI;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -46,7 +40,21 @@ public class gamePausePanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        updateUIsetting();
+    }
+    public void updateUIsetting()
+    {
+        if (settingUI.sl_Volume.value == gameMngr.settingData.volume &&
+             settingUI.sl_SFX.value == gameMngr.settingData.soundFx) return;
+
+        if (!settingUI.ui.active)
+        {
+            settingUI.updateVolume(gameMngr.settingData);
+        }
+        else
+        {
+            settingUI.saveVolume(gameMngr.settingData);
+        }
     }
     public void selectBoxSave(slotSave slot)
     {
@@ -54,35 +62,11 @@ public class gamePausePanel : MonoBehaviour
     }
     public void btnSave(InputField inputfield)
     {
-        gameMngr.saveLoadGame.save(inputfield.text,gameMngr.playerCtrl.scenes);
+        gameMngr.saveLoadGame.save(inputfield.text);
     }
-    public void btnLoad(slotLoad slot)
+
+    public void btnReturn2MainMenu()
     {
-        StartCoroutine(checDoubleClick());
-        if (!isdoubleClick)
-        {
-            return;
-        }
-            print("click"+slot.name);
-        gameMngr.saveLoadGame.load(slot.nameFile.text);
-    }
-   
-    
-    IEnumerator checDoubleClick()
-    {
-        countClick+=1;
-        if (countClick > 1)
-        {
-            isdoubleClick = true;
-            countClick = 0;
-            StopCoroutine(checDoubleClick());
-        }
-        yield return new WaitForSeconds(0.5f);
-        if (countClick <= 1)
-        {
-            isdoubleClick = false;
-            countClick = 0;
-        }
-        
+        SceneManager.LoadScene(Scenes.menu.ToString());
     }
 }
