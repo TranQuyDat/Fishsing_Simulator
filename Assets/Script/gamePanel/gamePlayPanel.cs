@@ -149,6 +149,7 @@ public class gamePlayPanel : MonoBehaviour
 
     public void btnUpDownSurfaceWater()
     {
+        if (!gameMngr.fishingRodCtrl.isfishing) return;
         GameObject target ;
         if (gameMngr.mainCamera.isCameraUp)
         {

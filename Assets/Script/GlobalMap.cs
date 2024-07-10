@@ -11,6 +11,13 @@ public class GlobalMap : MonoBehaviour
 
         gameManager = FindObjectOfType<GameManager>();
     }
+    public DataSave  createData()
+    {
+        DataPlayer dataPlayer = gameManager.playerCtrl.exportData();
+        DataRod dataRod = gameManager.fishingRodCtrl.exportData();
+        DataSave dataSave = new DataSave(gameManager.TimeMngr.timeOfDay, dataPlayer, dataRod);
+        return dataSave;
+    }
     public void btn2city()
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
@@ -21,14 +28,14 @@ public class GlobalMap : MonoBehaviour
         }
 
         obj.ischangeScene = true;
-        gameManager.change2LoadingScene(obj.scenes,Scenes.city);
+        gameManager.change2LoadingScene(obj.scenes,Scenes.city,false, createData());
     }
     public void btn2Port()
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
         obj.ischangeScene = true;
 
-        gameManager.change2LoadingScene(obj.scenes, Scenes.port);
+        gameManager.change2LoadingScene(obj.scenes, Scenes.port,false, createData());
     }
     public void btn2Sea1()
     {
@@ -46,7 +53,7 @@ public class GlobalMap : MonoBehaviour
         }
         obj.ischangeScene = true;
 
-        gameManager.change2LoadingScene(obj.scenes, Scenes.sea1);
+        gameManager.change2LoadingScene(obj.scenes, Scenes.sea1,false, createData());
     }
     public void btn2Sea2()
     {
@@ -65,7 +72,7 @@ public class GlobalMap : MonoBehaviour
         }
         obj.ischangeScene = true;
 
-        gameManager.change2LoadingScene(obj.scenes, Scenes.sea2);
+        gameManager.change2LoadingScene(obj.scenes, Scenes.sea2,false, createData());
     }
 
 

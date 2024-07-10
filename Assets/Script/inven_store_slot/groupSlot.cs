@@ -112,29 +112,56 @@ public abstract class GroupSlot : MonoBehaviour
     }
     public void addItem(ItemData it, int numItem = 1)
     {
-        if (it == null) return;
-        for (int i = 0; i < slots.Count; i++)
+        
+        Dictionary<int, int> id_num = new Dictionary<int, int>();
+        bool b = checkSlot(it, numItem,id_num);
+        if (!b)
         {
-            //  slot !=null && (numItem == maxNumItem || item != it) => continue
-            bool b = slots[i].item != null && (slots[i].numItem == slots[i].maxNumItem || slots[i].item != it);
-            if (b) continue;
-            if (slots[i].item != null && slots[i].item == it)// slot != null && item == it && numItem < maxNumItem => numItem++
-            {
-                canAddToData = true;
-                slots[i].addNumItem(numItem);
-                return;
-            }
-            canAddToData =  true ;
-            slots[i].updateSlot(it, numItem);// slot == null
+            canAddToData = false;
+            gameMngr.notify.setUpAndShow("inventory full");
             return;
         }
-        canAddToData = false;
-        gameMngr.notify.setUpAndShow("inventory full");
+        canAddToData = true;
+        foreach(KeyValuePair<int,int> pair in id_num)
+        {
+            print(it + " : slot = " + pair.Key + ", num  = " + pair.Value);
+            if (slots[pair.Key].item != null)
+                slots[pair.Key].addNumItem(pair.Value);
+            else
+                slots[pair.Key].updateSlot(it, pair.Value);
+        }
+        
+    }
+    public bool checkSlot( ItemData it , int num,Dictionary<int,int> dic)
+    {
+        dic.Clear();
+        for (int i = 0; i < slots.Count; i++)
+        {
+            bool b = slots[i].item != null && (slots[i].numItem >= slots[i].maxNumItem || slots[i].item != it);
+            if (b) continue;
+            if (slots[i].item != null)
+            {
+                int delta = slots[i].maxNumItem - slots[i].numItem;
+                int v = num - delta;
+                dic.Add(i, (v > 0) ? delta : num);
+                num -= (v > 0) ? delta : num;
+                if (num <= 0) return true;
+            }
+            else
+            {
+                int v  = num - slots[i].maxNumItem;
+                dic.Add(i, (v > 0) ? slots[i].maxNumItem : num);
+
+                num -= (v > 0) ? slots[i].maxNumItem : num;
+                if (num <= 0) return true;
+            }
+        }
+        return false;
     }
     public void removeItem(slotItem slot, int numItem = 1)
     {
+        Data.add(slot.item, -numItem);
         slot.addNumItem(-numItem);
-
         if (slot.numItem <= 0)
         {
             slot.clear();

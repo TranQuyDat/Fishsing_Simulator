@@ -11,7 +11,7 @@ public class TimeManager : MonoBehaviour
     public Color daySkybox;
     public Color eveningSkybox;
     public Color nightSkybox;
-
+    public bool locktime = false;
     [Range(0, 24)]
     public float timeOfDay;
     [Range(0.0f,1)]
@@ -21,12 +21,12 @@ public class TimeManager : MonoBehaviour
     public float speedCloud =5f;
     private void Awake()
     {
-        timeOfDay =  gameMngr.loadData.time;
+        if (!locktime) timeOfDay =  gameMngr.loadData.dataSave.timeIngame;
     }
     private void Update()
     {
         UpdateLighting(timeOfDay / 24f);
-        timeOfDay += speedTime* Time.deltaTime;
+        if(!locktime)timeOfDay += speedTime* Time.deltaTime;
         if (timeOfDay >= 24)
         {
             timeOfDay = 0;
@@ -48,7 +48,7 @@ public class TimeManager : MonoBehaviour
         if (timePercent < 0.25f)//0 -> 0.25 dawn
         {
             sun.gameObject.SetActive(true);
-            moon.gameObject.SetActive(false);
+            if(moon != null) moon.gameObject.SetActive(false);
             Color currentColor = Color.Lerp(nightSkybox, dawnSkybox, timePercent / 0.25f);
             return currentColor;
         }
@@ -65,7 +65,7 @@ public class TimeManager : MonoBehaviour
         else //0.75 -> 1 night
         {
             sun.gameObject.SetActive(false);
-            moon.gameObject.SetActive(true);
+            if (moon != null) moon.gameObject.SetActive(true);
             Color currentColor = Color.Lerp(eveningSkybox, nightSkybox, (timePercent-0.75f) / 0.125f);
             return currentColor;
         }

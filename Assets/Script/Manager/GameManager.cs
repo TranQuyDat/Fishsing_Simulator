@@ -57,17 +57,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-    public void NewGame()
+    public void change2LoadingScene(Scenes oldScene,Scenes nextScene,bool isloadFrSave,DataSave dataSave = null)
     {
-        //reset data
-    }
-
-
-
-    public void change2LoadingScene(Scenes oldScene,Scenes nextScene,DataSave dataSave = null)
-    {
-        bool isloadFrSave = (dataSave == null) ? false : true;
 
         loadData.setLoadData(oldScene,nextScene, TimeMngr.timeOfDay, isloadFrSave, dataSave);
         SceneManager.LoadScene(Scenes.loading.ToString());

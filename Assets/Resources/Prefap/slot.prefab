@@ -187,9 +187,10 @@ MonoBehaviour:
   groupSlot: {fileID: 0}
   item: {fileID: 0}
   numItem: 1
-  maxNumItem: 2
+  maxNumItem: 10
   imgItem: {fileID: 6962550929625228361}
   txt_numItem: {fileID: 853765064083021288}
+  txt_name: {fileID: 0}
 --- !u!114 &805709146788576809
 MonoBehaviour:
   m_ObjectHideFlags: 0

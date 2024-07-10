@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: fishV4
   m_EditorClassIdentifier: 
   tyleItem: 3
-  nameItem: fishV4
+  nameItem: fishv4
   imgItem: {fileID: 265402892, guid: 400ab292af70df447885e0a8d21b1092, type: 3}
-  price: 50
-  detail: fishV4
+  price: 20
+  detail: fishv4
   meshren: {fileID: -2068639166428788250, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
-  mat: {fileID: -876546973899608171, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+  mat: {fileID: -3846018093981099296, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
   maxNuminSlot: 10
   status: 3
   bait: 3

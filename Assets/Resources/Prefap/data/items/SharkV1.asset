@@ -18,7 +18,7 @@ MonoBehaviour:
   price: 200
   detail: shark
   meshren: {fileID: -4108424097152807243, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}
-  mat: {fileID: -876546973899608171, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}
+  mat: {fileID: 4874126678125670354, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}
   maxNuminSlot: 10
   status: 3
   bait: 3

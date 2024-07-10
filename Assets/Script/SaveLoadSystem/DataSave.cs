@@ -11,11 +11,13 @@ public class DataRod
     public String tagBait;
     public string meshBaitPath;
     public string matBaitPath;
-    public DataRod(string tagBait, Mesh meshBait, Material matBait)
+    public Vector3 scale;
+    public DataRod(string tagBait, Mesh meshBait, Material matBait,Vector3 scale)
     {
         this.tagBait = tagBait;
         this.meshBaitPath = DataSave.savePathIt(meshBait) ;
         this.matBaitPath = DataSave.savePathIt(matBait);
+        this.scale = scale;
     }
 }
 
@@ -55,14 +57,14 @@ public class DataSave
     public List<GroupSlotDataSave>  listStore= new List<GroupSlotDataSave>();
 
     public DataPlayer dataPlayer;
-    public DataRod datagRod;
-    public DataSave(string name , float timeIngame, List<GroupSlotData> grSlots , DataPlayer dataPlayer, DataRod datagRod)
+    public DataRod dataRod;
+    public DataSave(string name , float timeIngame, List<GroupSlotData> grSlots , DataPlayer dataPlayer, DataRod dataRod)
     {
         this.name = name;
         dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         this.timeIngame = timeIngame;
         this.dataPlayer = dataPlayer;
-        this.datagRod = datagRod;
+        this.dataRod = dataRod;
         
         listStore.Clear();
         
@@ -71,7 +73,15 @@ public class DataSave
             listStore.Add(new GroupSlotDataSave(grsl));
         }
     }
-  
+    
+    public DataSave(float timeIngame,DataPlayer dataPlayer,DataRod dataRod)
+    {
+        this.timeIngame = timeIngame;
+        this.dataPlayer = dataPlayer;
+        this.dataRod = dataRod;
+    }
+
+
     public static T GetDtFrPath<T>(string p) where T : UnityEngine.Object
     {
         //"Assets/Resources/"

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GroupSlotData : ScriptableObject
 {
     public  List<Item> items;
+    public List<Item> itemsReset;
     public void add(ItemData itdt, int numit)
     {
         foreach(Item it in items)
@@ -16,11 +17,17 @@ public class GroupSlotData : ScriptableObject
             if(itdt == it.itdt)
             {
                 it.NumIt += numit;
+                if (it.NumIt <= 0) items.Remove(it);
                 return;
             }
         }
         Item newit = new(itdt, numit);
         items.Add(newit);
+    }
+
+    public void reset()
+    {
+        items = itemsReset;
     }
 }
 
@@ -37,15 +44,7 @@ public class Item
     }
     public void save()
     {
-        itdtS.tyleItem = itdt.tyleItem;
-        itdtS.nameItem = itdt.nameItem;
         string name = (itdt.imgItem != null) ? itdt.imgItem.name : "0";
-        itdtS.imgItemPath = DataSave.savePathIt(itdt.imgItem)+"_"+ name;//path+_+name
-        itdtS.price = itdt.price;
-        itdtS.detail = itdt.detail;
-        itdtS.meshrenPath = DataSave.savePathIt(itdt.meshren);
-        itdtS.matPath = DataSave.savePathIt(itdt.mat);
-        itdtS.maxNuminSlot = itdt.maxNuminSlot;
         itdtS.status = itdt.status;
     }
     public void Load()
@@ -58,15 +57,6 @@ public class Item
                 Debug.Log("not find path");
             } 
         }
-        itdt.tyleItem = itdtS.tyleItem;
-        itdt.nameItem = itdtS.nameItem;
-
-        itdt.imgItem = DataSave.GetDtFrPathTsprite<Sprite>(itdtS.imgItemPath);
-        itdt.price = itdtS.price;
-        itdt.detail = itdtS.detail;
-        itdt.meshren = DataSave.GetDtFrPath<Mesh>(itdtS.meshrenPath);
-        itdt.mat = DataSave.GetDtFrPath<Material>(itdtS.matPath);
-        itdt.maxNuminSlot = itdtS.maxNuminSlot;
         itdt.status = itdtS.status;
     }
    

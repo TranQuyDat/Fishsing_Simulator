@@ -68,13 +68,14 @@ public class fishingRodController : MonoBehaviour
         MeshFilter meshBai = bait.GetComponent<MeshFilter>();
         MeshRenderer matBait = bait.GetComponent<MeshRenderer>();
         meshBai.mesh = DataSave.GetDtFrPath<Mesh>(dataRod.meshBaitPath);
-        matBait.material = DataSave.GetDtFrPath<Material>(dataRod.matBaitPath); 
+        matBait.sharedMaterial = DataSave.GetDtFrPath<Material>(dataRod.matBaitPath);
+        bait.transform.localScale = dataRod.scale;
     }
     public DataRod exportData()
     {
         MeshFilter meshBai = bait.GetComponent<MeshFilter>();
         MeshRenderer matBait = bait.GetComponent<MeshRenderer>();
-        DataRod dataRod = new DataRod(bait.tag, meshBai.sharedMesh, matBait.sharedMaterial);
+        DataRod dataRod = new DataRod(bait.tag, meshBai.sharedMesh, matBait.sharedMaterial,bait.transform.localScale);
         return dataRod;
     }
     public void Reset()

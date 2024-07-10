@@ -29,7 +29,7 @@ public class ShipManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(curShip == null && it_Equiped != null)
+        if( (it_Equiped !=null && curShip == null) || (it_Equiped == null && curShip != null))
         {
             setActiveShips();
         }

@@ -7,7 +7,10 @@ public class storeShip : GroupSlot
     public inventory iv;
     public slotItem_ship sl;
     public ShipManager shipMngr;
-
+    private void Awake()
+    {
+        gameMngr = FindObjectOfType<GameManager>();
+    }
     void Update()
     {
         if(curSlot !=null && (sl ==null|| sl.gameObject !=curSlot.gameObject)) sl = curSlot.GetComponent<slotItem_ship>();
@@ -30,14 +33,15 @@ public class storeShip : GroupSlot
         {
             //unlock
             iv.coin -= curSlot.item.price;
-            sl.item.status = Status.unlock;
 
+            gameMngr.loadData.dataSave.dataPlayer.coins = iv.coin;
+            sl.item.status = Status.unlock;
             sl.canUpdateIcon = true;
             sl.icon_lock.SetActive(false);
         }
         else
         {
-            print("khong du tien");
+            gameMngr.notify.setUpAndShow("You don't have enough money to buy it.");
         }
     }
 
@@ -46,11 +50,7 @@ public class storeShip : GroupSlot
         if (curSlot == null || curSlot.item == null || sl.status == Status.Lock) return;
         if (sl.status == Status.equiped)
         {
-            // unEquip
-            sl.item.status = Status.unlock;
-            shipMngr.it_Equiped = null;
-            sl.canUpdateIcon = true;
-            sl.icon_Equip.SetActive(false);
+            gameMngr.notify.setUpAndShow("Ship was equiped");
         }
         else if (sl.status == Status.unlock)
         {

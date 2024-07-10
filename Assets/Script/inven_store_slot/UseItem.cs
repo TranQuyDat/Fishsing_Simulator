@@ -25,9 +25,10 @@ public class UseItem : MonoBehaviour
         MeshRenderer baitObjMeshR = baitObj.GetComponent<MeshRenderer>();
         MeshFilter baitObjMeshF = baitObj.GetComponent<MeshFilter>();
 
-        baitObjMeshR.materials[0] = baitDT.mat;
-        baitObjMeshF.mesh = baitDT.meshren;
+        baitObjMeshR.material = baitDT.mat;
+        baitObjMeshF.sharedMesh = baitDT.meshren;
         baitObj.tag = baitDT.bait.ToString();
+        baitObj.transform.localScale = baitDT.scale;
 
     }
 }

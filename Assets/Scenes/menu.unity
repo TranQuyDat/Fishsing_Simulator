@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.599
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1801024948}
-  m_IndirectSpecularColor: {r: 0.4984467, g: 0.3275626, b: 0.8997587, a: 0.599}
+  m_IndirectSpecularColor: {r: 0.076382644, g: 0.24639216, b: 0.5618173, a: 0.599}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2659,11 +2659,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa3072b8831e4a46aa0c44a15e479f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newGameData:
+    name: NewGame
+    dateTime: 
+    timeIngame: 0
+    listStore:
+    - name: inventory
+      items:
+      - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
+        itdtS:
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/rice.asset
+        NumIt: 5
+    - name: shopdataNPC1
+      items:
+      - itdt: {fileID: 11400000, guid: 515895674f60deb4ea068bf7fb2e17d7, type: 2}
+        itdtS:
+          status: 3
+          pathItem: 
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 5d7cd0ccb7f353947868f99d36cc7f7c, type: 2}
+        itdtS:
+          status: 3
+          pathItem: 
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 8d2e11a79c32d6a45906d718aae8dd96, type: 2}
+        itdtS:
+          status: 3
+          pathItem: 
+        NumIt: 10
+      - itdt: {fileID: 11400000, guid: 6eb01a20387ffc94087654e12e34cc3a, type: 2}
+        itdtS:
+          status: 3
+          pathItem: 
+        NumIt: 10
+    - name: shopdataNPC2
+      items:
+      - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
+        itdtS:
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/rice.asset
+        NumIt: 20
+      - itdt: {fileID: 11400000, guid: c451a30fc4fef144e9f3e99a9f747dce, type: 2}
+        itdtS:
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/worm.asset
+        NumIt: 15
+      - itdt: {fileID: 11400000, guid: 72abbf4217922cc4e8bc47dc95eef30f, type: 2}
+        itdtS:
+          status: 3
+          pathItem: Assets/Resources/Prefap/data/items/meat.asset
+        NumIt: 10
+    - name: shopdataNPC3
+      items:
+      - itdt: {fileID: 11400000, guid: 257cefa67208c024a90d83532342e770, type: 2}
+        itdtS:
+          status: 0
+          pathItem: Assets/Resources/Prefap/data/items/boat.asset
+        NumIt: 1
+      - itdt: {fileID: 11400000, guid: d97f5d5a3ac74a345b656cfd7b95def6, type: 2}
+        itdtS:
+          status: 1
+          pathItem: Assets/Resources/Prefap/data/items/ship1.asset
+        NumIt: 1
+      - itdt: {fileID: 11400000, guid: 331d5940956cdcf41b2affa607474e73, type: 2}
+        itdtS:
+          status: 1
+          pathItem: Assets/Resources/Prefap/data/items/ship2.asset
+        NumIt: 1
+    dataPlayer:
+      pos: {x: 0, y: 0, z: 0}
+      coins: 200
+      parentName: 
+      posParent: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+      scene: 1
+      action: 0
+      inArea: 3
+      canMove: 1
+    dataRod:
+      tagBait: noneBait
+      meshBaitPath: 
+      matBaitPath: 
+      scale: {x: 0, y: 0, z: 0}
   gameMngr: {fileID: 877931379512246547}
   settingUI:
     ui: {fileID: 622702619}
     sl_Volume: {fileID: 399071897}
     sl_SFX: {fileID: 2140439159}
+  data:
+    grSlDatas:
+    - {fileID: 11400000, guid: f1e60549e50a0bc4193b770728527dce, type: 2}
+    - {fileID: 11400000, guid: d1912ec979a053e4fa44cda6b80c4f5e, type: 2}
+    - {fileID: 11400000, guid: a9f1e69ede3eaa84ea9490e869143f92, type: 2}
+    - {fileID: 11400000, guid: d32134582f6234945baff9ee0efd4df4, type: 2}
+    shipDatas:
+    - {fileID: 11400000, guid: 257cefa67208c024a90d83532342e770, type: 2}
+    - {fileID: 11400000, guid: d97f5d5a3ac74a345b656cfd7b95def6, type: 2}
+    - {fileID: 11400000, guid: 331d5940956cdcf41b2affa607474e73, type: 2}
 --- !u!1 &1149503690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,8 +3002,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1565.3, y: -137.47}
-  m_SizeDelta: {x: 190.6784, y: 181.34}
+  m_AnchoredPosition: {x: -1565.3, y: -146}
+  m_SizeDelta: {x: 434.8697, y: 251.7998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297881081
 MonoBehaviour:
@@ -2932,7 +3025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 512970041, guid: b1de81b1a78332c46bbae0a0aaee6033, type: 3}
+  m_Sprite: {fileID: 605030385, guid: a5d9a855ea4a95a49859040638659068, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4046,7 +4139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 354.67126, y: 0}
+  m_AnchoredPosition: {x: 354.7, y: -60}
   m_SizeDelta: {x: 570.7544, y: 796.8214}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730068575
@@ -5150,19 +5243,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5544664176420331962}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b1de48c6e4ef32489def88de3f9d3c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameMngr: {fileID: 877931379512246547}
-  sun: {fileID: 0}
+  sun: {fileID: 1801024948}
   moon: {fileID: 0}
   dawnSkybox: {r: 0.6313726, g: 0.34901962, b: 0.34901962, a: 1}
   daySkybox: {r: 0.5372549, g: 0.65882355, b: 0.7529412, a: 1}
   eveningSkybox: {r: 0.5647059, g: 0.3254902, b: 0.24313726, a: 1}
   nightSkybox: {r: 0.09019608, g: 0.16862746, b: 0.3019608, a: 1}
-  timeOfDay: 6
+  locktime: 1
+  timeOfDay: 3
   speedTime: 0.01
   offset: 0
   speedCloud: 3

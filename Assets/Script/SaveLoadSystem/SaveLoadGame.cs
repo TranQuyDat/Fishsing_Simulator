@@ -85,7 +85,10 @@ public class SaveLoadGame : MonoBehaviour
     }
     public DataSave getData(string nameFile)
     {
-        string json = File.ReadAllText(dirPath + "/filesave_" + nameFile + ".json");
+        string json = "";
+        if (nameFile.StartsWith("filesave_") && nameFile.EndsWith(".json"))
+            json = File.ReadAllText(dirPath + "/" + nameFile);
+        else json = File.ReadAllText(dirPath + "/filesave_" + nameFile + ".json");
         DataSave loadData = JsonUtility.FromJson<DataSave>(json);
         return loadData;
     }
@@ -102,10 +105,9 @@ public class SaveLoadGame : MonoBehaviour
         
         string json = JsonUtility.ToJson(saveData);
         File.WriteAllText(pathSave, json);
-        gameMngr.loadData.newNameSave = name;
-        print(saveData.listStore.Count);
-        print(json);
-
+        //print(saveData.listStore.Count);
+        //print(json);
+        gameMngr.notify.setUpAndShow("saved",1);
         DataSave save = getData(name);
         if (!dicSlotSave.ContainsKey(name)) return;
         dicSlotSave[name].dateTime.text = save.dateTime;
@@ -119,8 +121,10 @@ public class SaveLoadGame : MonoBehaviour
         {
             DataSave loadData = getData(name);
             Scenes scene = (gameMngr.curScene!=Scenes.menu) ? playerCtrl.scenes : Scenes.menu;
-            gameMngr.change2LoadingScene(scene, loadData.dataPlayer.scene,loadData);
+            gameMngr.change2LoadingScene(scene, loadData.dataPlayer.scene,true,loadData);
             
+
+            //load Groupslot
             foreach(GroupSlotDataSave gr in loadData.listStore)
             {
                 dicSlots[gr.name].items = gr.items;

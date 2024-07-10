@@ -15,9 +15,9 @@ MonoBehaviour:
   tyleItem: 2
   nameItem: scout_BoatV1
   imgItem: {fileID: 465797283, guid: c630fb572ce8450478429b66297d452e, type: 3}
-  price: 200
-  detail: ship2
+  price: 300
+  detail: scout_BoatV1
   meshren: {fileID: -3811911705681396582, guid: 0e6c567c9eb17644780f66c4dea0324b, type: 3}
   mat: {fileID: -4814387500147316422, guid: 0e6c567c9eb17644780f66c4dea0324b, type: 3}
-  maxNuminSlot: 1
+  maxNuminSlot: 0
   status: 1

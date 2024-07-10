@@ -9,6 +9,7 @@ public class store : GroupSlot
     public inventory iv;
     private void Awake()
     {
+        gameMngr = FindObjectOfType<GameManager>();
         txt_name.text = name;
     }
     private void Update()
@@ -32,16 +33,20 @@ public class store : GroupSlot
             if (iv.coin >= cost)
             {
                 print("buy"+curSlot.item);
-                iv.coin -= cost;
+                
                 iv.addItem(curSlot.item, num);
-                if (iv.canAddToData) iv.Data.add(curSlot.item, num);
+                if (iv.canAddToData)
+                {
+                    iv.Data.add(curSlot.item, num);
+                    iv.coin -= cost;
+                }
                 removeItem(curSlot, num);
                 ui_ok_close.SetActive(false);
                 curSlot = null;
             }
             else
             {
-                print("you have not enought coin");
+                gameMngr.notify.setUpAndShow("You don't have enough money to buy it.");
             }
 
             btnOK.onClick.RemoveAllListeners();

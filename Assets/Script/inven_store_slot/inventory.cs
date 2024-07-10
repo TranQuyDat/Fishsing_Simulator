@@ -13,17 +13,22 @@ public class inventory : GroupSlot
     public UseItem useItem;
     private void Awake()
     {
-
+        gameMngr = FindObjectOfType<GameManager>();
     }
     private void Update()
     {
         updateUIok();
         updateGroupSlot();
+        if(coin != gameMngr.loadData.dataSave.dataPlayer.coins)
+        {
+            gameMngr.loadData.dataSave.dataPlayer.coins = coin;
+        }
     }
 
     private void OnEnable()
     {
         importShopData(Data);
+        coin = gameMngr.loadData.dataSave.dataPlayer.coins;
         SortAndMergeSlots();
         txt_coin.text = "" + coin;
     }

@@ -44,13 +44,15 @@ public class LoadScene : MonoBehaviour
             DontDestroyOnLoad(gameMngr.playerCtrl.gameObject);
         }
         gameMngr.playerCtrl.ischangeScene = true;
+        gameMngr.playerCtrl.importData(loadData.dataSave.dataPlayer);
+        gameMngr.fishingRodCtrl.importData(loadData.dataSave.dataRod);
         SceneManager.LoadSceneAsync(loadData.nextScene.ToString());
     }
     public void loadFromSave()
     {
         //add player to ship if have ship
         DataPlayer dataPlayer = loadData.dataSave.dataPlayer;
-        DataRod dataRod = loadData.dataSave.datagRod;
+        DataRod dataRod = loadData.dataSave.dataRod;
         if (dataPlayer.parentName != "")
         {
             Transform parent = GameObject.Find(dataPlayer.parentName).transform;
@@ -60,7 +62,6 @@ public class LoadScene : MonoBehaviour
             DontDestroyOnLoad(parent.gameObject);
         }
         else DontDestroyOnLoad(gameMngr.playerCtrl.gameObject);
-        loadData.time = loadData.dataSave.timeIngame;
         gameMngr.playerCtrl.importData(dataPlayer);
         gameMngr.fishingRodCtrl.importData(dataRod);
         SceneManager.LoadSceneAsync(loadData.nextScene.ToString());

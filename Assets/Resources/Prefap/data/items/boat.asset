@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c802200ca259246b4040c909078de5, type: 3}
   m_Name: boat
   m_EditorClassIdentifier: 
-  tyleItem: 2
+  tyleItem: 0
   nameItem: wood_BoatV1
   imgItem: {fileID: 1579248240, guid: 358cde081d2a70e4ea52ad664aa324f6, type: 3}
   price: 0
