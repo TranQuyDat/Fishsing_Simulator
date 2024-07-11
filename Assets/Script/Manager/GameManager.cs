@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public fishManager fishMngr;
     public ShipManager shipMngr;
     public TimeManager TimeMngr;
+    public soundManager soundMngr;
     public PlayerController playerCtrl;
     public fishingRodController fishingRodCtrl;
     public inventory iv;

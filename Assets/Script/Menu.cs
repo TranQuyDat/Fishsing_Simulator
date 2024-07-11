@@ -43,6 +43,7 @@ public class Menu : MonoBehaviour
     public DataGame data;
     private void Awake()
     {
+        gameMngr.soundMngr.playMusic(SoundType.music_menu, true);
         Time.timeScale = 1;
         foreach(GroupSlotData grslDT in data.grSlDatas)
         {

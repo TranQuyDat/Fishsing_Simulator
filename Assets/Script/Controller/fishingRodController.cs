@@ -57,8 +57,10 @@ public class fishingRodController : MonoBehaviour
     }
     private void OnEnable()
     {
-        gameMngr.fishMngr.Reset();
         Reset();
+        if(gameMngr.fishMngr != null) 
+            gameMngr.fishMngr.Reset();
+        
         gameMngr.uiMngr.gamePlay.fishingUI.playAniFishingNormal();
     }
 

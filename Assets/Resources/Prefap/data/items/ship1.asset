@@ -19,5 +19,5 @@ MonoBehaviour:
   detail: speed_BoatV1
   meshren: {fileID: 5893029891874791259, guid: fb2bcf6de7a3fd14f8e4ec1f1a2e1bc1, type: 3}
   mat: {fileID: -4814387500147316422, guid: fb2bcf6de7a3fd14f8e4ec1f1a2e1bc1, type: 3}
-  maxNuminSlot: 0
-  status: 1
+  maxNuminSlot: 1
+  status: 0

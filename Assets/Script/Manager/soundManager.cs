@@ -30,6 +30,9 @@ public class soundManager : MonoBehaviour
 
     public Dictionary<SoundType, AudioClip> dicSound;
     public SoundType curMusicScene;
+
+    public float curVolumeMusic;
+    public float curVolumeSound;
     private void Awake()
     {
         gameMngr = FindObjectOfType<GameManager>();
@@ -43,13 +46,22 @@ public class soundManager : MonoBehaviour
     }
     private void Start()
     {
-        mixer.SetFloat("Master", 40 * Mathf.Log10(gameMngr.settingData.volume));
-        mixer.SetFloat("SFX", 40 * Mathf.Log10(gameMngr.settingData.soundFx));
+        mixer.SetFloat("music", 40 * Mathf.Log10(gameMngr.settingData.volume));
+        mixer.SetFloat("sound", 40 * Mathf.Log10(gameMngr.settingData.soundFx));
     }
 
     private void Update()
     {
-
+        if(curVolumeMusic != gameMngr.settingData.volume)
+        {
+            setVolumeMusic(gameMngr.settingData.volume);
+            curVolumeMusic = gameMngr.settingData.volume;
+        }
+        if (curVolumeSound != gameMngr.settingData.soundFx)
+        {
+            setVolumeSFX(gameMngr.settingData.soundFx);
+            curVolumeSound = gameMngr.settingData.soundFx;
+        }
     }
 
     public void playMusic(SoundType st, bool isloop, float delaytime = 0)
@@ -66,10 +78,10 @@ public class soundManager : MonoBehaviour
 
     public void setVolumeMusic(float v)
     {
-        mixer.SetFloat("Master", 40 * Mathf.Log10(v));
+        mixer.SetFloat("music", 40 * Mathf.Log10(v));
     }
     public void setVolumeSFX(float v)
     {
-        mixer.SetFloat("SFX", 40 * Mathf.Log10(v));
+        mixer.SetFloat("sound", 40 * Mathf.Log10(v));
     }
 }

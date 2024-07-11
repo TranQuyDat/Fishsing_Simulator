@@ -12,42 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ad38530f0f6a449a61c2f33c94a5a7, type: 3}
   m_Name: loadData
   m_EditorClassIdentifier: 
-  oldScene: 0
+  oldScene: 3
   nextScene: 2
   isloadFrSave: 0
   dataSave:
     name: 
     dateTime: 
-    timeIngame: 0
-    listStore:
-    - name: 
-      items:
-      - itdt: {fileID: 0}
-        itdtS:
-          tyleItem: 0
-          nameItem: 
-          imgItemPath: 
-          price: 0
-          detail: 
-          meshrenPath: 
-          matPath: 
-          maxNuminSlot: 0
-          status: 0
-          pathItem: 
-        NumIt: 0
+    timeIngame: 3.3559992
+    listStore: []
     dataPlayer:
-      pos: {x: 0, y: 0, z: 0}
-      coins: 0
-      parentName: 
-      posParent: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0}
-      scene: 0
-      action: 0
-      inArea: 0
+      pos: {x: -180.0353, y: -1.8779011, z: 0}
+      coins: 200
+      parentName: scout_BoatV1
+      posParent: {x: -179.8653, y: -2.7939014, z: 0}
+      rotation: {x: -9.719457e-11, y: 270, z: -0.000000031331265}
+      scene: 3
+      action: 2
+      inArea: 1
       canMove: 0
     dataRod:
-      tagBait: 
-      meshBaitPath: 
-      matBaitPath: 
-  time: 13.362826
-  newNameSave: 
+      tagBait: rice
+      meshBaitPath: Assets/Resources/model_mat_texture/bait/rice.fbx
+      matBaitPath: Assets/Resources/model_mat_texture/bait/rice.mat
+      scale: {x: 2, y: 2, z: 2}
