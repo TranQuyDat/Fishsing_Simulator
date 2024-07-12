@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13663c719dafe6e449d0e548fe7b65e1, type: 3}
+  m_Name: Kingshark
+  m_EditorClassIdentifier: 
+  tyleItem: 0
+  nameItem: Kingshark
+  imgItem: {fileID: -700592006, guid: 5ab9fbbfbf320344aa44b03e3c5c18e4, type: 3}
+  price: 200
+  detail: 'Kingshark, price : 200'
+  meshren: {fileID: -4108424097152807243, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}
+  mat: {fileID: 4874126678125670354, guid: ca38d4485fce19f4aa0d3d7bdd8b6cf2, type: 3}
+  maxNuminSlot: 10
+  status: 3
+  bait: 3
+  scale: {x: 0.5, y: 0.5, z: 0.5}

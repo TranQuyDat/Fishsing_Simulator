@@ -16,7 +16,7 @@ MonoBehaviour:
   nameItem: worm
   imgItem: {fileID: 730895436, guid: 0fb76ee956891e245b61b6b97318f166, type: 3}
   price: 10
-  detail: worm
+  detail: 'worm, price : 10'
   meshren: {fileID: -3168918542085528509, guid: a1ff10265640c54468f4330389d54db0, type: 3}
   mat: {fileID: 2100000, guid: caefa7bb0a85d604c81fd24f580ddfca, type: 2}
   maxNuminSlot: 10

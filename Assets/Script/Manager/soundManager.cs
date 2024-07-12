@@ -8,11 +8,17 @@ using UnityEngine.SceneManagement;
 public enum SoundType
 {
     //music Loop
-    music_gamePlay,
+    music_mapPort,
+    music_mapCity,
+    music_mapsea,
+    music_Underwater,
     music_menu,
     // soundFx
     sfx_run,
     sfx_caughtFish,
+    sfx_click,
+    sfx_reeling,
+    sfx_notify,
 
 }
 public class soundManager : MonoBehaviour
@@ -22,11 +28,17 @@ public class soundManager : MonoBehaviour
     public AudioSource SFX;
     public AudioMixer mixer;
     [Header("Music")]
-    public AudioClip music_gamePlay;
+    public AudioClip music_mapPort;
+    public AudioClip music_mapCity;
+    public AudioClip music_mapsea;
+    public AudioClip music_Underwater;
     public AudioClip music_menu;
     [Header("SFX")]
     public AudioClip sfx_run;
     public AudioClip sfx_caughtFish;
+    public AudioClip sfx_reeling;
+    public AudioClip sfx_click;
+    public AudioClip sfx_notify;
 
     public Dictionary<SoundType, AudioClip> dicSound;
     public SoundType curMusicScene;
@@ -39,8 +51,14 @@ public class soundManager : MonoBehaviour
         dicSound = new Dictionary<SoundType, AudioClip>
         {
             { SoundType.music_menu , music_menu },
-            { SoundType.music_gamePlay , music_gamePlay },
+            { SoundType.music_mapPort , music_mapPort },
+            { SoundType.music_mapCity , music_mapCity },
+            { SoundType.music_mapsea , music_mapsea },
+            { SoundType.music_Underwater , music_Underwater },
             { SoundType.sfx_run , sfx_run },
+            { SoundType.sfx_click , sfx_click },
+            { SoundType.sfx_notify , sfx_notify },
+            { SoundType.sfx_reeling , sfx_reeling },
             { SoundType.sfx_caughtFish , sfx_caughtFish },
         };
     }

@@ -16,7 +16,7 @@ MonoBehaviour:
   nameItem: rice
   imgItem: {fileID: -306934099, guid: c84fa96e495b43248863c69d91261525, type: 3}
   price: 5
-  detail: rice
+  detail: 'rice, price: 5'
   meshren: {fileID: 4711208715938537054, guid: 3dc750cb5001d524baa72a1223cca2b9, type: 3}
   mat: {fileID: 2100000, guid: f207f12a7456ad048a5e76e9b8053239, type: 2}
   maxNuminSlot: 10

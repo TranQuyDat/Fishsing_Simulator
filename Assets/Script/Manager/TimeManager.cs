@@ -30,9 +30,21 @@ public class TimeManager : MonoBehaviour
         if (timeOfDay >= 24)
         {
             timeOfDay = 0;
+            onNewDay();
         }
     }
 
+    public void onNewDay()
+    {
+        if(gameMngr.iv.coin <=0 && gameMngr.iv.Data.items.Count <= 0)
+        {
+            // hỗ trợ người chơi thêm 10 coint
+            gameMngr.loadData.dataSave.dataPlayer.coins += 10;
+            gameMngr.notify.setUpAndShow("New Day \n The villagers support you with 10 coins");
+            return;
+        }
+        gameMngr.notify.setUpAndShow("New Day");
+    }
     private void UpdateLighting(float timePercent)
     {
         RenderSettings.skybox.SetColor("_Tint", GetCurrentSkybox(timePercent)) ;

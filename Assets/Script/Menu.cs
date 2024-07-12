@@ -43,14 +43,13 @@ public class Menu : MonoBehaviour
     public DataGame data;
     private void Awake()
     {
-        gameMngr.soundMngr.playMusic(SoundType.music_menu, true);
+        
         Time.timeScale = 1;
         foreach(GroupSlotData grslDT in data.grSlDatas)
         {
             data.dicgrSlData.Add(grslDT.name, grslDT);
         }
     }
-
     private void Update()
     {
         updateUIsetting();
@@ -72,6 +71,7 @@ public class Menu : MonoBehaviour
     }
     public void btn_continue()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         string dirPath = Application.persistentDataPath + "/Save";
         if (!Directory.Exists(dirPath)) return;
         DirectoryInfo directoryInfo = new DirectoryInfo(dirPath);
@@ -83,6 +83,7 @@ public class Menu : MonoBehaviour
     }
     public void btn_NewGame()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         newGameData.dateTime = Time.deltaTime.ToString("yyyy-MM-dd HH:mm:ss");
         gameMngr.change2LoadingScene(Scenes.menu, Scenes.city,false,newGameData);
 
@@ -91,6 +92,7 @@ public class Menu : MonoBehaviour
 
     public void btn_Quit()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         Application.Quit();
     }
 }

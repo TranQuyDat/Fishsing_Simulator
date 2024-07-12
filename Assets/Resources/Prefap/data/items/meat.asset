@@ -16,7 +16,7 @@ MonoBehaviour:
   nameItem: meat
   imgItem: {fileID: -1523661995, guid: c4987a4f51960284db8f67f6ebd62c0a, type: 3}
   price: 100
-  detail: meat
+  detail: meat, price:100
   meshren: {fileID: -1935031821256707543, guid: b4401b400319d9c4b942ccf15d0f3789, type: 3}
   mat: {fileID: 2100000, guid: e128f8b7fd2b1c245bb73f4cb9e88d00, type: 2}
   maxNuminSlot: 10

@@ -306,10 +306,16 @@ MonoBehaviour:
   musicTheme: {fileID: 6681479002636463944}
   SFX: {fileID: 4279343875749202164}
   mixer: {fileID: 24100000, guid: 6a3af601bc6af0c4d9d8b24737844cdc, type: 2}
-  music_gamePlay: {fileID: 0}
+  music_mapPort: {fileID: 8300000, guid: 1349004818bee9244b77f9830d87ced6, type: 3}
+  music_mapCity: {fileID: 8300000, guid: b3c69ebb8f9a90642b5e9f42a8d68fb1, type: 3}
+  music_mapsea: {fileID: 8300000, guid: e8a959970a7c74f429112942073149a5, type: 3}
+  music_Underwater: {fileID: 8300000, guid: b5dd526935404564380229d3b86a7d07, type: 3}
   music_menu: {fileID: 8300000, guid: 4096c695d2d82d242b66c7c136c72a15, type: 3}
   sfx_run: {fileID: 0}
   sfx_caughtFish: {fileID: 0}
-  curMusicScene: 1
+  sfx_reeling: {fileID: 0}
+  sfx_click: {fileID: 8300000, guid: 914adc08494c15d49baa536784ca9fd0, type: 3}
+  sfx_notify: {fileID: 8300000, guid: 952b39dcb1127cd47afe76b09c91599e, type: 3}
+  curMusicScene: 2
   curVolumeMusic: 0
   curVolumeSound: 0

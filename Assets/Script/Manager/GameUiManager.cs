@@ -63,15 +63,18 @@ public class GameUiManager : MonoBehaviour
     }
     public void btnCloseUI(GameObject ui)
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         ui.SetActive(false);
     }
     public void btnOpentUI(GameObject ui)
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         ui.SetActive(true);
     }
 
     public void btnLoad(slotLoad slot)
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         StartCoroutine(checDoubleClick());
         if (!isdoubleClick)
         {

@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-
+        if (curScene != Scenes.loading)
+        {
+            soundMngr.playMusic(soundMngr.curMusicScene, true);
+        }
         if (curScene != Scenes.menu && playerCtrl.transform.parent == null) 
             SceneManager.MoveGameObjectToScene(playerCtrl.gameObject, SceneManager.GetActiveScene());
     }
