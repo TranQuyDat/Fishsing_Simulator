@@ -43,6 +43,7 @@ public class fishManager : MonoBehaviour
     }
     private void Update()
     {
+        if(fishRodCtrl == null) fishRodCtrl = gameMngr.fishingRodCtrl;
         spawnFish();
         randomFish();
         updateDisOfTLKFish();

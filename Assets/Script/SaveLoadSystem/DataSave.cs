@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 
 [Serializable]
 public class DataRod
@@ -85,23 +86,25 @@ public class DataSave
     public static T GetDtFrPath<T>(string p) where T : UnityEngine.Object
     {
         //"Assets/Resources/"
+        if (p == "" || p == null) return null;
         T obj = Resources.Load<T>(p);
         if (p.StartsWith("Assets/Resources/"))
         {
             string[] pathSplit = p.Split("."); ;
             string path = pathSplit[0].Substring("Assets/Resources/".Length);
             obj = Resources.Load<T>(path);
-            Debug.Log(path + " | obj:" + obj);
+            //Debug.Log(path + " | obj:" + obj);
         }
         if(obj == null)
         {
-            Debug.Log("not find path" + p);
+            //Debug.Log("not find path" + p);
         }
         return obj;
     }
     public static T GetDtFrPathTsprite<T>(string p) where T : UnityEngine.Object
     {
-       //"Assets/Resources/img/fish.png_fish_0"
+        //"Assets/Resources/img/fish.png_fish_0"
+        if (p == null || p == null) return null;
         T obj = Resources.Load<T>(p);
         if (p.StartsWith("Assets/Resources/")) {
             string[] pathSplit = p.Split("_");
@@ -112,17 +115,16 @@ public class DataSave
         }
         if(obj == null)
         {
-            Debug.Log("not find path" + p);
+            //Debug.Log("not find path" + p);
         }
         return obj;
     }
-
     public static string savePathIt(UnityEngine.Object obj)
     {
-        string path = AssetDatabase.GetAssetPath(obj);
+        string path = GameManager.getPath(obj);
         if (String.IsNullOrEmpty(path))
         {
-            Debug.Log("path is null or empty");
+            //Debug.Log("path is null or empty");
         }
         return path;
     }

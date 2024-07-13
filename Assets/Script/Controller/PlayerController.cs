@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     public void importData(DataPlayer dataPlayer)
     {
-        print("load data");
+        //print("load data");
         gameMngr.iv.coin = dataPlayer.coins;
         transform.position = dataPlayer.pos;
         inArea = dataPlayer.inArea;

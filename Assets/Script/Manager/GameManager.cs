@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour
     public GlobalMap globalMap;
     public LoadData loadData;
     public SettingData settingData;
+    public path pathdata;
     public Scenes curScene;
     public bool isStopGame = false;
-
+    public static Dictionary<int, string> dicPath = new Dictionary<int, string>();
     private void Awake()
     {
+        initDicPath();
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         playerCtrl = FindObjectOfType<PlayerController>();
@@ -56,11 +58,27 @@ public class GameManager : MonoBehaviour
         {
             playerCtrl.resetInput();
             saveLoadGame.playerCtrl = playerCtrl;
-            Debug.Log("Update input");
+            //Debug.Log("Update input");
         }
     }
 
+    public void initDicPath()
+    {
+        if (dicPath.Count > 0) return;
+        foreach(StringPair p in pathdata.listPath)
+        {
+            int key = p.key.GetInstanceID();
+            print(key);
+            dicPath.Add(key, p.value);
+        }
+    }
 
+    public static string getPath(Object obj)
+    {
+        if (obj == null) return null;
+        int k = obj.GetInstanceID();
+        return dicPath[k];
+    }
     public void change2LoadingScene(Scenes oldScene,Scenes nextScene,bool isloadFrSave,DataSave dataSave = null)
     {
 

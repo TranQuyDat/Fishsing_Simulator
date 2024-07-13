@@ -72,7 +72,7 @@ public class GroupSlotDataSave
         items = new List<Item>(grdt.items);
         foreach(Item it in items)
         {
-            it.itdtS.pathItem = AssetDatabase.GetAssetPath(it.itdt);
+            it.itdtS.pathItem = GameManager.getPath(it.itdt);
             it.save();
         }
     }

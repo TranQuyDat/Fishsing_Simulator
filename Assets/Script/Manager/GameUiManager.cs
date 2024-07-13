@@ -80,7 +80,7 @@ public class GameUiManager : MonoBehaviour
         {
             return;
         }
-        print("click" + slot.name);
+        //print("click" + slot.name);
         gameMngr.saveLoadGame.load(slot.nameFile.text);
     }
 

@@ -116,7 +116,7 @@ public class SaveLoadGame : MonoBehaviour
 
     public void load(string name)
     {
-        print(Directory.Exists(dirPath));
+        //print(Directory.Exists(dirPath));
         if (Directory.Exists(dirPath))
         {
             DataSave loadData = getData(name);

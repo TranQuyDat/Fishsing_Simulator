@@ -23163,6 +23163,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ff1fa2b7ba0479a4a9bfea336f95271a, type: 2}
     - target: {fileID: 877931380202264161, guid: 5922ca4c14d105342b5411ac1bdf087b, type: 3}
+      propertyPath: pathdata
+      value: 
+      objectReference: {fileID: 11400000, guid: bc24090899589cf4ebad3b1a5a747c50, type: 2}
+    - target: {fileID: 877931380202264161, guid: 5922ca4c14d105342b5411ac1bdf087b, type: 3}
       propertyPath: globalMap
       value: 
       objectReference: {fileID: 2608835570363613517}

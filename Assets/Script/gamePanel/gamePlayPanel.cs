@@ -45,7 +45,7 @@ public class FishInfoUI
 
     public void btn_close(inventory iv)
     {
-        iv.addItem(fishdata);
+        iv.Data.add(fishdata,1);
         fishdata = null;
         ui.SetActive(false);
     }

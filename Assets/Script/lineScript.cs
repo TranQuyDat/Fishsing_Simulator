@@ -59,7 +59,7 @@ public class lineScript : MonoBehaviour
     {
         if (ropeConnection == null ) return;
         lineScript line = ropeConnection.GetComponent<lineScript>();
-        if(snapRopTip == false && line.listNode.Count>0)
+        if(snapRopTip == false && line.listNode.Count>0 && line !=null)
         {
             listNode[0].GetComponent<CharacterJoint>().connectedBody = line.listNode[line.listNode.Count - 1].GetComponent<Rigidbody>();
             line.endPos.position = listNode[0].transform.position;
@@ -102,7 +102,7 @@ public class lineScript : MonoBehaviour
             listNode[listNode.Count - 1].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
            endPos.transform.position = listNode[listNode.Count - 1].transform.position;
         }
-        Component com = listNode[0].GetComponent<CharacterJoint>();
+
         if (snapRopTip)
         {
             Destroy(listNode[0].GetComponent<CharacterJoint>());
@@ -111,7 +111,7 @@ public class lineScript : MonoBehaviour
         }
         else if (listNode[0].GetComponent<CharacterJoint>()== null)
         {
-            listNode[0].AddComponent(com.GetType());
+            listNode[0].AddComponent<CharacterJoint>();
             listNode[0].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
         
