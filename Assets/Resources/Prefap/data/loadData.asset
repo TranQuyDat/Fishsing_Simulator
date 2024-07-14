@@ -12,84 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ad38530f0f6a449a61c2f33c94a5a7, type: 3}
   m_Name: loadData
   m_EditorClassIdentifier: 
-  oldScene: 5
+  oldScene: 1
   nextScene: 0
-  isloadFrSave: 1
+  isloadFrSave: 0
   dataSave:
-    name: a
-    dateTime: 2024-07-11 20:48:44
-    timeIngame: 2.2648954
-    listStore:
-    - name: inventory
-      items: []
-    - name: shopdataNPC1
-      items:
-      - itdt: {fileID: 0}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/fishV1.asset
-        NumIt: 10
-      - itdt: {fileID: 2606694310529139623, guid: 88bcdc8a58ebfdf4c8499497aed7393b, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/fishV2.asset
-        NumIt: 10
-      - itdt: {fileID: 22100000, guid: 6a82f97644eaf55478d0c15fbc30fa92, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/fishV3.asset
-        NumIt: 10
-      - itdt: {fileID: 2100000, guid: b17e54a35bf9d914b94e41bcb230fdee, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/fishV4.asset
-        NumIt: 10
-    - name: shopdataNPC2
-      items:
-      - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/rice.asset
-        NumIt: 20
-      - itdt: {fileID: 2100000, guid: eaf17b849c043774a9a195245f3e635c, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/worm.asset
-        NumIt: 15
-      - itdt: {fileID: 11400000, guid: 72abbf4217922cc4e8bc47dc95eef30f, type: 2}
-        itdtS:
-          status: 3
-          pathItem: Assets/Resources/Prefap/data/items/meat.asset
-        NumIt: 10
-    - name: shopdataNPC3
-      items:
-      - itdt: {fileID: 2100000, guid: 7d53f22039b5eba47b74dccdc78bc951, type: 2}
-        itdtS:
-          status: 2
-          pathItem: Assets/Resources/Prefap/data/items/boat.asset
-        NumIt: 1
-      - itdt: {fileID: 2100000, guid: edd6b8b8d278f9541989c64dcadaf7d5, type: 2}
-        itdtS:
-          status: 2
-          pathItem: Assets/Resources/Prefap/data/items/ship1.asset
-        NumIt: 1
-      - itdt: {fileID: 11400000, guid: 331d5940956cdcf41b2affa607474e73, type: 2}
-        itdtS:
-          status: 0
-          pathItem: Assets/Resources/Prefap/data/items/ship2.asset
-        NumIt: 1
+    name: 
+    dateTime: 
+    timeIngame: 0.20867033
+    listStore: []
     dataPlayer:
-      pos: {x: -44.5882, y: 3.1682568, z: 0.0000010244548}
-      coins: 10
+      pos: {x: 23.347536, y: -0.5198147, z: 1.7499998}
+      coins: 200
       parentName: 
       posParent: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 270, z: 0}
-      scene: 0
+      scene: 1
       action: 0
       inArea: 2
       canMove: 1
     dataRod:
-      tagBait: rice
-      meshBaitPath: Assets/Resources/model_mat_texture/bait/rice.fbx
-      matBaitPath: Assets/Resources/model_mat_texture/bait/rice.mat
-      scale: {x: 2, y: 2, z: 2}
+      tagBait: noneBait
+      meshBaitPath: 
+      matBaitPath: 
+      scale: {x: 0, y: 0, z: 0}

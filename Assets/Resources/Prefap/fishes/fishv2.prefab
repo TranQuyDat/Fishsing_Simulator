@@ -700,7 +700,6 @@ MonoBehaviour:
   rb: {fileID: -4782157917398144019}
   speed: 5
   timeChangeDir: 8
-  olfaction: 3
   limitXYmin: {fileID: 0}
   limitXYmax: {fileID: 0}
   head: {fileID: 3780998805147929658}

@@ -15,37 +15,32 @@ MonoBehaviour:
   items:
   - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
     itdtS:
-      tyleItem: 1
-      nameItem: rice
-      imgItem: {fileID: 2469237369149368062, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
-      price: 1
-      detail: 
-      meshren: {fileID: 2100000, guid: 823cb446423dd7747b7454d5cf133e75, type: 2}
-      mat: {fileID: 2100000, guid: 0c4be2c3911ed014c99a083e8f6b559d, type: 2}
-      maxNuminSlot: 10
-      status: 0
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/rice.asset
     NumIt: 20
   - itdt: {fileID: 11400000, guid: c451a30fc4fef144e9f3e99a9f747dce, type: 2}
     itdtS:
-      tyleItem: 1
-      nameItem: worm
-      imgItem: {fileID: 0}
-      price: 3
-      detail: 'worm is the bait , price : 10'
-      meshren: {fileID: 100100000, guid: 1e69511aec3ef63448cddb61accb7922, type: 3}
-      mat: {fileID: 2100000, guid: 3ab839f8deeab9b4cbf51e114936438b, type: 2}
-      maxNuminSlot: 10
       status: 3
+      pathItem: Assets/Resources/Prefap/data/items/worm.asset
     NumIt: 15
   - itdt: {fileID: 11400000, guid: 72abbf4217922cc4e8bc47dc95eef30f, type: 2}
     itdtS:
-      tyleItem: 1
-      nameItem: meat
-      imgItem: {fileID: 2107144618038543316, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
-      price: 20
-      detail: meat
-      meshren: {fileID: 4198391595887606406, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
-      mat: {fileID: 2100000, guid: 85858c05d24b07741bc6d951c6a1258a, type: 2}
-      maxNuminSlot: 5
-      status: 0
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/meat.asset
+    NumIt: 10
+  itemsReset:
+  - itdt: {fileID: 11400000, guid: 48d34092ee641dd45b36b3dfbf1de39e, type: 2}
+    itdtS:
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/rice.asset
+    NumIt: 20
+  - itdt: {fileID: 11400000, guid: c451a30fc4fef144e9f3e99a9f747dce, type: 2}
+    itdtS:
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/worm.asset
+    NumIt: 15
+  - itdt: {fileID: 11400000, guid: 72abbf4217922cc4e8bc47dc95eef30f, type: 2}
+    itdtS:
+      status: 3
+      pathItem: Assets/Resources/Prefap/data/items/meat.asset
     NumIt: 10

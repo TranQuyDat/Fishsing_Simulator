@@ -41,6 +41,7 @@ public class dialog : MonoBehaviour
 
     public void btn_shop()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         npc.st.importShopData(npc.shopdata);
         npc.st.transform.parent.gameObject.SetActive(true);
         npc.st.gameObject.SetActive(true);

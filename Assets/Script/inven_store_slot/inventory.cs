@@ -19,10 +19,6 @@ public class inventory : GroupSlot
     {
         updateUIok();
         updateGroupSlot();
-        if(coin != gameMngr.loadData.dataSave.dataPlayer.coins)
-        {
-            gameMngr.loadData.dataSave.dataPlayer.coins = coin;
-        }
     }
 
     private void OnEnable()
@@ -56,6 +52,7 @@ public class inventory : GroupSlot
 
     public void btn_sell() 
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null) return;
         ui_ok_close.SetActive(true);
         setUiOK("are you want sell?",true,true);
@@ -63,7 +60,7 @@ public class inventory : GroupSlot
         {
             int num = (int)(slider.value * curSlot.numItem);
             int cost = curSlot.item.price * num;
-            coin += cost;
+            gameMngr.loadData.dataSave.dataPlayer.coins += cost;
             print("sell" + curSlot.item);
             //sell
             st.addItem(curSlot.item, num);
@@ -75,6 +72,7 @@ public class inventory : GroupSlot
     }
     public void btn_use() 
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null) return;
         ui_ok_close.SetActive(true);
         setUiOK("are you want use?",false);
@@ -92,6 +90,7 @@ public class inventory : GroupSlot
     }
     public void btn_drop()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null) return;
         ui_ok_close.SetActive(true);
         setUiOK("are you want drop?");

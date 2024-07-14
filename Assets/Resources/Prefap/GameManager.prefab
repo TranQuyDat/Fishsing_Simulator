@@ -50,6 +50,7 @@ MonoBehaviour:
   fishMngr: {fileID: 0}
   shipMngr: {fileID: 0}
   TimeMngr: {fileID: 5036851060709714697}
+  soundMngr: {fileID: 0}
   playerCtrl: {fileID: 0}
   fishingRodCtrl: {fileID: 0}
   iv: {fileID: 0}
@@ -58,7 +59,10 @@ MonoBehaviour:
   notify: {fileID: 0}
   saveLoadGame: {fileID: 0}
   globalMap: {fileID: 0}
+  surfaceWater: {fileID: 0}
   loadData: {fileID: 11400000, guid: ff1fa2b7ba0479a4a9bfea336f95271a, type: 2}
+  settingData: {fileID: 0}
+  pathdata: {fileID: 0}
   curScene: 1
   isStopGame: 0
 --- !u!114 &5053960223387683167
@@ -101,6 +105,7 @@ MonoBehaviour:
   daySkybox: {r: 0.5372549, g: 0.65882355, b: 0.7529412, a: 1}
   eveningSkybox: {r: 0.5647059, g: 0.3254902, b: 0.24313726, a: 1}
   nightSkybox: {r: 0.09019608, g: 0.16862746, b: 0.3019608, a: 1}
+  locktime: 0
   timeOfDay: 6
   speedTime: 0.01
   offset: 0

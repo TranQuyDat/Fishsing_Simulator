@@ -34,7 +34,8 @@ public class TriggerChangeScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameMngr.playerCtrl !=null && playerctrl == null)
+        if(gameMngr ==null) gameMngr = FindObjectOfType<GameManager>();
+        if (gameMngr.playerCtrl !=null && playerctrl == null)
         {
             playerctrl = gameMngr.playerCtrl;
         }
@@ -65,6 +66,7 @@ public class TriggerChangeScene : MonoBehaviour
     public void movePlayerToTarget(bool playerCanMove)
     {
         //Debug.Log("this ok");
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         playerctrl.transform.position = target.transform.position;
         playerctrl.inArea = nextArea;
         float euler = (isFaceRight) ? playerctrl.faceRight: playerctrl.faceLeft;

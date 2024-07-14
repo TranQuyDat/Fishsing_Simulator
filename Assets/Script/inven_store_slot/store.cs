@@ -22,12 +22,13 @@ public class store : GroupSlot
     override
     public void btn_buy()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null) return;
         ui_ok_close.SetActive(true);
         setUiOK("are you want buy?",true,true);
         btnOK.onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
-
+            gameMngr.soundMngr.playSFX(SoundType.sfx_click);
             int num = (int)(slider.value * curSlot.numItem);
             int cost = curSlot.item.price * num;
             if (iv.coin >= cost)
@@ -38,7 +39,7 @@ public class store : GroupSlot
                 if (iv.canAddToData)
                 {
                     iv.Data.add(curSlot.item, num);
-                    iv.coin -= cost;
+                    gameMngr.loadData.dataSave.dataPlayer.coins -= cost;
                 }
                 removeItem(curSlot, num);
                 ui_ok_close.SetActive(false);

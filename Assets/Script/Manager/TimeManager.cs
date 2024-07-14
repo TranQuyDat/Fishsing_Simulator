@@ -36,6 +36,12 @@ public class TimeManager : MonoBehaviour
 
     public void onNewDay()
     {
+        //reset store
+        foreach(GroupSlotData gr in gameMngr.saveLoadGame.grSlots)
+        {
+            if (gr.name == "inventory") continue;
+            gr.reset();
+        }
         if(gameMngr.iv.coin <=0 && gameMngr.iv.Data.items.Count <= 0)
         {
             // hỗ trợ người chơi thêm 10 coint

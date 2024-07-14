@@ -14,7 +14,9 @@ public class slotSave : MonoBehaviour
 
     public void delete()
     {
+
         GameManager gameMngr = FindObjectOfType<GameManager>();
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         gameMngr.saveLoadGame.deleteFileSave(this);
     }
 }

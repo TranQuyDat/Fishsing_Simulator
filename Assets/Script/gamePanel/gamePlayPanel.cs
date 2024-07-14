@@ -90,10 +90,19 @@ public class gamePlayPanel : MonoBehaviour
     }
     private void Update()
     {
+        //update coint
+        if (gameMngr.iv.coin != gameMngr.loadData.dataSave.dataPlayer.coins)
+        {
+            gameMngr.iv.coin = gameMngr.loadData.dataSave.dataPlayer.coins;
+        }
+
+        //set active or deactive fishhing ui , fishInFoUI
         if(fishingUI != null )
             setActive(fishingUI.ui, gameMngr.shipMngr!=null && gameMngr.shipMngr.curShipCtrl != null && gameMngr.shipMngr.curShipCtrl.isFishing);
         if (fishInfoUI != null ) 
             setActive(fishInfoUI.ui,gameMngr.fishingRodCtrl != null && gameMngr.fishingRodCtrl.wasCaughtFish && gameMngr.fishingRodCtrl.fish != null);
+        
+        //update Amount of fishing button
         updateAmount();
         if (fishInfoUI.ui.active)
         {
@@ -112,7 +121,8 @@ public class gamePlayPanel : MonoBehaviour
             editImgUI.setFillAmount(0);
             return;
         }
-            if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
+        
+        if (gameMngr.fishMngr.theLuckyFish != null && gameMngr.fishMngr.theLuckyFishAI.acFish == Action.ateBait &&
             editImgUI.imgValue.fillAmount >= 0 && editImgUI.imgValue.fillAmount < 1f)
         {
             editImgUI.setFillAmount(1 - Mathf.Round((gameMngr.fishMngr.dis / gameMngr.fishMngr.maxdis) * 100f) * 0.01f);
@@ -123,6 +133,7 @@ public class gamePlayPanel : MonoBehaviour
     #region button
     public void btnFishing()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         gameMngr.fishingRodCtrl.isPull = true;
         if (editImgUI.imgValue.fillAmount >= 0.95f)
         {
@@ -131,6 +142,7 @@ public class gamePlayPanel : MonoBehaviour
     }
     public void btnFishingcast( )
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (gameMngr.playerCtrl.cur_action == Action.fishing_cast
          || gameMngr.playerCtrl.cur_action == Action.fishing_reel) return;
         gameMngr.playerCtrl.cur_action = Action.fishing_cast;
@@ -140,6 +152,7 @@ public class gamePlayPanel : MonoBehaviour
 
     public void btnStopFishing()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         fishingUI.btnStopFishing();
         gameMngr.fishingRodCtrl.Reset();
         gameMngr.fishMngr.Reset();
@@ -149,10 +162,12 @@ public class gamePlayPanel : MonoBehaviour
 
     public void btnUpDownSurfaceWater()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (!gameMngr.fishingRodCtrl.isfishing) return;
         GameObject target ;
         if (gameMngr.mainCamera.isCameraUp)
         {
+            //under water
             target = gameMngr.fishingRodCtrl.hook.gameObject;
         }
         else
@@ -164,6 +179,7 @@ public class gamePlayPanel : MonoBehaviour
 
     public void btnCloseFishInfoUI()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         fishInfoUI.btn_close(gameMngr.iv);
         gameMngr.fishingRodCtrl.fish.destroy();
         gameMngr.fishMngr.Reset();

@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5114a5595ddabf4d8e06d33f96187d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMngr: {fileID: 0}
   istalking: 0
   avt: {fileID: 21300000, guid: b9553a34fbe596b42908a0b6dd59302a, type: 3}
   dia: {fileID: 0}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.52544266, g: 0.45560145, b: 0.5845379, a: 1}
+  m_IndirectSpecularColor: {r: 0.49901688, g: 0.4423688, b: 0.58030003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3103,6 +3103,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1200557153042428132, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235442616717896521, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5475262525432880557, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504624994889710262, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713346550724444487, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5792116024679381705, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3152,6 +3172,10 @@ PrefabInstance:
       value: ships
       objectReference: {fileID: 0}
     - target: {fileID: 7331569256402324006, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862187509406569759, guid: 9a2a3a7a20deb7641a6cf58a621e7cba, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -6360,6 +6384,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2696501777709104224, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
+      propertyPath: sfx_run
+      value: 
+      objectReference: {fileID: 8300000, guid: 3741393ac30df524fabd696e695a80b9, type: 3}
+    - target: {fileID: 2696501777709104224, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
+      propertyPath: sfx_click
+      value: 
+      objectReference: {fileID: 8300000, guid: 7386d1dba8129014f9537353a9dbc3c4, type: 3}
     - target: {fileID: 2696501777709104224, guid: 380ed3d8f6ca07f4aa1a2407ebbc9eb4, type: 3}
       propertyPath: curMusicScene
       value: 1

@@ -26,6 +26,7 @@ public class storeShip : GroupSlot
 
     public override void btn_buy()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null || sl.status != Status.Lock)
             return;
 
@@ -47,6 +48,7 @@ public class storeShip : GroupSlot
 
     public override void btn_eqiup()
     {
+        gameMngr.soundMngr.playSFX(SoundType.sfx_click);
         if (curSlot == null || curSlot.item == null || sl.status == Status.Lock) return;
         if (sl.status == Status.equiped)
         {

@@ -21,6 +21,12 @@ public class GlobalMap : MonoBehaviour
     public void btn2city()
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
+
+        if (obj.scenes == Scenes.city)
+        {
+            gameManager.notify.setUpAndShow("you are here");
+            return;
+        }
         if (obj.inArea == area.ship)
         {
             gameManager.notify.setUpAndShow("you need out your ship");
@@ -28,14 +34,20 @@ public class GlobalMap : MonoBehaviour
         }
 
         obj.ischangeScene = true;
+        gameManager.playerCtrl.inArea = area.city;
         gameManager.change2LoadingScene(obj.scenes,Scenes.city,false, createData());
     }
     public void btn2Port()
     {
         PlayerController obj = FindObjectOfType<PlayerController>();
+        if (obj.scenes == Scenes.port)
+        {
+            gameManager.notify.setUpAndShow("you are here");
+            return;
+        }
         obj.ischangeScene = true;
-
-        gameManager.change2LoadingScene(obj.scenes, Scenes.port,false, createData());
+        gameManager.playerCtrl.inArea = area.port;
+        gameManager.change2LoadingScene(obj.scenes, Scenes.port, false, createData());
     }
     public void btn2Sea1()
     {
@@ -43,6 +55,11 @@ public class GlobalMap : MonoBehaviour
         if (obj.inArea != area.ship )
         {
             gameManager.notify.setUpAndShow("you are not in Boat ");
+            return;
+        }
+        if(obj.scenes == Scenes.sea1)
+        {
+            gameManager.notify.setUpAndShow("you are here");
             return;
         }
         GameObject parent = obj.transform.parent.gameObject;
@@ -53,7 +70,8 @@ public class GlobalMap : MonoBehaviour
         }
         obj.ischangeScene = true;
 
-        gameManager.change2LoadingScene(obj.scenes, Scenes.sea1,false, createData());
+        gameManager.playerCtrl.inArea = area.ship;
+        gameManager.change2LoadingScene(obj.scenes, Scenes.sea1, false, createData());
     }
     public void btn2Sea2()
     {
@@ -64,6 +82,11 @@ public class GlobalMap : MonoBehaviour
             return;
         }
 
+        if (obj.scenes == Scenes.sea2)
+        {
+            gameManager.notify.setUpAndShow("you are here");
+            return;
+        }
         GameObject parent = obj.transform.parent.gameObject;
         if (parent.name != "scout_BoatV1")
         {
@@ -72,7 +95,8 @@ public class GlobalMap : MonoBehaviour
         }
         obj.ischangeScene = true;
 
-        gameManager.change2LoadingScene(obj.scenes, Scenes.sea2,false, createData());
+        gameManager.playerCtrl.inArea = area.ship;
+        gameManager.change2LoadingScene(obj.scenes, Scenes.sea2, false, createData());
     }
 
 

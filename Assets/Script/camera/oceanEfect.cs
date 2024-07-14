@@ -31,19 +31,6 @@ public class oceanEfect : MonoBehaviour
 
 
 
-    //Private METHOD
-    #region Private metod
-
-
-
-
-
-    #endregion
-
-
-
-
-
     //Public METHOD
     #region public method
 

@@ -2355,7 +2355,6 @@ MonoBehaviour:
   playerCTRL: {fileID: 0}
   isfishbite: 0
   wasCaughtFish: 0
-  imgvalue: {fileID: 0}
   rodtip: {fileID: 5140615229779709892}
   hook: {fileID: 5171531816634994512}
   bait: {fileID: 7834331277120171304}

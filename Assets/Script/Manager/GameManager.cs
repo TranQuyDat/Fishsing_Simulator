@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Notifycation notify;
     public SaveLoadGame saveLoadGame;
     public GlobalMap globalMap;
+    public Transform surfaceWater;
     public LoadData loadData;
     public SettingData settingData;
     public path pathdata;
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
         mainCamera = FindObjectOfType<cameraFollow>();
     }
     private void Start()
-    {
+    {   
         if (curScene != Scenes.loading)
         {
             soundMngr.playMusic(soundMngr.curMusicScene, true);
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        updateSound();
         if (curScene == Scenes.menu) return;
         if (isStopGame) Time.timeScale = 0;
         else Time.timeScale = 1;
@@ -62,14 +64,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void updateSound()
+    {
+        if (surfaceWater == null) return;
+        if (mainCamera.transform.position.y > surfaceWater.position.y
+            && soundMngr.musicTheme.clip != soundMngr.dicSound[soundMngr.curMusicScene])
+        {
+            soundMngr.playMusic(soundMngr.curMusicScene, true);
+        }
+        else if (mainCamera.transform.position.y < surfaceWater.position.y
+            && soundMngr.musicTheme.clip != soundMngr.dicSound[SoundType.music_Underwater])
+        {
+
+            soundMngr.playMusic(SoundType.music_Underwater, true);
+        }
+    }
     public void initDicPath()
     {
         if (dicPath.Count > 0) return;
         foreach(StringPair p in pathdata.listPath)
         {
-            int key = p.key.GetInstanceID();
-            print(key);
-            dicPath.Add(key, p.value);
+            if(p.key!=null)
+                dicPath.Add(p.key.GetInstanceID(), p.value);
         }
     }
 
