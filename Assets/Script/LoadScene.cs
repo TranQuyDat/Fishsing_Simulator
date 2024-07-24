@@ -72,6 +72,15 @@ public class LoadScene : MonoBehaviour
     IEnumerator wait2changescene()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadSceneAsync(loadData.nextScene.ToString());
+        AsyncOperation async = SceneManager.LoadSceneAsync(loadData.nextScene.ToString());
+        async.allowSceneActivation = false;
+        while (!async.isDone)
+        {
+            if(async.progress >= 0.9f)
+            {
+                async.allowSceneActivation = true;
+            }
+            yield return null;
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.49901688, g: 0.4423688, b: 0.58030003, a: 1}
+  m_IndirectSpecularColor: {r: 0.08557113, g: 0.23346454, b: 0.5133238, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1213,7 +1213,6 @@ GameObject:
   - component: {fileID: 238677878}
   - component: {fileID: 238677877}
   - component: {fileID: 238677876}
-  - component: {fileID: 238677875}
   m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
@@ -1221,28 +1220,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &238677875
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238677874}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 4096
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 520031288}
 --- !u!33 &238677876
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -2172,7 +2149,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4112
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 1
@@ -2866,7 +2843,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83124
+  m_Name: pb_Mesh57862
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -4764,7 +4741,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83378
+  m_Name: pb_Mesh58114
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5198,7 +5175,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83180
+  m_Name: pb_Mesh45686
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -5639,7 +5616,7 @@ GameObject:
   - component: {fileID: 1976623487}
   - component: {fileID: 1976623486}
   - component: {fileID: 1976623485}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5674,7 +5651,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -5793,7 +5770,6 @@ GameObject:
   - component: {fileID: 2023058746}
   - component: {fileID: 2023058745}
   - component: {fileID: 2023058744}
-  - component: {fileID: 2023058743}
   m_Layer: 0
   m_Name: Prism
   m_TagString: Untagged
@@ -5816,28 +5792,6 @@ Transform:
   m_Father: {fileID: 737719172}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 12.766}
---- !u!64 &2023058743
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023058741}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1443884071}
 --- !u!33 &2023058744
 MeshFilter:
   m_ObjectHideFlags: 10

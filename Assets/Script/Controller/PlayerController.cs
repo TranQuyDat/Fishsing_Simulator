@@ -34,9 +34,9 @@ public class PlayerController : MonoBehaviour
         gameMngr = FindObjectOfType<GameManager>();
         
         rb = this.GetComponent<Rigidbody>();
+        if (gameMngr.curScene == Scenes.loading) rb.useGravity = false;
         instructionBTN = gameMngr.instructionBTN;
         mainCamera = gameMngr.mainCamera.transform;
-        if (gameMngr.curScene == Scenes.loading) rb.useGravity = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         //print("load data");
         gameMngr.iv.coin = dataPlayer.coins;
-        transform.position = dataPlayer.pos;
+        transform.position = new Vector3(dataPlayer.pos.x, dataPlayer.pos.y+0.1f, dataPlayer.pos.z);
         inArea = dataPlayer.inArea;
         cur_action = dataPlayer.action;
         scenes = dataPlayer.scene;
@@ -95,9 +95,11 @@ public class PlayerController : MonoBehaviour
     public DataPlayer exportData()
     {
         string parentName = (transform.parent != null) ? transform.parent.name : "";
+        Action ac = (cur_action == Action.fishing_cast || cur_action == Action.fishing_cast) 
+            ? Action.fishing_idle : cur_action;
         Vector3 poParent = (transform.parent != null) ? transform.parent.position : default;
         DataPlayer dataPlayer = new DataPlayer(transform.position,transform.eulerAngles,
-                gameMngr.iv.coin, scenes, inArea,cur_action,canMove,parentName, poParent);
+                gameMngr.iv.coin, scenes, inArea,ac,canMove,parentName, poParent);
         return dataPlayer;
     }
     public void movement()
